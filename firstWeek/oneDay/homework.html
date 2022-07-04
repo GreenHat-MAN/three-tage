@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>封装Vue数据渲染功能</title>
+</head>
+
+<body>
+    <div id="app">
+        {{test}}
+        {{pwd}}
+        {{name}}
+        <h1>{{age}}</h1>
+    </div>
+</body>
+
+<script>
+
+    class Vue {
+
+        constructor(options) {
+            this.exp = /\{\{(.*?)\}\}/;
+            this.dom = document.querySelector(options.el);
+            this.data = options.data;
+            this.init();
+        }
+
+        init() {
+            // console.log(this.data);
+            // 获取页面内容
+            // console.log(this.data[item]);
+            if ((this.exp).test(this.dom.innerText)) {
+                // console.log(this.dom.innerText);
+                let first = this.exp.exec(this.dom.innerText)[1];
+                // console.log(first);
+                this.dom.innerText = this.dom.innerText.replace(this.exp, this.data[first]);
+                return this.init();
+            }
+        }
+    }
+
+    let vue = new Vue({
+        el: '#app',
+        data: {
+            test: 'Hello Word!!',
+            pwd: 123,
+            name: '罗先略',
+            age: 22
+        },
+    });
+
+</script>
+
+</html>

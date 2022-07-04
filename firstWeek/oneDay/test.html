@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vue的五大语句</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <!-- v- 指令前缀 -->
+    <!-- 基本结构作用域在app表示的范围内 -->
+    <div id="app">
+
+        {{msg}}
+
+        <!-- 绑定元素属性attribute -->
+        <!-- <img v-bind:src="src"></img> -->
+        <!-- <input type="text" v-bind:value="info" v-on:input="change"> -->
+        <!-- <span v-bind:title="message">
+            鼠标悬停几秒钟查看此处动态绑定的提示信息！
+        </span> -->
+
+        <!-- 条件指令v-if -->
+        <!-- <p v-if="seen">现在看的见</p><button v-on:click="seen=!seen">切换</button> -->
+
+        <!-- v-for 循环指令绑定数组数据渲染整个列表 -->
+        <!-- <h3 v-for="item in todos">{{item.text}}</h3> -->
+
+        <!-- v-model 指令实现数据的双向绑定 -->
+        <!-- <input v-model="msg"> -->
+
+        <!-- v-html 指令解析页面html标签 -->
+        <!-- <p v-html="html"></p> -->
+
+        <!-- v-text 指令只会解析文本内容 -->
+        <!-- <p v-text="html"></p> -->
+    </div>
+
+</body>
+
+<script>
+
+    let todos = [
+        { text: '学习 JavaScript' },
+        { text: '学习 Vue' },
+        { text: '整个牛项目' }
+    ];
+
+    // 默认模板
+    // {{}}双括号模板,渲染数据到DOM
+    let vue = new Vue({
+        // 所表示的作用域范围
+        el: '#app',
+        // 针对页面所需要的数据
+        data: {
+            msg: 'Hello World',
+            src: 'https://img0.baidu.com/it/u=530426417,2082848644&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1657040400&t=ec6a55bced982f77fb0827b72d364525',
+            message: '页面加载于 ' + new Date().toLocaleString(),
+            info: '123',
+            seen: false,
+            todos,
+            html:'<h1>我是解析标签的h1</h1>'
+        },
+        // 绑定事件做触发的方法
+        methods: {
+            change(e) {
+                this.msg = e.target.value;
+            },
+            falg() {
+                this.seen = (!this.seen);
+            }
+        },
+    });
+
+
+    
+</script>
+
+</html>

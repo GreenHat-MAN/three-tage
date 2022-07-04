@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- 留言板的数据显示 -->
+        <div class="box" v-for="(item,index) in option">{{item.title}}<button v-on:click="del(index)">删除</button></div>
+        <!-- 编写留言发送 -->
+        <input v-model="text"><button v-on:click="send">发送</button>
+    </div>
+
+</body>
+<script>
+    let vue = new Vue({
+        el: '#app',
+        data: {
+            option: [
+                { title: '今天大暴雨,放不放假?' },
+                { title: '学习Vue的第一天' },
+                { title: '安装各项插件' }
+            ],
+            text: "我是一条留言",
+        },
+        methods: {
+            send() {
+                this.option.push({title:this.text})
+            },
+            del(index){
+                this.option.splice(index,1);
+            }
+        }
+    });
+</script>
+
+</html>
