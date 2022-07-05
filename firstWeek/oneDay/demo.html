@@ -13,9 +13,11 @@
 
     <div id="app">
         <!-- 留言板的数据显示 -->
-        <div class="box" v-for="(item,index) in option">{{item.title}}<button v-on:click="del(index)">删除</button></div>
+        <div class="box" v-for="(item,index) in option">{{item.title}}<button v-on:click="del(index)">删除</button><button
+                @click="update(item,index)">修改</button></div>
         <!-- 编写留言发送 -->
-        <input v-model="text"><button v-on:click="send">发送</button>
+        <input v-model="text" placeholder="请输入留言"><button v-on:click="send">发送</button>
+        <input type="text" v-model="word"><button @click="serach">查询</button>
     </div>
 
 </body>
@@ -28,14 +30,29 @@
                 { title: '学习Vue的第一天' },
                 { title: '安装各项插件' }
             ],
-            text: "我是一条留言",
+            text: "",
+            word:'',
         },
         methods: {
-            send() {
-                this.option.push({title:this.text})
+            serach(){
+                this.option=this.option.filter(element=>
+                    element.title.indexOf(this.word)!=-1
+                );
             },
-            del(index){
-                this.option.splice(index,1);
+            update(item, index) {
+                let title = window.prompt(index, item.title);
+                if (title && title != item.title) {
+                    item.title = title;
+                    this.option.splice(index, 1, item);
+                }else{
+                    alert('修改的内容不能为空!!')
+                }
+            },
+            send() {
+                this.option.push({ title: this.text })
+            },
+            del(index) {
+                this.option.splice(index, 1);
             }
         }
     });

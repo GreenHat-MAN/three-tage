@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选项卡</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav {
+            width: 400px;
+            display: flex;
+            /* border: 2px solid #ccc; */
+        }
+
+        .nav-heard {
+            width: 33.33%;
+            height: 50px;
+            border-radius: 30%;
+            text-align: center;
+            line-height: 50px;
+            border: 1px solid red;
+            cursor: pointer;
+        }
+
+        .bod {
+            width: 400px;
+            height: 400px;
+        }
+
+        .nav-body {
+            width: 400px;
+            height: 200px;
+            border: 1px solid black;
+            text-align: center;
+            line-height: 200px;
+        }
+
+        .active {
+            background-color: aqua;
+        }
+
+        .navs {
+            display: flex;
+        }
+
+        @keyframes move {
+            0% {
+                top: -100px;
+                left: 100px;
+            }
+
+            25% {
+                top: 0px;
+                left: 350px;
+            }
+
+            50% {
+                top: 200px;
+                left: 350px;
+            }
+
+            75% {
+                top: 200px;
+                left: 0px;
+            }
+
+            100% {
+                top: 0px;
+                left: 0px;
+            }
+        }
+    </style>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <div class="bod">
+            <div class="nav">
+
+                <div class="nav-heard" @click="current=index" :class="current===index?'active':''"
+                    v-for="(item,index) in nav">{{item.title}}</div>
+
+            </div>
+
+            <div class="navs">
+                <div class="nav-body" :style="{display:(current===index)?'block':'none'}" v-for="(item,index) in nav">
+                    {{index}}-{{item.title}}</div>
+            </div>
+        </div>
+
+
+
+    </div>
+
+</body>
+
+<script>
+
+    let vm = new Vue({
+        data: {
+            nav: [
+                { title: '都市传奇' },
+                { title: '玄幻休闲' },
+                { title: '恐怖悬疑' }
+            ],
+            current: 0,
+        }
+    }).$mount('#app')
+
+</script>
+
+</html>

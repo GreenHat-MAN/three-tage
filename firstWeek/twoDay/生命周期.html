@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue生命周期和实例</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <!-- <input type="text" v-model="text"> -->
+        <p>{{count}}</p>
+        <button @click="add">+</button>
+        <button @click="destory">销毁</button>
+    </div>
+</body>
+
+<script>
+    // 自定义数据对象
+    let list = { name: '罗先略', age: 22, sex: '男' };
+
+    // 冻结当前对象,使得vue响应系统无法追踪到当前数据并且发生不了变化
+    // Object.freeze(text);
+    //实例化vue对象vm
+    let vm = new Vue({
+
+        // 实例加载根元素DOM
+        // el: '#app',
+
+        // vue实例当中加载数据,将自定义数据对象加载到vue实例当中
+        data: {
+            list,
+            // text:'123',
+            count: 1,
+        },
+        methods: {
+            add() {
+                this.count++;
+            },
+            destory() {
+                vm.$destroy();
+            }
+        },
+
+        // vue的生命周期
+        // 第一步初始化vue实例对象vm,此步骤初始化实例对象和一些默认的生命和方法事件,其他大部分方法和对象都还未被初始化
+        beforeCreate() {
+            console.log('------beforeCreate------');
+            console.log(this.$el);
+            console.log(this.$data);
+        },
+        // 第二部初始化实例对象当中的data和methods,实例属性也被绑定,但是其中的dom还是虚拟的,真正的dom还没有生成所以$el还不能使用,但是我们可以在此步骤初始化我们的数据
+        created() {
+            console.log('-------created--------');
+            console.log(this.$data);
+            console.log(this.$el);
+        },
+        // 第三步在挂在前的准备,虽然el还未被配置但是vue已经开始编译模板最终在内存当中编译好了的字符串模板并渲染到内存中的dom等待挂载到页面,在这步我们可以做初始数据的获取操作。
+        beforeMount() {
+            console.log('------beforeMount------');
+            console.log(this.count + '数据');
+            //不是真正的el而是等待挂载的目标
+            console.log(this.$el);
+        },
+        // 第四步我们将内存的模板真正的渲染到页面上,只要是执行完成mounted实例的创建阶段结束进入运行阶段
+        mounted() {
+            console.log('-------mounted--------');
+            console.log(this.$data);
+            // 这才是真正的el
+            console.log(this.$el);
+        },
+        //此时已完全进入运行阶段,运行阶段的生命周期函数只有两个:beforeUpdate和updated,这两个事件会根据data的变化执行0次和无数次
+        // 第五步当我们执行beforeUpdate,更新前的一个状态是当我们的data数据发生改变影响view视图发生改变之前,简而言之就是重新渲染之前触发,然后vue会重新构建一个新的虚拟dom树和旧版dom利用diff算法做比较不同之处形成一个page队列重新渲染(***仅仅只是data发生改变不会触发这两函数******).
+        beforeUpdate() {
+            console.log('-----beforeUpdate-----');
+            console.log('被更新之前的操作');
+        },
+        // 第六步执行updated钩子函数,数据更改完成dom也重新render(**** render作用:会return一个虚拟dom，return什么该组件就渲染什么****)
+        updated() {
+            console.log('------updated-----');
+            console.log('重新渲染完成');
+        },
+        // 第七步执行销毁钩子函数之前,我们的vue实例就从运行阶段进入到了销毁阶段,只是执行销毁之前时实例上的data、指令、methods方法、过滤器都是可以运行的还没到达真正的销毁过程.
+        beforeDestroy() {
+            console.log('-------brforeDestroy------');
+            console.log(this.$data);
+            console.log(this.$el);
+        },
+        // 第八步执行销毁钩子函数,此时所有的实例对象和属性方法等等都不能使用,页面完全出于静态。
+        destroyed() {
+            console.log('-------destroyed------');
+            console.log(this.$data);
+            console.log(this.$el);
+        }
+    }).$mount('#app');
+    // 挂载
+</script>
+
+</html>
