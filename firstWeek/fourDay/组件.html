@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue组件</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+
+            <test></test>
+            <demo></demo>
+
+    </div>
+
+</body>
+
+    <script>
+        // 组件是Vue中最重要的一部分,一个组件就是代码的复用和封装
+        // 实现组件的方法为----->全局和局部:component(name组件名称和options组件选项参数)和components
+
+        Vue.component('test',{
+            template:'<button @click="add">{{count}}</button>',
+            data(){
+                return{
+                    count:1,
+                }
+            },
+            methods: {
+                add(){
+                    this.count++;
+                }
+            },
+        });
+
+
+        
+
+        const vm=new Vue({
+
+            data:{
+
+            },
+            components:{
+                demo:{
+                    template:'<h1>罗先略</h1>'
+                }
+            }
+
+
+        }).$mount('#app');
+
+    </script>
+
+</html>
