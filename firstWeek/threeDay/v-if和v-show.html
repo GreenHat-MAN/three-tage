@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>显示隐藏的方法</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- v-if真正的渲染切换页面的显示和隐藏,但是他在页面上是不在存在的,隐藏是直接销毁dom节点,显示又重新构建页面,建议使用<template></template>不占位的机构包裹,否则页面结构可能会坍塌 -->
+        <div v-if="flag">
+            <p>{{obj.name}}</p>
+            <p>fullName-{{fullName()}}</p>
+            <p>Day-{{arry[2].title}}</p>
+        </div>
+        <!-- 和v-if配套使用的v-elese,和我们原生js一样的分支语句,为真或为假执行对应的程序,同样可以嵌套使用 -->
+        <div v-else="!flag">
+            <p>Day-{{arry[0].title}}</p>
+        </div>
+
+        <button @click="flag=!flag">切换</button>
+
+        <hr>
+
+        <!-- v-show指令是在页面渲染的基础上控制css样式的display属性操作隐藏和显示,block和none,页面会一直存在. -->
+        <div v-show="seen">
+            <p v-for="index of arr">
+                {{index}}
+            </p>
+        </div>
+
+        <button @click="swit">show</button>
+
+    </div>
+    <!-- 我们在页面频繁的切换,推荐使用show指令会好一点,如果条件很少改变用if更合适 -->
+    <!-- 不推荐把if和for指令用在同一标签上,for的优先级要比if的要高,需要使用时可以把if写在for循环的外面,适用场景在我们页面还未获取到数据时想要先搭建页面数据结构的情况下。 -->
+</body>
+
+<script>
+    let arr = [1, 2, 3, 4, 5, 6, 7];
+    let obj = { name: '罗先略', age: 22, sex: '男' };
+    let arry=[
+        {title:'第一天!!!'},
+        {title:'第二天!!!'},
+        {title:'第三天!!!'},
+    ];
+
+    let vm = new Vue({
+
+        data: {
+            flag: true,
+            arr,
+            obj,
+            arry,
+            seen:true
+        },
+
+        methods: {
+            swit(){
+                this.seen=!this.seen;
+            },
+            fullName(){
+                return obj.name + obj.age;
+            }
+        }
+
+    }).$mount('#app');
+
+</script>
+
+</html>

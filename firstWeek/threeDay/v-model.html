@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据的双向绑定</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- 
+            v-model的原理:
+            本质上就是一个语法糖,相当于是由value和@input所组合使用,底层原理则是对象下面的 Object.defineProperty()方法进行数据劫持实现监听数据的改变从而触发修改视图的逻辑函数,监听输入框数据从而修改对应的数据 
+            v-model的修饰符:
+            lazy    input 变为 change 延迟触发 相当于失去焦点触发
+            trim    去除首尾空格
+            number  用户的输入值转为数值类型 数据的类型转换
+        -->
+
+        <p>
+            {{text}}
+        </p>
+
+        <textarea v-model="text"></textarea>
+        <br>
+
+        <!-- <input type="checkbox" v-model="checked">{{checked}} -->
+
+        <input type="checkbox" v-model="checked">全选
+        <ul>
+            <li><input type="checkbox" :checked="checked">1</li>
+            <li><input type="checkbox" :checked="checked">2</li>
+            <li><input type="checkbox" :checked="checked">3</li>
+        </ul>
+
+        <input type="radio" id="one" value="One" v-model="picked">
+        <label for="one">One</label>
+        <br>
+        <input type="radio" id="two" value="Two" v-model="picked">
+        <label for="two">Two</label>
+        <br>
+        <span>Picked: {{ picked }}</span>
+
+    </div>
+
+</body>
+
+<script>
+
+    let vm = new Vue({
+
+        data: {
+            text: '123',
+            checked: false,
+            picked:'',
+        }
+
+    }).$mount('#app');
+
+</script>
+
+</html>

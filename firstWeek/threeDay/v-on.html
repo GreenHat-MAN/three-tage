@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件处理指令</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <div v-if="false">
+            <!-- 监听事件 -->
+            <input type="text" v-model="count" value="count">
+            {{count}}
+            <button @click="add">+</button>
+
+            <!-- 事件源对象 -->
+            <button @click="submit($event)">提交</button>
+
+            <!-- 事件修饰符 stop阻止事件传播、prevent清除默认行为、capture使用捕获模式、self当前原生才能触发、once只执行一次、passive -->
+            <a href="" @click.stop.prevent="dothis">清除默认跳转行为</a>
+
+            <!-- 按键修饰符 enter、13回车时触发,space空格触发、right和left左右光标、up和down上下触发 -->
+            <input type="text" @keydown.enter="getvul">
+
+            <!-- 鼠标事件 -->
+            <div :style="{width:'100px',height:'100px',background:'red'}" @mousemove="move">
+                这是个块
+            </div>
+        </div>
+
+
+        <!-- 过滤器,作用:格式化文本可用在插值表达式里和bind自定义属性当中
+            全局过滤器Vue.filter
+            局部过滤器filters
+            使用时用'|'管道符号表示
+        -->
+
+        <div>
+            <select @change="change(index)">
+                <option v-for="(item,index) in money" :data-index="index">{{item}}</option>
+            </select>
+            <input type="number" v-model="num">
+            <button @click="transt">转换</button>
+            <!-- <p>{{item}}</p> -->
+            <p>{{nums|check}}</p>
+        </div>
+
+
+    </div>
+
+
+</body>
+
+<script>
+    // 全局过滤器
+    Vue.filter('check', value => {
+        if (!value) return '';
+        value=value.toString().split('.');
+        let arr=value[0].split('').reverse();
+        let newArr=[];
+        for(let i=0;i<arr.length;i++){
+            if(i%3===0 && i!==0){
+                newArr.push(',');
+            }
+            newArr.push(arr[i]);
+        }
+        newArr.reverse();
+        if(value[1]){
+            newArr=newArr.join('').concat('.'+value[1]);
+        }else{
+            newArr=newArr.join('');
+        }
+        return newArr;
+    });
+
+    let vm = new Vue({
+
+        data: {
+            count: 1,
+            money: ['美元$', '日元¥'],
+            nums: 0,
+            num:0,
+        },
+        methods: {
+            add() {
+                this.count++
+            },
+            submit(event) {
+                if (event) {
+                    // 清除默认行为
+                    event.preventDefault()
+                }
+                alert('提交!!')
+            },
+            dothis(e) {
+                // e.preventDefault()
+                console.log('清除a标签的默认行为')
+            },
+            getvul(e) {
+                return alert(e.target.value)
+            },
+            move(e) {
+                console.log(e.clientX);
+            },
+            transt() {
+                this.nums = this.num;
+            },
+            change(index){
+                alert(index);
+            }
+        }
+
+    }).$mount('#app')
+
+
+    // v-on:click  @click       
+    //     input
+    //     change
+    //     click
+    //     dbclick
+    //     keyup
+    //     keydown
+    //     keypress
+    //     mousemove
+    //     mousedown
+    //     mouseup
+    //     mouseenter
+    //     mouserleave
+    //     touchstart  手机端的触摸事件
+    //     touchmove
+    //     touchend
+
+</script>
+
+</html>
