@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="root">
+        <h1>{{fullname}}</h1>
+
+        <input type="text" v-model="firstName">
+        <input type="text" v-model="lastName">
+
+        <h1>快捷方式</h1>
+        <button @click="fullname = '王 五'">王五</button>
+        <button @click="fullname = 'George Bush'">George Bush</button>
+        <button @click="fullname = 'Black Mamba'">Black Mamba</button>
+    </div>
+
+</body>
+
+<script>
+    const vm = new Vue({
+        el: "#root",
+        data: {
+            firstName: '赵',
+            lastName: '四',
+        },
+        computed: {
+            fullname: {
+                get() {   //获取的时候触发，firstName 和lastName有一个变化时也会触发
+                    console.log('get已执行!!!');
+                    return this.firstName + this.lastName
+                },
+                set(newValue) {  //set称之为快捷方式，当firstName和lastName同时变化时，就会触发set
+                    console.log('set已触发!!!');
+                    let names = newValue.split(' ')
+                    this.firstName = names[0]
+                    this.lastName = names[names.length - 1]
+                }
+            }
+        }
+    })
+</script>
+
+</html>

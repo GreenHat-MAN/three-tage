@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星期六</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <h2>数量:{{count}}</h2>
+        <h3>{{newCount}}</h3>
+        <h3>{{newCount}}</h3>
+        <h3>{{newCount}}</h3>
+        <h3>{{newCount}}</h3>
+        <h3>{{newCount}}</h3>
+        <button @click="newCount=5">修改</button>
+        <!-- <h3>{{newCount}}</h3> -->
+        <h3>{{newCount}}</h3>
+        <h3>{{newCount}}</h3>
+        <!-- <button @click="add">ADD</button> -->
+
+    </div>
+
+</body>
+
+<script>
+
+    // 计算属性的基本应用
+    const vm = new Vue({
+
+        data: {
+            count: 1
+        },
+        computed: {
+
+            // 属性名
+            newCount: {
+                // 计算属性默认有一个get方法给我们读取值(响应式的依赖)
+                get() {
+                    console.log('get方法已执行!!!');
+                    // 计算属性将所读取的值存在缓存当中,当我们再次使用时不会重新去计算而是直接走缓存
+                    return this.count;
+                },
+
+                // 当我们主动修改时,会有一个set方法
+                // 且只能修改计算属性所依赖的值
+                set(val) {
+                    console.log('set方法已执行!!!');
+                    this.count = val;
+                }
+
+            }
+
+
+
+        },
+        watch: {
+
+        }
+
+    }).$mount('#app');
+
+</script>
+
+</html>
