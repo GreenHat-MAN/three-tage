@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态组件</title>
+    <script src="../vue.js"></script>
+    <style>
+        table {
+            width: 50%;
+            background: yellowgreen;
+        }
+
+        td {
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            background: deeppink;
+            justify-content: space-around;
+        }
+
+        ul li p {
+            margin: 10px;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <select v-model="names">
+            <option value="tables">列表</option>
+            <option value="list">表格</option>
+        </select>
+        <!-- <list></list>
+        <tables></tables> -->
+
+        <!-- 生命周期最后两个 activated激活和deactivated失活 只有再keep-alive标签里面才能使用  -->
+
+        <keep-alive>
+            <component :is="names" :cars="cars"></component>
+        </keep-alive>
+
+
+    </div>
+
+    <template id="list">
+        <div>
+            <div>
+                <h2>表格组件</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <td>序号</td>
+                            <td>品牌</td>
+                            <td>型号</td>
+                            <td>颜色</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="(car,key,index) in cars" :key="index">
+                            <td>{{index+1}}</td>
+                            <td>{{car.brand}}</td>
+                            <td>{{car.model}}</td>
+                            <td>{{car.color}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </template>
+
+
+    <template id="tables">
+        <div>
+            <div>
+                <h2>列表展示</h2>
+                <ul>
+                    <li v-for="(l,k,i) in cars " :key="i">
+                        <p>序号: {{i+1}}</p>
+                        <p>品牌: {{l.brand}}</p>
+                        <p>型号: {{l.model}}</p>
+                        <p>颜色: {{l.color}}</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </template>
+
+</body>
+
+<script>
+
+    var cars = {
+        car01: { brand: "Ford", model: "Mustang", color: "red" },
+        car02: { brand: "Fiat", model: "500", color: "white" },
+        car03: { brand: "Volvo", model: "XC90", color: "black" }
+    }
+
+
+    // 创建动态组件
+    Vue.component('list', {
+        template: '#list',
+        data() {
+            return {
+                cars,
+            }
+        },
+    });
+
+    Vue.component('tables', {
+        template: '#tables',
+        data() {
+            return {
+                cars
+            }
+        },
+    });
+
+
+    const vm = new Vue({
+        data: {
+            cars,
+            names: 'tables',
+        }
+    }).$mount('#app');
+
+</script>
+
+</html>

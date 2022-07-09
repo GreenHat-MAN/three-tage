@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>值传递</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- 将父元素组件加到vue作用域当中 -->
+        <fater></fater>
+    </div>
+
+
+
+    <!-- 创建父组件模板 -->
+    <template id="dad">
+        <div>
+            <h1>{{title}}</h1>
+
+            <p>子组件修改父组件的值:{{oneinfo}}</p>
+
+            <!-- 通过ref获取当前对象传值给子组件 -->
+            添加父组件的值:<input type="text" ref="value">
+            <button @click="add">添加</button>
+
+            <!-- 通过ref获取当前对象修改子元素的值 -->
+            修改子组件的值:<input type="text" ref="faterinfo">
+            <button @click="update">修改</button>
+            <hr>
+
+            <!-- 父子之间通信传递参数到子组件 -->
+            <!-- 通过ref获取子组件对象修改子组件 -->
+            <child  :titlechild="info" ref="childs" :updatepro="updatepro" v-on:changeon="getchange" 
+            ></child>
+            <hr>
+
+            <!-- 兄弟元素自定义事件和反向props实现兄弟通信 -->
+            <brother :middprops="middpro" @changecheck="changecheck"></brother>
+        </div>
+    </template>
+
+
+
+
+    <!-- 创建子元素组件模板 -->
+    <template id="boy">
+        <div>
+            <h2>{{title}}</h2>
+            <p>我是父组件传递过来的参数:{{titlechild}}</p>
+            <p>我是通过父组件修改过来的值:{{boyinfo}}</p>
+            <p>我是兄弟组件修改的值:{{byinfo}}</p>
+
+            <!-- 子组件修改父组件: $parent、反向props、自定义事件 -->
+            <input type="text" ref="dadinfo">
+            <!-- $parent方法 -->
+            <button @click="updatedad">$parent修改父组件</button>
+            <!-- 反向props方法 -->
+            <button @click="updatepro(infos)">反向props修改</button>
+            <!-- 自定义事件方法 -->
+            <button @click="updateem">事件修改</button>
+        </div>
+    </template>
+
+
+
+
+    <!-- 创建兄弟元素组件模板 -->
+    <template id="girl">
+        <div>
+            <h3>{{title}}</h3>
+            <!-- 兄弟组件相互通信 -->
+            <!-- 事件总线方法 bus -->
+            <input type="text" ref="mina">
+            <button @click="changeboy">总线方法修改</button>
+
+            <!-- 中间人方法:6种,$parent、自定义事件、反向props -->
+            <button @click="middPerson">中间人$parent</button>
+            <button @click="middCheck">中间人自定义</button>
+            <button @click="middprops(80)">中间人反向props</button>
+        </div>
+    </template>
+
+</body>
+
+<!-- 通信:父子之间相互通信、兄弟之间相互通信 -->
+<!-- 
+        通信方法:
+            父组件访问子组件->props、refs、事件总线(bus=new Vue)、event事件(emit on)、vuex
+            子组件访问父组件->自定义事件emit、$parent、反向props、事件中央总线、vuex
+            兄弟组件之间访问->事件总线(bus new Vue)、中间人模式(把父组件当作中间人.子改父.父改子)、vuex
+     -->
+
+<script>
+
+    const bus=new Vue();
+
+    // 注册父组件
+    Vue.component('fater', {
+        template: '#dad',
+        data() {
+            return {
+                title: '我是父元素组件!!!',
+                info: '',
+                oneinfo: '第一次'
+            }
+        },
+        methods: {
+            add() {
+                this.info = this.$refs.value.value
+            },
+            update() {
+                this.$refs.childs.boyinfo = this.$refs.faterinfo.value
+            },
+            updatepro(info) {
+                // 反向props修改调用父组件方法
+                this.oneinfo = info
+            },
+            getchange(word) {
+                // 自定义事件修改父组件
+                this.oneinfo = word
+            },
+            changecheck(check){
+                this.$refs.childs.byinfo=check
+            },
+            middpro(value){
+                this.$refs.childs.byinfo=value
+            }
+        },
+    });
+
+
+
+
+    // 注册子组件
+    Vue.component('child', {
+        template: '#boy',
+        // 子组件通过props接收参数
+        props: {
+            titlechild: String,
+            // 反向props
+            updatepro: Function,
+        },
+        data() {
+            return {
+                title: '我是子元素组件!!!',
+                boyinfo: '88',
+                infos: '1',
+                byinfo:'我是被修改的值',
+            }
+        },
+        methods: {
+            updatedad() {
+                // $parent找父组件
+                this.$parent.oneinfo = this.$refs.dadinfo.value
+            },
+            updateem() {
+                // 自定义事件修改父组件
+                this.$emit('changeon', this.$refs.dadinfo.value)
+            },
+        },
+        mounted() {
+            bus.$on('changes',n=>{
+                this.byinfo=n
+            });
+        },
+    });
+
+
+
+
+
+    // 注册兄弟组件
+    Vue.component('brother', {
+        template: '#girl',
+        // 反向props
+        props:['middprops'],
+        data() {
+            return {
+                title: '我是兄弟元素组件!!!'
+            }
+        },
+        methods: {
+            changeboy(){
+                // 事件总线方法
+                bus.$emit('changes',this.$refs.mina.value);
+            },
+            middPerson(){
+                // 中间人$parent 找到父组件再找到对应的子组件下的变量
+                this.$parent.$refs.childs.byinfo=this.$refs.mina.value
+            },
+            middCheck(){
+                // 中间人自定义方法
+                this.$emit('changecheck',this.$refs.mina.value);
+            },
+        },
+    });
+
+
+
+
+
+
+    // 实例化vue对象
+    const vm = new Vue({}).$mount('#app');
+
+</script>
+
+</html>

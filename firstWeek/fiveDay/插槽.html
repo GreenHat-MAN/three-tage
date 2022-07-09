@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>插槽</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- 插槽 -->
+        <!-- <one name="罗先略">
+            <h2>我是匿名插槽</h2>
+        </one> -->
+
+        <hr>
+
+        <!-- 具名插槽 -->
+        <one name="罗先略">
+            <h2>我是具名插槽</h2>
+            <template v-slot:insertName>
+                <h3>具名插槽入口</h3>
+            </template>
+        </one>
+
+    </div>
+
+</body>
+
+
+<template id="one">
+    <div>
+        <h1>name === {{name}}</h1>
+
+        <!-- 定义插槽 slot标签  -->
+        <p :style="{width:'100px',height:'100px',background:'red'}">
+            <slot>匿名插槽 ---- slot出口  用来接收数据模板</slot>
+        </p>
+
+        <!-- 定义具名插槽 -->
+        <p :style="{width:'200px',height:'200px',background:'yellow'}">
+            <slot name="insertName">具名插槽 ---- slot出口  用来接收数据模板</slot>
+        </p>
+
+
+    </div>
+</template>
+
+<script>
+
+    // 请求一段标签或页面早指定页面或标签当中
+
+    Vue.component('one',{
+        template:'#one',
+        props:['name']
+    });
+
+    Vue.component('two',{
+        template:'#two'
+    });
+
+    const vm = new Vue({
+        data:{
+        }
+    }).$mount('#app');
+
+</script>
+
+</html>

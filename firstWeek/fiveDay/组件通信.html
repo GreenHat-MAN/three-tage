@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件之间相互通信</title>
+    <script src="../vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <!-- 将父级组件加入到vue作用域中 -->
+        <!-- 添加几个参数给父组件 -->
+        <fater name="罗先略" age="22" :adress="adress"></fater>
+
+    </div>
+
+
+
+    <!-- 父级组件模块创建 -->
+    <template id="Bigfater">
+        <div>
+
+            <h3>fater:父组件</h3>
+            <p>name=={{name}}</p>
+            <p>age=={{age}}</p>
+            <p>adress=={{adress}}</p>
+            <hr>
+            <!-- 将子组件嵌套在父组件中 -->
+            <!-- 子组件绑定变量 -->
+            <child :sex="sex" :county="county"></child>
+
+        </div>
+    </template>
+
+
+    <!-- 子级组件模块创建 -->
+    <template id="boy">
+        <div>
+            <h3>child:子组件</h3>
+            <!-- 子组件直接使用父级组件的参数 -->
+            <ol>
+                <li>{{sex}}</li>
+                <li>{{county}}</li>
+            </ol>
+        </div>
+    </template>
+
+
+</body>
+
+
+<script>
+
+    // 父级组件
+    // 组件名对饮页面标签名称
+    Vue.component('fater', {
+        // template名称对应组件模块的id名
+        template: '#Bigfater',
+        // 当我们想要父组件传递值给子组件可以使用props属性单向数据流,可以是数组或者对象
+        props:['name','age','adress'],
+        // data函数表示组件返回的数据对象
+        data() {
+            return {
+                sex:'男',
+                county:'china'
+            }
+        },
+
+    });
+
+
+    // 创建子组件
+    // 规则同上父组件
+    Vue.component('child', {
+        template: '#boy',
+        // 子级组件接收父级传递的参数
+        props:['sex','county'],
+    });
+
+
+
+
+
+
+
+    const vm = new Vue({
+
+        data:{
+            adress:'武汉市'
+        }
+        
+    }).$mount('#app');
+
+</script>
+
+</html>
