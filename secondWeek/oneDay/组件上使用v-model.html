@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件v-model</title>
+    <script src="../vue.js"></script>
+</head>
+<body>
+
+
+    <div id="app">
+
+        <h1>{{title}}</h1>
+
+        <hr>
+
+        <!-- 直接在组件上实现v-model的用法 -->
+        <fater v-model="title"></fater>
+
+        <hr>
+
+
+
+    </div>
+
+
+    <template id="dad">
+        <div>
+            <h3>{{msg}}</h3>
+            <input type="text" :value="fat" @input="$emit('hello',$event.target.value)">
+            <child></child>
+        </div>
+    </template>
+
+
+    <template id="boy">
+        <div>
+            <h3>{{msg}}</h3>
+            <input type="text" >
+        </div>
+    </template>
+    
+</body>
+
+    <script>
+        // 使用v-model实现组件之间数据双向绑定
+
+        //创建父组件
+        Vue.component('fater',{
+            // 接收组件上的v-model
+            model:{
+                // 下面两的参数随便给
+                prop:'fat',//接收数据
+                event:'hello',//发送的自定义处理事件
+            },
+            props:{
+                // 反向props发送数据给父组件
+                fat:String
+            },
+            template:'#dad',
+            data() {
+                return {
+                    msg:'我是父组件',
+                }
+            },
+        });
+
+
+        //创建子组件组件
+        Vue.component('child',{
+            template:'#boy',
+            data() {
+                return {
+                    msg:'我是子组件',
+                }
+            },
+        });
+
+
+        const vm=new Vue({
+
+            data:{
+                title:'我是根实例',
+            }
+
+        }).$mount('#app');
+
+    </script>
+
+</html>

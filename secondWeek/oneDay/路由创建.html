@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,26 +8,78 @@
     <title>创建路由</title>
     <script src="../vue.js"></script>
     <script src="../vue-router.js"></script>
+    <style>
+        .viewbox {
+            width: 70%;
+            min-height: 500px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+    </style>
 </head>
+
 <body>
-    
+
     <div id="app">
 
+        <h1>{{title}}</h1>
 
+        <!-- 5.路由出口,所有组件都将在这里渲染 -->
+        <router-view class="viewbox"></router-view>
+
+        <!-- 6.还能通过link跳转的方式显示出页面 -->
+        <router-link to="/login">登录</router-link>
+        <router-link to="/regist">注册</router-link>
 
     </div>
 
+
+    <template id="login">
+        <div>
+            <h3>登录界面</h3>
+        </div>
+    </template>
+
+    <template id="res">
+        <div>
+            <h3>注册界面</h3>
+        </div>
+    </template>
+
+
 </body>
 
-    <script>
-        // 使用路由实现单页面应用,将多个组件加载到同一页面当中
-        // 实现路由的五个步骤
-        // 1.
+<script>
+    // 使用路由实现单页面应用,将多个组件加载到同一页面当中
+    // 实现路由的五个步骤
+    // 1.创建路由组件
+    const login = { template: '#login' };
+    const regist = { template: '#res' };
 
-        const vm=new Vue({
+    // 2.定义路由和组件之间关系的映射,配置参数path和component
+    const routes = [
+        // path相当于访问的地址,component表示为当前路径下的组件名称
+        { path: '/login', component: login },
+        { path: '/regist', component: regist }
+    ];
 
-        }).$mount('#app');
+    // 3.创建全局路由实例
+    const router = new VueRouter({
+        routes
+    })
 
-    </script>
+
+
+
+
+    const vm = new Vue({
+        // 4.创建和挂载到根实例
+        router,// this.$router属性可在组件中使用路由功能或者查看当前路由
+        data: {
+            title: '主页面',
+        }
+    }).$mount('#app');
+
+</script>
 
 </html>
