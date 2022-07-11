@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态路由</title>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+
+
+        <!-- 导航组件相当于a标签 注意:默认的to属性的地址为写死的,并不是动态的 -->
+        <!-- <router-link to="/index">主页</router-link>
+        <router-link to="/login">登录</router-link>
+        <router-link to="/regist">注册</router-link> -->
+
+
+        <!-- 当to加冒号变成变量的时候,这时就是一个动态地址,通过路由配置上的name属性来访问对应的页面 格式:外双内单 -->
+        <!-- <router-link to="/index/45362/name/罗先略">主页</router-link>
+        <router-link to="/login/info/用户信息">登录</router-link>
+        <router-link to="/firstOut/data=20220711(取别名)">注册</router-link> -->
+
+        <router-link :to=" {name:'firstIndex',params:{id:'423654',userName:'罗先略'}} ">主页</router-link>
+        <router-link :to="{name:'firstLogin',params:{user:'用户信息'},hash:'#00001'}">登录</router-link>
+        <router-link :to="{name:'firstRegist',query:{data:'20220711'},params:{out:'退出'}}">注册</router-link>
+
+
+
+        <!-- 路由出口渲染的地方 -->
+        <router-view></router-view>
+
+    </div>
+
+
+    <template id="index">
+        <div>
+            <h1>主页</h1>
+            <!-- 通过route获取页面地址传递的参数 -->
+            <h3>id====={{$route.params.id}}</h3>
+            <h3>name====={{$route.params.userName}}</h3>
+        </div>
+    </template>
+
+
+    <template id="login">
+        <div>
+
+            <h3>登录界面</h3>
+
+            <!-- 获取参数信息 -->
+            <h4>info======{{$route.params.user}}</h4>
+
+            <!-- 查看当前页面得绝对路径地址 -->
+            <h4>当前绝对路径地址:{{$route.path}}</h4>
+
+            <!-- 查看当前页面得完整地址 参数等信息也会显示 -->
+            <h4>当前完整路径地址:{{$route.fullPath}}</h4>
+
+            <!-- 查看路由得标记信息 -->
+            <h4>meta========{{$route.meta}}</h4>
+
+            <!-- 查看当前路由路径是否带哈希值 -->
+            <h4>hash========{{$route.hash}}</h4>
+
+        </div>
+    </template>
+
+
+    <template id="regist">
+        <div>
+            <h3>注册界面</h3>
+            <!-- 通过冒号定义的参数用params获取,而通过问号传递的参数通过query获取 -->
+            <h4>data======{{$route.query.data}}</h4>
+            <h4>out====={{$route.params.out}}</h4>
+        </div>
+    </template>
+
+
+    <template id="nones">
+        <div style="background-color: red; width: 400px; height: 400px; text-align: center; line-height: 400px;">
+            <h2>找不到该页面,请检查路径是否正确</h2>
+        </div>
+    </template>
+
+
+
+</body>
+
+<script>
+
+    // 当我们页面复杂繁琐时,可结合动态路由的方式来进行不同页面的渲染而不是将地址信息给写死.路由可存储在前端也可存储在数据库增加安全性,大大简化了维护的工作即可在一个页面维护多个不同的路由
+
+    // 创建路由组件
+    // 首页
+    const index = {
+        template: '#index',
+    };
+
+    const login = {
+        template: '#login',
+    };
+
+    const regist = {
+        template: '#regist',
+    };
+
+    // 创建一个404界面,地址不对或者参数有误时默认跳转到这里
+    const noFound = {
+        template: '#nones',
+    };
+
+    // 定义路由,每个路由映射一个组件
+    // 一个路径可以匹配多个路由,谁的先写谁的优先级高
+    const routes = [
+        // 配置默认进入的页面
+        // 给每个配置项添加一个name属性来表示当前页面,动态路径参数为冒号开头
+        // 当然我们也可以用alias为一个路由地址取一个别名,访问地址时也可用别名去访问当然对应的参数也必须得带上
+        { path: '/', redirect: '/index' },
+        { path: '/index/:id/name/:userName', component: index, name: 'firstIndex' },//问号表示该参数可传可不传,不加问号表示必须传递
+        // meta表示路由得标记信息,islive表示是否缓存
+        { path: '/login/:data?/info/:user', component: login, name: 'firstLogin',meta:{islive:true} },
+        { path: '/regist/:out?', component: regist, name: 'firstRegist', alias: '/firstOut/:out?' },
+        // 配置错误信息重定向到404界面
+        { path: '/404', component: noFound,name:'404' },
+        { path: '*', redirect: {name:"404"} }
+    ]
+
+    // 创建全局路由实例,将定义的路由配置传递进去
+    const router = new VueRouter({
+        routes
+    })
+
+
+    const vm = new Vue({
+        // 将路由挂载到根实例上
+        router//此时可以使用vue提供的$route(路由信息参数)和$router(路由对象)属性
+    }).$mount('#app');
+
+
+    // 路由对象属性
+    /**
+     * $route.query      个 key / value 对象，表示 URL 查询参数(?)
+        $route.params     一个 key / value 对象  获取路由参数(: )
+        $route.name       当前路由的名称
+        $route.path       对应当前路由的路径，总是解析为绝对路径
+        $route.hash       当前路由的 hash 值(带 #) ，如果没有 hash 值，则为空字符串
+        $route.fullPath   完成解析后的 URL，包含查询参数和 hash 的完整路径
+        $route.meta       路由标记信息
+    */
+
+
+
+</script>
+
+</html>

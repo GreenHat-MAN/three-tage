@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>路由跳转和嵌套</title>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+
+        <!-- <router-link :to=" {name:'index'} ">主页</router-link>
+        <router-link :to=" {name:'new'} ">新闻</router-link>
+        <router-link :to=" {name:'out'} ">退出</router-link> -->
+
+        <router-view></router-view>
+
+    </div>
+
+
+    <template id="index">
+        <div>
+            <h1>主页</h1>
+            <!-- 在需要嵌套的位置设置路由出口 -->
+            <router-link :to="{name:'options' }">选择英雄</router-link>
+            <router-link :to="{name:'selects'}">选择符文</router-link>
+            <router-link :to="{name:'read'}">选择皮肤</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+
+
+    <template id="news">
+        <div>
+            <h1>详情页</h1>
+        </div>
+    </template>
+
+
+    <template id="out">
+        <div>
+            <h1>退出</h1>
+        </div>
+    </template>
+
+    <template id="option">
+        <div>
+            <h3>选择你的英雄</h3>
+            <!-- 二级路由 -->
+            <router-link :to="{name:'hero'}">展开⬇</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+
+    <template id="selects">
+        <div>
+            <h3>请选择符文</h3>
+        </div>
+    </template>
+
+    <template id="read">
+        <div>
+            <h3>选择你的皮肤</h3>
+        </div>
+    </template>
+
+    <template id="hero">
+        <div>
+            <ol v-for="(item,i) in list" ::key="i">
+                <li>英雄:{{item.name}}</li>
+                <li>楼层:{{item.id}}</li>
+                <li>精粹:{{item.price}}</li>
+            </ol>
+        </div>
+    </template>
+
+
+    <template id="fuwen">
+        <div>
+            <ol v-for="(item,i) in list" ::key="i">
+                <li>英雄:{{item.name}}</li>
+                <li>楼层:{{item.id}}</li>
+                <li>精粹:{{item.price}}</li>
+            </ol>
+        </div>
+    </template>
+
+</body>
+
+    <script>
+
+        const firstIndex={template:'#index'};
+
+        const firstNews={template:'#news'};
+        const firstOption={template:'#option'};
+        const firstSelect={template:'#selects'};
+        const firstRead={template:'#read'};
+
+        const fisrtOut={template:'#out'};
+
+        // 在定义一层
+        const hero={
+            template:'#hero',
+            data() {
+                return {
+                    list:[
+                        {name:'剑豪',id:00001,price:6300},
+                        {name:'剑姬',id:00002,price:6300},
+                        {name:'剑魔',id:00003,price:6300},
+                        {name:'剑圣',id:00004,price:450},
+                        {name:'剑魂',id:00005,price:6300},
+                    ]
+                }
+            },
+        };
+
+        // 在定义一层
+        const fuwen={
+            template:'#fuwen',
+            data() {
+                return {
+                    list:[
+                        {name:'主系',first:'征服者',second:'致命节奏',third:'迅捷步伐'},
+                        {name:'剑姬',id:00002,price:6300},
+                        {name:'剑魔',id:00003,price:6300},
+                        {name:'剑圣',id:00004,price:450},
+                        {name:'剑魂',id:00005,price:6300},
+                    ]
+                }
+            },
+        };
+
+
+
+
+        // 定义子路由 router-view 接收子路由组件
+        const childList=[
+            {
+                path:'/index/option',
+                component:firstOption,
+                name:'options',
+                children:[
+                    {path:'/index/option/hero',component:hero,name:'hero'}
+                ]
+            },
+            {path:'/index/selects',component:firstSelect,name:'selects'},
+            {path:'/index/read',component:firstRead,name:'read'}
+        ];
+        
+
+        const routes=[
+
+            {
+                path:'/index',
+                redirect:'/index/options',
+                component:firstIndex,
+                name:'index',
+                children:childList,
+
+            },
+
+            {path:'/news',component:firstNews,name:'new'},
+            {path:'/out',component:fisrtOut,name:'out'},
+
+        ]
+
+        const router = new VueRouter({
+            routes
+        })
+
+        const vm=new Vue({
+            router
+        }).$mount('#app');
+
+    </script>
+
+</html>
