@@ -10,9 +10,9 @@
 </template>
 
 <script>
-import Fater from "@/components/fater.vue";
+import Fater from '@/components/fater.vue';
 export default {
-    comments:{Fater}
+    components: { Fater }
 }
 </script>
 
