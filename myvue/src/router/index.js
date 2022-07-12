@@ -1,29 +1,60 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
+// 模块化编译,全局生命使用vue-router
 Vue.use(VueRouter)
 
+// 定义路由组件
+import IndexMain from "@/views/indexMain.vue"
+
+//配置路由信息配置,path和compent的映射关系
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
+    {
+        path: '/',
+        redirect: '/indexmain'
+    },
+    {
+        path: '/indexmain',
+        name: 'indexmain',
+        component: IndexMain
+    },
+    {
+        path: '/main',
+        name: 'main',
+        component: () => import('@/views/main.vue')//懒加载
+    },
+    {
+        path: '/detail',
+        name: 'detail',
+        component: () => import('@/views/detail.vue')//懒加载
+    },
+    {
+        path: '/cart',
+        name: 'cart',
+        component: () => import('@/views/cart.vue')//懒加载
+    },
+    {
+        path: '/regist',
+        name: 'regist',
+        component: () => import('@/views/regist.vue')//懒加载
+    },
+    {
+        path: '/404',
+        name: '404',
+        component: () => import('@/views/404.vue')
+    },
+    {
+        path: '*',
+        redirect: '/404'
+    }
 ]
 
+// 创建路由的实例对象
 const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes
+    routes,
+    mode: 'history',
+    base: ''
 })
 
+// 将创建的路由实例对象暴露出去
 export default router
