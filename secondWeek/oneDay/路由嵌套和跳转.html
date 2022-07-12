@@ -12,9 +12,9 @@
     
     <div id="app">
 
-        <!-- <router-link :to=" {name:'index'} ">主页</router-link>
+        <router-link :to=" {name:'index'} ">主页</router-link>
         <router-link :to=" {name:'new'} ">新闻</router-link>
-        <router-link :to=" {name:'out'} ">退出</router-link> -->
+        <router-link :to=" {name:'out'} ">退出</router-link>
 
         <router-view></router-view>
 
@@ -29,6 +29,7 @@
             <router-link :to="{name:'selects'}">选择符文</router-link>
             <router-link :to="{name:'read'}">选择皮肤</router-link>
             <router-view></router-view>
+            <p>提示信息:{{title}}</p>
         </div>
     </template>
 
@@ -52,12 +53,17 @@
             <!-- 二级路由 -->
             <router-link :to="{name:'hero'}">展开⬇</router-link>
             <router-view></router-view>
+            <button @click="nextStep">下一步</button>
         </div>
     </template>
 
     <template id="selects">
         <div>
             <h3>请选择符文</h3>
+            <!-- 二级路由 -->
+            <router-link :to="{name:'fuwen'}">展开⬇</router-link>
+            <router-view></router-view>
+            <button @click="lastStep">上一步</button>
         </div>
     </template>
 
@@ -77,31 +83,62 @@
         </div>
     </template>
 
-
     <template id="fuwen">
         <div>
             <ol v-for="(item,i) in list" ::key="i">
-                <li>英雄:{{item.name}}</li>
-                <li>楼层:{{item.id}}</li>
-                <li>精粹:{{item.price}}</li>
+                <li>
+                    {{item.name}}:
+                        <ul>
+                            <li>{{item.first}}</li>
+                            <li>{{item.second}}</li>
+                            <li>{{item.third}}</li>
+                        </ul>
+                </li>
             </ol>
         </div>
     </template>
+
+
+
 
 </body>
 
     <script>
 
-        const firstIndex={template:'#index'};
+        const firstIndex={template:'#index',data() {
+            return {
+                title:this.$route.query.title
+            }
+        },};
 
         const firstNews={template:'#news'};
-        const firstOption={template:'#option'};
-        const firstSelect={template:'#selects'};
+
+        const firstOption={template:'#option',methods: {
+            // 路由跳转编程式不带参数跳转
+            nextStep(){
+                this.$router.push('/index/selects');
+            }
+        },};
+
+        const firstSelect={template:'#selects',methods: {
+            lastStep(){
+                // this.$router.replace('/index');
+                // 带参数跳转
+                // go正负代表前进和后退,数值大小代表跳转的页数
+                // this.$router.go(-1);
+                this.$router.push({
+                    name:'index',
+                    query:{title:'重新选择'},
+                });
+                this.$router.go(0);//页面强制刷新
+            }
+        },};
+
         const firstRead={template:'#read'};
 
         const fisrtOut={template:'#out'};
 
-        // 在定义一层
+        // 在定义一层嵌套(二层)
         const hero={
             template:'#hero',
             data() {
@@ -117,45 +154,51 @@
             },
         };
 
-        // 在定义一层
+        // 又再一次定义一层嵌套(三层)
         const fuwen={
             template:'#fuwen',
             data() {
                 return {
                     list:[
                         {name:'主系',first:'征服者',second:'致命节奏',third:'迅捷步伐'},
-                        {name:'剑姬',id:00002,price:6300},
-                        {name:'剑魔',id:00003,price:6300},
-                        {name:'剑圣',id:00004,price:450},
-                        {name:'剑魂',id:00005,price:6300},
+                        {name:'副系',first:'凯旋',second:'欢欣',third:'全知全命'},
                     ]
                 }
             },
         };
 
-
-
-
         // 定义子路由 router-view 接收子路由组件
         const childList=[
             {
-                path:'/index/option',
+                path:'/index',
                 component:firstOption,
                 name:'options',
+                data() {
+                    return {
+                        
+                    }
+                },
                 children:[
                     {path:'/index/option/hero',component:hero,name:'hero'}
                 ]
             },
-            {path:'/index/selects',component:firstSelect,name:'selects'},
+            {
+                path:'/index/selects',
+                component:firstSelect,
+                name:'selects',
+                children:[
+                {path:'/index/selects/fuwen',component:fuwen,name:'fuwen'}
+                ]
+            },
             {path:'/index/read',component:firstRead,name:'read'}
         ];
         
-
+        // 配置最外层路由信息
         const routes=[
 
             {
                 path:'/index',
-                redirect:'/index/options',
+                redirect:'/index',
                 component:firstIndex,
                 name:'index',
                 children:childList,
@@ -167,12 +210,39 @@
 
         ]
 
+        // 实例化路由对象
         const router = new VueRouter({
-            routes
+            routes,
+            mode:'hash',//路由模式 hash哈希模式、
+            base:'',//路径
         })
 
+        // 配置全局路由守卫
+        // router.beforeEach((to, from, next) => {
+        //     // to and from are both route objects. must call `next`.
+        //     console.log('路由前置守卫!!!');
+        //     if (to.name=='selects') {
+        //         if (window.confirm('请先选择您的英雄!!!')) {
+        //             next('/index');//确认为true才能进行下一步
+        //         }else{
+        //             next(false)//中断当前的导航
+        //         }
+        //     }else{
+        //         next()
+        //     }
+        // })
+
+        // router.afterEach((to, from) => {
+        //     // to and from are both route objects.
+        //     console.log('路由后置守卫!!!');
+        // })
+
         const vm=new Vue({
-            router
+            router,
+            mounted() {
+                console.log(this.$router);
+                console.log(this.$route);
+            },
         }).$mount('#app');
 
     </script>
