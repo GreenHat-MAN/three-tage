@@ -18,6 +18,9 @@ Vue.config.productionTip = false
 const bus = new Vue();
 Vue.prototype.$bus = bus
 
+// 导入数据生成器
+import '@/utils/mock'
+
 
 // 全局vue实例对象
 new Vue({
