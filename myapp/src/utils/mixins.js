@@ -7,7 +7,7 @@ Vue.mixin({
 
     data() {
         return {
-            title:'这是混入里的值',
+            // title:'这是混入里的值',
         }
     },
     mounted(){

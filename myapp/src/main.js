@@ -7,6 +7,10 @@ import store from './store'
 import '@/assets/index.scss'
 // 导入vant组件库
 import Vant from 'vant'
+import { Dialog } from 'vant'
+import { Lazyload } from 'vant';
+Vue.use(Lazyload);
+Vue.use(Dialog)
 import 'vant/lib/index.css'
 // 在全局下使用
 Vue.use(Vant)
