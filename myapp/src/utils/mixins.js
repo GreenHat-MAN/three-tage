@@ -11,7 +11,7 @@ Vue.mixin({
         }
     },
     mounted(){
-        console.log('这是一个全局混入的mounted!!!');
+        // console.log('这是一个全局混入的mounted!!!');
     },
     created(){
 
