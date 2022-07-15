@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <h1>注册界面</h1>
+    <myheard title="用户注册" :back="true"></myheard>
     <div class="fom">
       <van-form @submit="onSubmit">
         <van-field
@@ -25,7 +25,7 @@
         </div>
       </van-form>
     </div>
-    <p class="back" @click="goback">&gt;返回</p>
+    <!-- <p class="back" @click="goback">&gt;返回</p> -->
   </div>
 </template>
 
@@ -41,9 +41,6 @@ export default {
     };
   },
   methods: {
-    goback(){
-      this.$router.go(-1);
-    },
     onSubmit(values) {
       console.log(values);
       if (

@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <h1>主页</h1>
+  <div class="mbox">
     <!-- 路由出口 -->
     <router-view></router-view>
+    <footers></footers>
   </div>
 </template>
 
@@ -12,6 +12,9 @@ export default {
 }
 </script>
 
-<style>
+
+<style lang="scss">
+
+  
 
 </style>

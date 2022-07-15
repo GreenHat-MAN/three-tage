@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>电影商城</h1>
+    <myheard title="电影商城" :back="false"></myheard>
   </div>
 </template>
 

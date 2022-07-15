@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>新片推荐</h1>
+    <myheard title="新片推荐" :back="false"></myheard>
   </div>
 </template>
 

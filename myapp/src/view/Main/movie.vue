@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>电影列表</h1>
+    <myheard title="电影列表" :back="false"></myheard>
   </div>
 </template>
 

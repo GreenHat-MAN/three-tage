@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <h1>登录界面</h1>
+    <myheard title="用户登录" :back="true"></myheard>
     <div class="logo">
       <img :src="PIC" />
     </div>
