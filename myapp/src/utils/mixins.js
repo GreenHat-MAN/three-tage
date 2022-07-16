@@ -22,6 +22,9 @@ Vue.mixin({
         ...mapState['name','age','adress']
     },
     methods:{
+        onSubmit(values){
+            console.log(values);
+        },
         goback(){
             this.$router.go(-1);
         },

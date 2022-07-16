@@ -4,6 +4,8 @@
     <div class="fom">
       <van-form @submit="onSubmit">
         <van-field
+        clearable
+          left-icon="friends-o"
           v-model="username"
           name="username"
           label="用户名"
@@ -11,6 +13,8 @@
           :rules="[{ required: true, message: '请填写用户名' }]"
         />
         <van-field
+        clearable
+        left-icon="passed"
           v-model="password"
           type="password"
           name="password"
@@ -25,7 +29,6 @@
         </div>
       </van-form>
     </div>
-    <!-- <p class="back" @click="goback">&gt;返回</p> -->
   </div>
 </template>
 

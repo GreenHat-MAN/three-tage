@@ -1,90 +1,36 @@
 <template>
   <div class="box">
     <myheard title="用户登录" :back="true"></myheard>
-    <div class="logo">
-      <img :src="PIC" />
-    </div>
-    <div class="fom">
-      <van-form @submit="onSubmit">
-        <van-field
-          v-model="username"
-          name="username"
-          label="用户名"
-          placeholder="用户名"
-          :rules="[{ required: true, message: '请填写用户名' }]"
-        />
-        <van-field
-          v-model="password"
-          type="password"
-          name="password"
-          label="密码"
-          placeholder="密码"
-          :rules="[{ required: true, message: '请填写密码' }]"
-        />
-        <div style="margin: 16px">
-          <van-button round block type="info" native-type="submit"
-            >登录</van-button
-          >
-        </div>
-      </van-form>
-          <van-button class="reg" @click="toregist" round block type="info" native-type="submit"
-            >注册</van-button
-          >
-    </div>
+    <van-tabs
+      v-model="active"
+      animated
+      swipeable
+      title-active-color="#f50"
+      title-inactive-color="#999"
+      color="#f50"
+    >
+      <van-tab title="账号登录" name="username">
+        <byname/>
+      </van-tab>
+      <van-tab title="手机登录" name="phone">
+        <byphone/>
+      </van-tab>
+    </van-tabs>
   </div>
 </template>
 
 <script>
-import PIC from "../../../public/img/logo.png";
-import axios from "axios";
+import byname from './byname.vue';
+import Byphone from './byphone.vue';
 export default {
-  name:'login',
+  components: { byname, Byphone },
+  name: "login",
   data() {
     return {
-      PIC,
-      username: "",
-      password: "",
-      check: [],
+      active:"username"
     };
   },
-  mounted() {
-    axios.get("http://localhost:2206/login").then((res) => {
-      // console.log(res.data);
-      this.check = res.data;
-    });
-  },
-  methods: {
-    toregist(){
-      // console.log('123');
-      this.$router.push({name:'regist'});
-    },
-    onSubmit(values) {
-      console.log("前端submit" + values.username, values.password);
-      if (
-        this.check.find((val) => {
-          return (
-            val.username === values.username && val.password === values.password
-          );
-        })
-      ) {
-        this.$dialog
-          .alert({
-            message: "登录成功!!!",
-          })
-          .then(() => {
-            this.$router.push({ name: "main" });
-          });
-      } else {
-        this.$dialog
-          .alert({
-            message: "用户名或密码错误!!!",
-          })
-          .then(() => {
-            this.$router.go(0);
-          });
-      }
-    },
-  },
+  
 };
 </script>
 
@@ -93,19 +39,5 @@ export default {
   width: 100%;
   height: 100%;
 }
-.logo {
-  width: 100%;
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  img {
-    width: 50px;
-    height: 50px;
-  }
-}
-::v-deep .reg{
-  width: 92%;
-  margin-left: 16px;
-}
+
 </style>
