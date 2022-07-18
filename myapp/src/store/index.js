@@ -5,15 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    name:'罗先略',
-    age:22,
-    adress:'武汉'
+    userInfo:null,//个人用户登录信息
   },
   getters: {
   },
   mutations: {
     changeAge(state,playload){
       state.age+=playload
+    },
+    changeUserInfo(state,payload){
+      state.userInfo = payload
     }
   },
   actions: {

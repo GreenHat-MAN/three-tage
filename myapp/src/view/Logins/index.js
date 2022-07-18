@@ -13,6 +13,11 @@ export default[
         path:'/find',
         name:'findPass',
         component:()=>import('./findPass.vue')
+    },
+    {
+        path:'/resetpwd',
+        name:'resetpwd',
+        component:()=>import('./resetpwd.vue')
     }
 
 ]

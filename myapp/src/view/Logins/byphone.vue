@@ -7,7 +7,7 @@
       <!-- 通过 pattern 进行正则校验 -->
       <van-field
         left-icon="phone-o"
-        v-model="value1"
+        v-model="phone"
         name="phone"
         label="手机号"
         clearable
@@ -17,15 +17,26 @@
       <!-- 短信 -->
       <van-field
         left-icon="envelop-o"
-        v-model="sms"
-        name="code"
+        v-model="captcha"
+        name="captcha"
         center
         clearable
         label="短信验证码"
         placeholder="请输入短信验证码"
       >
         <template #button>
-          <van-button size="small" type="primary">发送验证码</van-button>
+          <van-button
+            v-if="falg"
+            @click="sendCode"
+            size="small"
+            :disabled="!toDisable"
+            type="primary"
+            native-type="button"
+            >发送验证码</van-button
+          >
+          <van-button v-else size="small" disabled type="primary"
+            >{{ count }} S 后可发送</van-button
+          >
         </template>
       </van-field>
       <div style="margin: 16px">
@@ -38,19 +49,92 @@
 </template>
 
 <script>
+let timer = null;
 import PIC from "../../../public/img/logo.png";
-import axios from "axios";
 export default {
   data() {
     return {
       PIC,
-      value1:'',
-      pattern:/^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
-      sms:''
+      phone: "",
+      pattern:
+        /^(0|86|17951)?(13[0-9]|15[012356789]|166|17[3678]|18[0-9]|14[57])[0-9]{8}$/,
+      captcha: "",
+      falg: true,
+      count: 60,
     };
   },
   methods: {
-    
+    async onSubmit(values) {
+      // 验证登录信息
+      console.log(values);
+      let data = await this.$ajax.getLogin({ phone: this.phone });
+      if (data.length > 0) {
+        let res = await this.$ajax.verifyCaptcha(values).catch((err) => {
+          this.$toast.fail("验证失败");
+        });
+        if (res && res.code == 200) {
+          this.$toast.success("验证成功");
+          this.$router.push({ name: "mine" });
+          localStorage.setItem("phone", values.phone);
+          localStorage.setItem("username", data[0].username);
+        }else{
+          this.$toast.fail('验证失败');
+        }
+      }else{
+        this.$toast('当前手机号未注册,请先去注册');
+      }
+    },
+    countdown() {
+      this.count--;
+      this.falg = false;
+      timer = setInterval(() => {
+        if (this.count > 0) {
+          this.count--;
+          this.falg = false;
+        } else {
+          clearInterval(timer);
+          timer = null;
+          this.count = 60;
+          this.falg = true;
+        }
+      }, 1000);
+    },
+    async checkPhone() {
+      // 判断手机号是否注册
+      // console.log(this.phone);
+      let data = await this.$ajax.getLogin({ phone: this.phone });
+      // console.log(data);
+      if (data.length > 0) {
+        //说明不存在
+        let res = await this.$ajax
+          .sendCaptcha({ phone: this.phone })
+          .catch((err) => {
+            this.$toast.fail("发送失败");
+          });
+        // console.log(res);
+        if (res && res.code == 200) {
+          this.$toast.success("发送成功");
+        } else {
+          this.$toast.fail("发送失败");
+        }
+      } else {
+        this.$toast("当前手机号未注册,请先去注册");
+      }
+    },
+    sendCode() {
+      this.countdown();
+      // 发送请求获取验证码
+      this.checkPhone();
+    },
+  },
+  computed: {
+    toDisable() {
+      return this.pattern.test(this.phone);
+    },
+  },
+  destroyed() {
+    clearInterval(timer);
+    timer = null;
   },
 };
 </script>

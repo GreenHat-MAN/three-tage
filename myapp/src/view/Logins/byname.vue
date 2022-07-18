@@ -66,10 +66,10 @@ export default {
     },
     async onSubmit(values) {
       // console.log(values);
-      let res = await axios.get("http://localhost:2206/login", {});
-      // console.log(res.data);
+      let res = await this.$ajax.getLogin(values);
+      // console.log(res);
       if (
-        res.data.find((items) => {
+        res.find((items) => {
           return (
             items.username === values.username &&
             items.password === values.password
@@ -77,10 +77,10 @@ export default {
         })
       ) {
         // console.log('登录成功');
-        this.$notify({ type: "success", message: "登录成功" });
-        setTimeout(() => {
-          this.$router.push({ name: "mine" });
-        }, 500);
+        // this.$notify({ type: "success", message: "登录成功" });
+        localStorage.setItem("phone", res[0].phone);
+        localStorage.setItem("username", values.username);
+        this.$router.push({ name: "mine" });
       } else {
         // console.log('账号密码不正确!!!');
         this.$notify({ type: "danger", message: "账号密码不正确!!!" });
@@ -106,16 +106,16 @@ export default {
   width: 92%;
   margin-left: 16px;
 }
-.linkitems{
-        margin-top: 5px;
-        display: flex;
-        justify-content: space-between;
-        font-size: 12px;
-        .cm{
-            color:#f50;
-        }
-        .co{
-            color:#b5b5b5;
-        }
-    }
+.linkitems {
+  margin-top: 5px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  .cm {
+    color: #f50;
+  }
+  .co {
+    color: #b5b5b5;
+  }
+}
 </style>
