@@ -61,3 +61,20 @@ export const FooterList = [
 ]
 
 
+
+// 导入axios下的封装方法
+import {get,post,Delete,Patch} from '@/utils/request'
+
+// 接口的服务层
+export const Ajax={
+    // 获取登录用户信息
+    getLogin:(params)=>get('login',params),
+    
+    sendCaptcha:(params)=>get("http://121.196.235.163:3000/captcha/sent",params),  // 发送验证码
+
+    verifyCaptcha:(params)=>get("http://121.196.235.163:3000/captcha/verify",params), // 校验验证码
+
+    // 修改密码
+    upDatepwd:(id,params)=>Patch('login/'+id,params),
+}
+

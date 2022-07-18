@@ -8,6 +8,16 @@ export default[
         path:'/regist',
         name:'regist',
         component:()=>import('./regist.vue')
+    },
+    {
+        path:'/find',
+        name:'findPass',
+        component:()=>import('./findPass.vue')
+    },
+    {
+        path:'/resetpwd',
+        name:'resetpwd',
+        component:()=>import('./resetpwd.vue')
     }
 
 ]

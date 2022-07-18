@@ -30,6 +30,15 @@ import '@/components'
 //适配淘宝版
 import 'lib-flexible'
 
+// 导入axios文件定义全局下使用axios
+import {request} from '@/utils/request'
+Vue.prototype.$axios=request
+
+// 全局下使用ajax
+import {Ajax} from '@/utils/index'
+Vue.prototype.$ajax=Ajax
+
+
 
 new Vue({
   router,

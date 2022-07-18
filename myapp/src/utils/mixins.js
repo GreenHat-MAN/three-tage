@@ -9,7 +9,7 @@ Vue.mixin({
     data() {
         return {
             // title:'这是混入里的值',
-            FooterList
+            FooterList,
         }
     },
     mounted(){
@@ -19,13 +19,16 @@ Vue.mixin({
 
     },
     computed:{
-        ...mapState['name','age','adress']
+        ...mapState(['userInfo'])
     },
     methods:{
+        onSubmit(values){
+            console.log(values);
+        },
         goback(){
             this.$router.go(-1);
         },
-        ...mapMutations['changeAge'],
+        ...mapMutations(['changeAge','changeUserInfo']),
     },
     watch:{
 
