@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { mapState,mapMutations } from "vuex";
+import { mapState,mapMutations,mapGetters } from "vuex";
 import {FooterList} from '@/utils/index'
 
 
@@ -19,7 +19,8 @@ Vue.mixin({
 
     },
     computed:{
-        ...mapState(['userInfo'])
+        ...mapState(['userInfo','city','cityList','cinemaList']),
+        ...mapGetters(['hotCity'])
     },
     methods:{
         onSubmit(values){
@@ -28,7 +29,12 @@ Vue.mixin({
         goback(){
             this.$router.go(-1);
         },
-        ...mapMutations(['changeAge','changeUserInfo']),
+        ...mapMutations(['changeAge','changeUserInfo','changeCity','changeCityList',
+        'changeCinemaList']),
+        gotowhere(options){
+            const {name,query,params} = options;
+            this.$router.push({name,query,params})
+        }
     },
     watch:{
 

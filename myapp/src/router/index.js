@@ -8,6 +8,7 @@ import GuideRouter from '@/view/Guide/guide.vue'
 import MainRouter from '@/view/Main'
 import LoginsRouter from '@/view/Logins'
 import erroPageRouter from '@/view/erroPage'
+import filmRouter from '@/view/film'
 
 
 // 配置路由路径和组件的映射关系
@@ -24,9 +25,16 @@ const routes = [
         name: 'guide',
         component: GuideRouter
     },
+    // 定位系统
+    {
+        path:'/city',
+        name:'city',
+        component:()=>import('@/view/City/city.vue')
+    },
     ...LoginsRouter,
     ...MainRouter,
     ...erroPageRouter,
+    ...filmRouter,
     //错误信息页
     {
         path: '*',

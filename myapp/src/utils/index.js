@@ -76,5 +76,10 @@ export const Ajax={
 
     // 修改密码
     upDatepwd:(id,params)=>Patch('login/'+id,params),
+
+    // 卖座电影接口
+    getList:(params,headers)=>get("https://m.maizuo.com/gateway",params,headers),
+
+    postList:(data,params,headers)=>post("https://m.maizuo.com/gateway",data,params,headers) ,// 卖座数据需要请求头
 }
 

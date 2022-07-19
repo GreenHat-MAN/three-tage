@@ -22,3 +22,11 @@ Vue.component('myfooter',myfooter)
 // 注册头部导航信息
 import myheard from '@/components/myheard.vue'
 Vue.component('myheard',myheard)
+
+// 注册主页电影列表组件
+import filmlist from '@/components/filmlist.vue'
+Vue.component('filmlist',filmlist)
+
+// 注册电影院组件
+import CList from '@/components/CList.vue'
+Vue.component('CList',CList) 
