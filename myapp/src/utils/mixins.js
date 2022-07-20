@@ -1,5 +1,5 @@
 import Vue from "vue";
-import { mapState,mapMutations,mapGetters } from "vuex";
+import { mapState,mapMutations,mapGetters, mapActions } from "vuex";
 import {FooterList} from '@/utils/index'
 
 
@@ -19,8 +19,9 @@ Vue.mixin({
 
     },
     computed:{
-        ...mapState(['userInfo','city','cityList','cinemaList']),
-        ...mapGetters(['hotCity'])
+        ...mapState(['userInfo','city','cityList','cinemaList','goodList']),
+        ...mapGetters(['hotCity','goodTypes']),
+        
     },
     methods:{
         onSubmit(values){
@@ -31,10 +32,26 @@ Vue.mixin({
         },
         ...mapMutations(['changeAge','changeUserInfo','changeCity','changeCityList',
         'changeCinemaList']),
+        ...mapActions(['getGoodListAsync']),
         gotowhere(options){
             const {name,query,params} = options;
             this.$router.push({name,query,params})
-        }
+        },
+        // 判断是否登录 
+        checkIsLogin(callback){
+            if(this.userInfo){
+                callback()
+            }else{
+                this.$dialog.confirm({
+                    title: '友情提示',
+                    message: '你还没有登录,请先登录哦.',
+                    // theme: 'round-button',
+                }).then(() => {
+                    // on close
+                    this.$router.push({name:'login'})
+                });
+            }
+        },
     },
     watch:{
 

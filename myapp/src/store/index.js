@@ -1,3 +1,4 @@
+import { Ajax } from '@/utils'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
@@ -9,7 +10,8 @@ export default new Vuex.Store({
     userInfo: null,//个人用户登录信息
     city: null,//城市定位信息
     cityList:[], // 全国的城市数据信息
-    cinemaList:[] // 当前城市的电影院 列表 
+    cinemaList:[], // 当前城市的电影院 列表
+    goodList:[] , // 商品列表   
   },
   plugins:[
     createPersistedState()  // vuex 存储到的本地localStorage 
@@ -17,6 +19,19 @@ export default new Vuex.Store({
   getters: {
     hotCity(state){
       return state.cityList.filter(item=>item.isHot==1)
+    },
+    goodTypes(state){
+      var arr = [{text:'全部商品',value:'-1'}]  // 初始化商品分类
+      var obj = {}
+      for(var i=0;i<state.goodList.length;i++){
+        var item = state.goodList[i]
+        if(!obj[item.type.text]){
+          obj[item.type.text] = item.type.text;
+          arr.push(item.type)
+        } 
+      }
+      // console.log(arr)
+      return arr;
     }
   },
   mutations: {
@@ -34,9 +49,16 @@ export default new Vuex.Store({
     },
     changeCinemaList(state,payload){
       state.cinemaList = payload;
+    },
+    changeGoodList(state,payload){
+      state.goodList=payload;
     }
   },
   actions: {
+    async getGoodListAsync({commit},playload){
+      let res=await Ajax.getGoodList(playload)
+      commit('changeGoodList',res)
+    }
   },
   modules: {
   }

@@ -104,7 +104,7 @@
     <div class="nav"></div>
 
     <!-- 选座购票 -->
-    <div class="goSchedule" @click="gotowhere({name:'film-cinemas',params:{filmId:film.filmId} })">
+    <div class="goSchedule" @click="gotowhere({name:'moviesit',params:{filmId:film.filmId} })">
              选座购票 
     </div>
 

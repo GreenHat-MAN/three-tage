@@ -81,5 +81,36 @@ export const Ajax={
     getList:(params,headers)=>get("https://m.maizuo.com/gateway",params,headers),
 
     postList:(data,params,headers)=>post("https://m.maizuo.com/gateway",data,params,headers) ,// 卖座数据需要请求头
+
+    // 请求商品数据
+    getGoodList:(params)=>get("goods",params),
+
+    // 添加购物车商品
+    postGood:(params)=>post("cart",params),
+
+    // 修改购物车商品数据
+    updateGood:(id,params)=>Patch('cart/'+id,params),
+
+    // 删除购物车商品
+    delGood:(id,params)=>Delete('cart/'+id,params),
+
+    // 获取购物车数据
+    getCarts:(params)=>get('/cart',params),
+
+
+    getLikes:(params)=>get('/likes',params),   // 获取点赞数据 
+
+    addToLikes:(params)=>post('/likes',params),   // 添加点赞数据 
+
+    deleteCarts:(id,params)=>Delete('/likes/'+id,params),   // 删除点赞 
+
+    
+    getCollects:(params)=>get('/collects',params),   // 获取点赞数据 
+
+    addCollects:(params)=>post('/collects',params),   // 添加点赞数据 
+
+    deleteCollects:(id,params)=>Delete('/collects/'+id,params),   // 删除点赞 
+
+
 }
 

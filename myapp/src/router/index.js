@@ -9,6 +9,7 @@ import MainRouter from '@/view/Main'
 import LoginsRouter from '@/view/Logins'
 import erroPageRouter from '@/view/erroPage'
 import filmRouter from '@/view/film'
+import goodRouter from '@/view/Goods'
 
 
 // 配置路由路径和组件的映射关系
@@ -35,6 +36,7 @@ const routes = [
     ...MainRouter,
     ...erroPageRouter,
     ...filmRouter,
+    ...goodRouter,
     //错误信息页
     {
         path: '*',

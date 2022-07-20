@@ -38,6 +38,9 @@ Vue.prototype.$axios=request
 import {Ajax} from '@/utils/index'
 Vue.prototype.$ajax=Ajax
 
+// 全局的过滤器配置
+import '@/utils/golbal'
+
 
 
 new Vue({

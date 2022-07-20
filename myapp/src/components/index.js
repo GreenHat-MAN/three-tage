@@ -30,3 +30,7 @@ Vue.component('filmlist',filmlist)
 // 注册电影院组件
 import CList from '@/components/CList.vue'
 Vue.component('CList',CList) 
+
+// 注册商品数据列表组件
+import GList from '@/components/GList.vue'
+Vue.component('GList',GList)
