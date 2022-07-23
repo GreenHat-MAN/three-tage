@@ -1,25 +1,14 @@
 export default [
-
     {
         path:'/main',
         name:'main',
         component:()=>import('./main.vue'),
-        redirect:'/movie',
+        redirect:'/shop',
         children:[
-            {
-                path:'/movie',
-                name:'movie',
-                component:()=>import('./movie.vue'),
-            },
             {
                 path:'/shop',
                 name:'shop',
                 component:()=>import('./shop.vue'),
-            },
-            {
-                path:'/news',
-                name:'news',
-                component:()=>import('./news.vue'),
             },
             {
                 path:'/mine',
@@ -27,9 +16,14 @@ export default [
                 component:()=>import('./mine.vue'),
             },
             {
-                path:'/cinema',
-                name:'cinema',
-                component:()=>import('./cinema.vue'),
+                path:'/cart',
+                name:'cart',
+                component:()=>import('@/views/Cart/cart.vue'),
+            },
+            {
+                path:'/classify',
+                name:'classify',
+                component:()=>import('@/views/Classify/classify.vue'),
             },
         ]
     }

@@ -40,34 +40,9 @@
   ],
   "login": [
     {
-      "username": "大佬弟",
-      "password": "123321",
-      "id": 1000
-    },
-    {
-      "username": "qq王",
-      "password": "qwer123",
-      "id": 1001
-    },
-    {
-      "username": "大雄",
-      "password": "1008611",
-      "id": 1002
-    },
-    {
-      "username": "胖虎",
-      "password": "10010",
-      "id": 1003
-    },
-    {
-      "username": "1",
-      "password": "1",
-      "id": 1004
-    },
-    {
       "username": "罗先略",
       "phone": "15272459621",
-      "password": "11111",
+      "password": "qwer123",
       "id": 1005
     },
     {
@@ -81,6 +56,12 @@
       "phone": "15171611371",
       "password": "1234567",
       "id": 1007
+    },
+    {
+      "username": "刘强东",
+      "phone": "13077206807",
+      "password": "abc10086",
+      "id": 1008
     }
   ],
   "goods": [
