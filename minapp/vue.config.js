@@ -39,6 +39,24 @@ module.exports = defineConfig({
           "^/cate": ""
         }
       },
+      "/search": {   
+        target: "https://mall.bilibili.com/",
+        pathRewrite: {  
+          "^/search": ""
+        }
+      },
+      "/gory": {   
+        target: "https://mall.bilibili.com/",
+        pathRewrite: {  
+          "^/gory": ""
+        }
+      },
+      "/vtwo": {   
+        target: "https://mall.bilibili.com/",
+        pathRewrite: {  
+          "^/vtwo": ""
+        }
+      },
     }
   },
 

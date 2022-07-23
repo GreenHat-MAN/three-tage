@@ -96,7 +96,7 @@ export default {
     position: absolute;
     top: 20px;
     right: 20px;
-    ::v-deep .van-circle__text {
+    :deep(.van-circle__text){
       color: #fff !important;
     }
   }

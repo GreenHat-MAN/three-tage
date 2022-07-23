@@ -3,6 +3,18 @@
     <!-- 头部 -->
     <hearder title="我的" :back="true"></hearder>
 
+    <!-- 用户信息 -->
+    <div class="bugImg">
+      <div class="userheard">
+        <img :src="PIC11" />
+      </div>
+      <p class="login" v-if="userInfo">
+        用户名:{{ userInfo.username }}<br />
+        手机号:{{ userInfo.phone }}
+      </p>
+      <p v-else class="login" @click="goLogin">立即登录</p>
+    </div>
+
     <!-- 我的订单 -->
     <div class="myOrder">
       <div class="order-top">
@@ -35,6 +47,12 @@
         </div>
       </div>
     </div>
+
+    <!-- 退出 -->
+    <div class="logbox" v-if="userInfo" @click="logoutAction">
+      <van-button class="logout" block>退出登录</van-button>
+    </div>
+
   </div>
 </template>
 
@@ -49,6 +67,7 @@ import PIC7 from "../../../public/img/fankui.png";
 import PIC8 from "../../../public/img/kefu.png";
 import PIC9 from "../../../public/img/cangku.png";
 import PIC10 from "../../../public/img/jiangp.png";
+import PIC11 from "../../../public/img/头像.png";
 export default {
   name: "mine",
   data() {
@@ -63,9 +82,35 @@ export default {
       PIC8,
       PIC9,
       PIC10,
+      PIC11,
       imgList: [],
       funList: [],
     };
+  },
+  methods: {
+    logoutAction() {
+      this.$dialog
+        .confirm({
+          title: "退出提示",
+          message: "你真的要退出登录吗?",
+        })
+        .then(() => {
+          // on confirm
+          localStorage.removeItem("username");
+          localStorage.removeItem("phone");
+          this.changeUserInfo(null);
+        })
+        .catch(() => {
+          // on cancel
+        });
+    },
+    goLogin() {
+      this.$router.push({ name: "login" });
+    },
+    async getUserInfo(username) {
+      let res = await this.$ajax.getLogin({ username });
+      this.changeUserInfo(res[0]); //全局的vuex
+    },
   },
   mounted() {
     this.imgList = [
@@ -83,6 +128,9 @@ export default {
       { background: this.PIC9, text: "魔力仓库", name: "" },
       { background: this.PIC10, text: "我的奖品", name: "" },
     ];
+     if (localStorage.getItem("username")) {
+      this.getUserInfo(localStorage.getItem("username"));
+    }
   },
 };
 </script>
@@ -91,6 +139,33 @@ export default {
 .box {
   width: 100%;
   height: 100%;
+  .bugImg {
+  width: 100%;
+  height: 150px;
+  background-image: url("../../../public/img/背景图.png");
+  display: flex;
+  align-items: center;
+}
+.login {
+  font-size: 16px;
+  // line-height: 150px;
+  color: white;
+}
+.userheard {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid white;
+  margin: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+  }
+}
 
   .myOrder {
     width: 359px;
@@ -198,5 +273,9 @@ export default {
         }
     }
   }
+  .logbox {
+  margin: 15px;
+  border-radius:30% ;
+}
 }
 </style>

@@ -62,7 +62,7 @@
     <van-goods-action>
     <van-goods-action-icon icon="chat-o" text="客服" />
     <van-goods-action-icon icon="shop-o" text="店铺" />
-    <van-goods-action-button color="#be99ff" type="warning" text="加入购物车" />
+    <van-goods-action-button color="#be99ff" type="warning" text="加入购物车" @click="addCart" />
     <van-goods-action-button color="#7232dd" type="danger" text="立即购买" />
     </van-goods-action>   
     
@@ -79,6 +79,7 @@ export default {
       current: 0,
       line:'',
       shopList:[],
+      count:1,
     };
   },
   methods: {
@@ -98,6 +99,34 @@ export default {
     onChange(index) {
       this.current = index;
     },
+    // 加入购物车
+    addCart(){
+      // 判断用户是否登录
+      this.checkIsLogin(async()=>{
+        // 判断该用户下的购物车是否被添加过
+        let res=await this.$ajax.getCarts({
+          phone: this.userInfo.phone,
+          goodId: this.itemsId,
+        });
+        if (res.length > 0) {
+            let data = res[0];
+            let res2 = await this.$ajax.updateGood(data.id, {
+                count: this.count++,
+            });
+            this.$toast.success("Again once!!!");
+        } else {
+          // 表示没添加过
+          let res3 = await this.$ajax.postGood({
+            phone: this.userInfo.phone,
+            goodId: this.itemsId,
+            good: this.shopList,
+            count: this.count,
+            time: new Date(), // 购买时间
+          });
+          this.$toast.success("Add to Cart sucess!!!")
+        }
+      });
+    }
   },
   mounted() {
     // 获取商品ID

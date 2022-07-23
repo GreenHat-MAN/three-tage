@@ -10,7 +10,7 @@
                 </van-sidebar>
             </div>
             <div class="shop-right">
-              
+              <classlist :list="tyList[activeKey]" :name="tyList[activeKey].typeName"></classlist>
             </div>
         </div>
 
@@ -29,8 +29,8 @@ export default {
       }
     },
     methods: {
-      changeActive(){
-
+      changeActive(index){
+        this.activeKey=index;
       },
       toSearch(){
         this.$router.push({name:'search'})
@@ -50,36 +50,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .shop{
-//     &-box{
-//         width:100%;
-//         height:calc(100vh - 100px);
-//         display: flex;
-//         overflow: hidden;
-//         .shop-left{
-//             flex-shrink: 0;
-//         }
-//         .shop-right{
-//             flex:1;
-//             flex-shrink: 0;
-//         }
-//     }
-//     ::v-deep .van-sidebar-item--select{
-//         .van-sidebar-item__text{
-//             color:#ee0a24;
-//         }
-//     }
-// }
-  .shop-box{
-      display: flex;
-      justify-content: space-between;
-      .shop-left{
-        width: 22%;
-        overflow: scroll;
-      }
-      .shop-left{
-        width: 78%;
-        overflow: scroll;
-      }
-  }
+.shop{
+    &-box{
+        width:100%;
+        height:calc(100vh - 100px);
+        display: flex;
+        overflow: hidden;
+        .shop-left{
+            flex-shrink: 0;
+        }
+        .shop-right{
+            flex:1;
+            flex-shrink: 0;
+            background: #fff;
+        }
+    }
+    :deep(.van-sidebar-item--select){
+        .van-sidebar-item__text{
+            color:#ee0a24;
+        }
+    }
+}
 </style>

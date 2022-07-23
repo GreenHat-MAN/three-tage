@@ -18,7 +18,7 @@
       <!-- 商品类别 -->
       <div class="category">
         <div class="item" v-for="(l, i) in gameList" :key="i">
-          <router-link :to="{ name: l.name }">
+          <router-link :to="{ name:l.name,query:{parentCategory:l.parentCategory,values:l.values,text:l.text} }">
             <div class="item-img">
               <img :src="l.background" />
             </div>
@@ -146,20 +146,22 @@ export default {
     async getDate(options) {
       let res = await this.$ajax.getShop(options);
       this.goodsList = res.data.vo.list;
+      console.log(this.goodsList);
     },
 
   },
+  
   mounted() {
     // 分类选项
     this.gameList = [
-      { background: PIC1, text: "手办", name: "" },
-      { background: PIC2, text: "周边", name: "" },
-      { background: PIC3, text: "漫展演出", name: "" },
-      { background: PIC4, text: "今日上新", name: "" },
-      { background: PIC5, text: "潮玩扭蛋", name: "" },
-      { background: PIC6, text: "游戏相关", name: "" },
-      { background: PIC7, text: "图书漫画", name: "" },
-      { background: PIC8, text: "全部分类", name: "" },
+      { background: PIC1, text: "手办" ,name:'categoryinfo',parentCategory:'category_sb',values:'1_107'},
+      { background: PIC2, text: "周边",name:'categoryinfo', parentCategory:'category_zb' ,values:'1_109'},
+      { background: PIC3, text: "漫展演出", name:'503'},
+      { background: PIC4, text: "今日上新", name:'404'},
+      { background: PIC5, text: "潮玩扭蛋", name:'categoryinfo',parentCategory:'category_cwnd' ,values:'2_681'},
+      { background: PIC6, text: "游戏相关", name:'categoryinfo',parentCategory:'category_game' ,values:'1_716'},
+      { background: PIC7, text: "图书漫画", name:'categoryinfo',parentCategory:'category_book' ,values:'1_735'},
+      { background: PIC8, text: "全部分类",name:'classify'},
     ];
 
     // 调用数据请求
@@ -176,6 +178,7 @@ export default {
     });
   
   },
+
 };
 </script>
 

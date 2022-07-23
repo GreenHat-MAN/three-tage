@@ -56,19 +56,19 @@ export default {
     async onSubmit(values) {
       // console.log(values);
       let res = await this.$ajax.getLogin(values);
-      // console.log(res);
+      console.log(res);
       if (res.length > 0) {
         this.$toast.success("登录成功");
-        // if (
-        //   this.fromName == "regist" || this.fromName == "forget"
-        // ) {
-        //   this.$router.push({ name: "mine" });
-        // } else {
-        //   this.$router.go(-1);
-        // }
+        if (
+          this.fromName == "regist" || this.fromName == "forget"
+        ) {
+          this.$router.push({ name: "mine" });
+        } else {
+          this.$router.go(-1);
+        }
         localStorage.setItem("username", values.username);
         localStorage.setItem("phone", res[0].phone);
-        this.$router.push({ name: "mine" });
+        // this.$router.push({ name: "mine" });
       } else {
         this.$notify({
           message: "密码错误",
@@ -102,7 +102,7 @@ export default {
     }
   }
   .btn {
-    ::v-deep .van-button {
+    :deep(.van-button){
       margin-right: 0;
       border: 1px solid #ff9db5;
       background: #ff9db5;

@@ -188,12 +188,12 @@ export default {
         })
         if(res && res.code==200){
             this.$toast.success('验证成功');
-            // if(this.fromName=='regist'||this.fromName=='forget'||this.fromName=='phone'){
-            //    this.$router.push({name:'mine'})
-            // }else{
-            //    this.$router.go(-1)
-            // }
-            this.$router.push({name:'mine'})
+            if(this.fromName=='regist'||this.fromName=='forget'||this.fromName=='phone'){
+               this.$router.push({name:'mine'})
+            }else{
+               this.$router.go(-1);
+            }
+            // this.$router.push({name:'mine'})
             localStorage.setItem('phone',values.phone)
             localStorage.setItem('username',data[0].username)
         }else{
@@ -239,19 +239,19 @@ export default {
   width: 100%;
   height: 100%;
   .choses {
-    ::v-deep .van-cell {
+    :deep(.van-cell){
       margin-top: 20px;
       margin-bottom: 20px;
     }
   }
-  ::v-deep .van-button {
+  :deep(.van-button){
     border: none;
     color: #fb7299;
     font-size: 14px;
     border-left: 1px solid #e7e7e7;
   }
   .tobtn {
-    ::v-deep .van-button {
+    :deep(.van-button){
       background: #ff9db5;
       height: 1.173333rem;
       min-width: 2.346667rem;

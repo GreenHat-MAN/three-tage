@@ -118,7 +118,7 @@ export default {
     top: 20px;
     right: 20px;
     // ::v-deep样式穿透效果
-    ::v-deep .van-circle__text {
+    :deep(.van-circle__text){
       color: #fff !important;
     }
   }

@@ -91,6 +91,12 @@ export const Ajax={
 
     getCategory:(params)=>get('/cate/mall-c-search/home/category/listV2',params),//bilibili分类数据
 
+    searchSug:(params)=>get('search/mall-c-search/home/sug',params),   //bilibili搜索方式一
+
+    categoryTab:(params)=>post('gory/mall-c-search/home/sub/tab',params), //bilibili类型分类
+
+    categoryV2:(params)=>post('vtwo/noah/search/category/v2',params), //bilibili类型分类具体数据
+
 
 
 

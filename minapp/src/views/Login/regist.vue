@@ -125,7 +125,7 @@ export default {
     height: 20px;
   }
   .tobtn {
-    ::v-deep .van-button {
+    :deep(.van-button){
       margin: 25px 30px;
       border: 1px solid #fff;
       background: #ff9db5;
