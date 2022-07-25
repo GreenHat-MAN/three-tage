@@ -20,3 +20,7 @@ Vue.component('classlist',classlist)
 // 方式一的搜索信息组件
 import searchres from '@/components/searchres.vue'
 Vue.component('searchres',searchres)
+
+// 地址选择的组件注册
+import Adress from '@/components/Adress.vue'
+Vue.component('Adress',Adress)

@@ -20,7 +20,7 @@ Vue.mixin({
 
     },
     computed:{
-        ...mapState(['userInfo','city','cityList','cinemaList','goodList','fromName','shopLists','cartList']),
+        ...mapState(['userInfo','city','cityList','cinemaList','goodList','fromName','shopLists','cartList','AdressList','OrderList']),
         ...mapGetters(['hotCity','goodTypes']),
         
     },
@@ -32,7 +32,7 @@ Vue.mixin({
             this.$router.go(-1);
         },
         ...mapMutations(['changeAge','changeUserInfo','changeCity','changeCityList',
-        'changeCinemaList','changeFormName','changeShopList','changeCartList']),
+        'changeCinemaList','changeFormName','changeShopList','changeCartList','changeAdressList','changeOrderList']),
         ...mapActions(['getGoodListAsync']),
         gotowhere(options){
             const {name,query,params} = options;

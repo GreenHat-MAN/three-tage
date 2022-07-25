@@ -13,6 +13,7 @@
         default-tag-text="默认"
         @add="onAdd"
         @edit="onEdit"
+        @select="onAdress"
         />
     </div>   
     <div class="unadress" v-else>
@@ -33,12 +34,18 @@ export default {
     name:'adress',
     data() {
         return {
-            chosenAddressId: '1',
+            chosenAddressId: 1,
             list:[],
             disabledList:[],
         }
     },
     methods: {
+      //选中的地址信息
+    async onAdress(item,index){
+      // console.log(item,index);
+        this.changeAdressList(item);
+        console.log(this.AdressList);
+    },
     // 获取地址信息
     async getAdress(){
         let res=await this.$ajax.getAdress({

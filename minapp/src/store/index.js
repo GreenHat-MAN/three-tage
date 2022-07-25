@@ -14,7 +14,9 @@ export default new Vuex.Store({
     goodList:[] , // 商品列表 
     fromName:'',//从哪个路由过来的
     shopLists:[],  //商品详情列表
-    cartList:[],
+    cartList:[],//购物车列表
+    AdressList:[],//邮寄地址列表
+    OrderList:[],//订单列表
   },
   plugins:[
     createPersistedState()  // vuex 存储到的本地localStorage 
@@ -64,6 +66,12 @@ export default new Vuex.Store({
     },
     changeCartList(state,payload){
       state.cartList=payload
+    },
+    changeAdressList(state,payload){
+      state.AdressList=payload
+    }
+    ,changeOrderList(state,payload){
+      state.OrderList=payload
     }
   },
   actions: {
