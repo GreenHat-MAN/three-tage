@@ -1164,27 +1164,7 @@
       "id": "FplCHCr"
     }
   ],
-  "cart": [
-    {
-      "goodId": "5c1c484b4ef88babbf26e626",
-      "good": {
-        "10id": "5cb57dd4adedb2f602422174",
-        "id": "5c1c484b4ef88babbf26e626",
-        "zhu10id": "5be29a65d3a58d48591820ff",
-        "name": "花仙子 黄色花朵新娘婚纱敬酒服生日晚宴年会礼服196",
-        "price": 298,
-        "discount": 8,
-        "img": "https://img.alicdn.com/imgextra/i3/26004687/TB2BvhduAKWBuNjy1zjXXcOypXa_!!0-saturn_solar.jpg_220x220.jpg",
-        "type": {
-          "value": "dress",
-          "text": "礼服"
-        }
-      },
-      "count": 5,
-      "time": "2022-07-20T13:11:55.456Z",
-      "id": 1
-    }
-  ],
+  "cart": [],
   "likes": [
     {
       "goodId": "5c1c484b4ef88babbf26e62c",
@@ -1258,5 +1238,38 @@
       "id": 5
     }
   ],
-  "collects": []
+  "collects": [],
+  "order": [],
+  "adress": [
+    {
+      "id": 1,
+      "name": "张三",
+      "tel": 13000000000,
+      "address": "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室",
+      "phone": 15272459621
+    },
+    {
+      "id": 2,
+      "name": "罗先略",
+      "tel": 15272459621,
+      "address": "武汉千峰yyds",
+      "isDefault": true,
+      "phone": 15272459621
+    },
+    {
+      "id": 3,
+      "name": "老王",
+      "tel": 13000000012,
+      "address": "浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 502 室",
+      "phone": 13077206807
+    },
+    {
+      "id": 4,
+      "name": "隔壁老王",
+      "tel": 1389756238,
+      "address": "武汉千峰daydayup",
+      "isDefault": true,
+      "phone": 13077206807
+    }
+  ]
 }

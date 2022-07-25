@@ -188,7 +188,7 @@ export default {
         })
         if(res && res.code==200){
             this.$toast.success('验证成功');
-            if(this.fromName=='regist'||this.fromName=='forget'||this.fromName=='phone'){
+            if(this.fromName=='regist'||this.fromName=='forget'){
                this.$router.push({name:'mine'})
             }else{
                this.$router.go(-1);

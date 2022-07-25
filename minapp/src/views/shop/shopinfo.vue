@@ -60,8 +60,14 @@
 
     <!-- 点击加入购物车 -->
     <van-goods-action>
-    <van-goods-action-icon icon="chat-o" text="客服" />
-    <van-goods-action-icon icon="shop-o" text="店铺" />
+    <van-goods-action-icon 
+     icon="like-o"
+      :color ="hasLike?'#f50':'#999'" 
+      :text ="hasLike?'已点赞':'点赞'"
+      @click="toLike"
+      :badge="likeCount" 
+      />
+    <van-goods-action-icon icon="shop-o" text="购物车" @click="toCart" :badge="cartLent" />
     <van-goods-action-button color="#be99ff" type="warning" text="加入购物车" @click="addCart" />
     <van-goods-action-button color="#7232dd" type="danger" text="立即购买" />
     </van-goods-action>   
@@ -80,9 +86,21 @@ export default {
       line:'',
       shopList:[],
       count:1,
+      cartLent:'',
+      hasLike: false, // 是否已经点赞
+      likeCount: 0, // 点赞次数
     };
   },
   methods: {
+
+    // 去购物车查看
+    toCart(){
+       this.checkIsLogin(async()=>{
+        // 判断用户是否登录
+        this.$router.push({name:'cart'});
+       })
+    },
+
     // 发请求获取商品详情数据
     async getShopitem(){
       let res=await this.$ajax.getShopInfo({
@@ -93,12 +111,14 @@ export default {
       this.$nextTick(() => {
            this.shopList=res.data;
            this.line=res.data.img.length;
-           console.log(this.shopList);
+          //  console.log(this.shopList);
         });
     },
+
     onChange(index) {
       this.current = index;
     },
+
     // 加入购物车
     addCart(){
       // 判断用户是否登录
@@ -111,7 +131,7 @@ export default {
         if (res.length > 0) {
             let data = res[0];
             let res2 = await this.$ajax.updateGood(data.id, {
-                count: this.count++,
+                count: data.count+1,
             });
             this.$toast.success("Again once!!!");
         } else {
@@ -123,15 +143,74 @@ export default {
             count: this.count,
             time: new Date(), // 购买时间
           });
-          this.$toast.success("Add to Cart sucess!!!")
+          this.$toast.success("Add to Cart sucess!!!");
+          this.getType();
         }
       });
-    }
+    },
+
+    // 查询种类
+   async getType(){
+      let res=await this.$ajax.getCarts({phone:this.userInfo.phone});
+      this.cartLent=res.length;
+    },
+
+    // 点赞功能实现
+    // 判断当前用户是否点过赞
+    async getHasLike(){
+      let res=await this.$ajax.getLikes({
+          phone:this.userInfo.phone,
+          goodId:this.itemsId
+      })
+      //强制类型转换,如果返回来的数值长度不大于1则表示没点过赞,将0转换为false
+      this.hasLike=!!res.length;
+    },
+    // 获取点赞次数
+    async getLikeCount(){
+        let res=await this.$ajax.getLikes({
+            goodId:this.itemsId
+        })
+        this.likeCount=res.length
+    },
+    // 用户点赞切换
+    toLike(){
+        // 用户登录才能点赞
+        this.checkIsLogin(async()=>{
+            // 判断当前是否已经点赞
+            if(this.hasLike){
+                // 已经点过再次点击删除点赞
+                let data = await this.$ajax.getLikes({
+                        goodId:this.itemsId,
+                        phone:this.userInfo.phone 
+                })
+                let res=await this.$ajax.deleteCarts(data[0].id)
+                this.likeCount--;
+                this.hasLike=false;
+                this.$toast('Is cancel!!!');
+            }else{
+                // 还没点过
+                let res=await this.$ajax.addToLikes({
+                    goodId:this.itemsId,
+                    phone:this.userInfo.phone,
+                    good:this.shopList,
+                })
+                this.likeCount++;
+                this.hasLike=true;
+                this.$toast('Is support!!!');
+            }
+        })
+    },
+
   },
   mounted() {
     // 获取商品ID
     this.itemsId=this.$route.query.itemsId;
     this.getShopitem();
+    if(this.userInfo){
+        this.getType()
+        this.getHasLike()
+        this.getLikeCount()
+    }
   },
 };
 </script>

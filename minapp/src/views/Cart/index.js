@@ -3,5 +3,20 @@ export default[
         path:'/cart',
         name:'cart',
         component:()=>import('./cart.vue')
+    },
+    {
+        path:'/order',
+        name:'order',
+        component:()=>import('./order.vue')
+    },
+    {
+        path:'/adress',
+        name:'adress',
+        component:()=>import('./adress.vue')
+    },
+    {
+        path:'/editadress',
+        name:'editadress',
+        component:()=>import('./editadress.vue')
     }
 ]

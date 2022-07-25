@@ -57,7 +57,7 @@ export const FooterList = [
         path: '/cart',
         name: 'cart',
         text: '购物车',
-        icon: "icon-cinema"
+        icon: "icon-cinema",
     },
     {
         path: '/mine',
@@ -97,7 +97,52 @@ export const Ajax={
 
     categoryV2:(params)=>post('vtwo/noah/search/category/v2',params), //bilibili类型分类具体数据
 
+    // // 添加购物车商品
+    postGood:(params)=>post("/api/cart",params),
 
+    // // 修改购物车商品数据
+    updateGood:(id,params)=>Patch('/api/cart/'+id,params),
+
+    // // 删除购物车商品
+    delGood:(id,params)=>Delete('/api/cart/'+id,params),
+
+    // // 获取购物车数据
+    getCarts:(params)=>get('/api/cart',params),
+
+
+    // // 添加订单商品
+    postOrder:(params)=>post("/api/order",params),
+
+    // // 修改订单商品数据
+    updateOrder:(id,params)=>Patch('/api/order/'+id,params),
+
+    // // 删除订单商品
+    delOrder:(id,params)=>Delete('/api/order/'+id,params),
+
+    // // 获取订单数据
+    getOrder:(params)=>get('/api/order',params),
+
+
+
+    // // 添加地址
+    postAdress:(params)=>post("/api/adress",params),
+
+    // // 修改地址数据
+    updateAdress:(id,params)=>Patch('/api/adress/'+id,params),
+
+    // // 删除地址商品
+    delAdress:(id,params)=>Delete('/api/adress/'+id,params),
+
+    // // 获取地址数据
+    getAdress:(params)=>get('/api/adress',params),
+
+
+
+    getLikes:(params)=>get('/api/likes',params),   // 获取点赞数据 
+
+    addToLikes:(params)=>post('/api/likes',params),   // 添加点赞数据 
+
+    deleteCarts:(id,params)=>Delete('/api/likes/'+id,params),   // 删除点赞 
 
 
     // 卖座电影接口
@@ -108,24 +153,8 @@ export const Ajax={
     // // 请求商品数据
     // getGoodList:(params)=>get("goods",params),
 
-    // // 添加购物车商品
-    // postGood:(params)=>post("cart",params),
 
-    // // 修改购物车商品数据
-    // updateGood:(id,params)=>Patch('cart/'+id,params),
-
-    // // 删除购物车商品
-    // delGood:(id,params)=>Delete('cart/'+id,params),
-
-    // // 获取购物车数据
-    // getCarts:(params)=>get('/cart',params),
-
-
-    // getLikes:(params)=>get('/likes',params),   // 获取点赞数据 
-
-    // addToLikes:(params)=>post('/likes',params),   // 添加点赞数据 
-
-    // deleteCarts:(id,params)=>Delete('/likes/'+id,params),   // 删除点赞 
+    
 
     
     // getCollects:(params)=>get('/collects',params),   // 获取点赞数据 

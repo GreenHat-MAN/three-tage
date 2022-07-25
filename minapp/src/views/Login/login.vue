@@ -68,6 +68,8 @@ export default {
         }
         localStorage.setItem("username", values.username);
         localStorage.setItem("phone", res[0].phone);
+        let res2 = await this.$ajax.getLogin({ username:values.username });
+        this.changeUserInfo(res2[0]); //全局的vuex
         // this.$router.push({ name: "mine" });
       } else {
         this.$notify({

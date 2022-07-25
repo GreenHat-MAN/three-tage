@@ -107,10 +107,10 @@ export default {
     goLogin() {
       this.$router.push({ name: "login" });
     },
-    async getUserInfo(username) {
-      let res = await this.$ajax.getLogin({ username });
-      this.changeUserInfo(res[0]); //全局的vuex
-    },
+    // async getUserInfo(username) {
+    //   let res = await this.$ajax.getLogin({ username });
+    //   this.changeUserInfo(res[0]); //全局的vuex
+    // },
   },
   mounted() {
     this.imgList = [
@@ -122,15 +122,15 @@ export default {
     ];
     this.funList = [
       { background: this.PIC, text: "优惠券", name: "" },
-      { background: this.PIC6, text: "地址管理", name: "" },
+      { background: this.PIC6, text: "地址管理", name: "adress" },
       { background: this.PIC7, text: "建议反馈", name: "" },
       { background: this.PIC8, text: "在线客服", name: "" },
       { background: this.PIC9, text: "魔力仓库", name: "" },
       { background: this.PIC10, text: "我的奖品", name: "" },
     ];
-     if (localStorage.getItem("username")) {
-      this.getUserInfo(localStorage.getItem("username"));
-    }
+    //  if (localStorage.getItem("username")) {
+    //   this.getUserInfo(localStorage.getItem("username"));
+    // }
   },
 };
 </script>
