@@ -1,26 +1,19 @@
 <template>
   <div>
     <!-- 头部 -->
-    <hearder title="编辑收货地址" :back="true"></hearder>
+    <hearder title="新增收货地址" :back="true"></hearder>
 
-    <!-- 编辑 -->
-        <van-address-edit
+    <!-- 地址新增 -->
+    
+      <van-address-edit
       :area-list="areaList"
       show-postal
-      show-delete
       show-set-default
       show-search-result
-      :search-result="searchResult"
       :area-columns-placeholder="['请选择', '请选择', '请选择']"
       @save="onSave"
-      @delete="onDelete"
-      @change-detail="onChangeDetail"
-      :address-info="{
-          name: from[0].name,
-          tel: from[0].phone,
-          addressDetail: from[0].address,
-       }"
-    />
+      />
+      
     
   </div>
 </template>
@@ -33,37 +26,35 @@ export default {
   data() {
     return {
       areaList,
-      searchResult: [],
-      from:[],
+      isdefault:'',//是否设为默认地址
     };
   },
   methods: {
-    onSave() {
-      Toast("save");
-    },
-    onDelete() {
-      Toast("delete");
-    },
-    onChangeDetail(val) {
-      if (val) {
-        this.searchResult = [
-          {
-            name: "黄龙万科中心",
-            address: "杭州市西湖区",
-          },
-        ];
-      } else {
-        this.searchResult = [];
+    async onSave(name) {
+      console.log(name);
+      // 新增收货地址信息
+      let data=await this.$ajax.getAdress({
+        username:this.userInfo
+      })
+      let res=await this.$ajax.postAdress({
+        address:`${name.province}/${name.city}/${name.county}`,//地址
+        name:name.name,//姓名
+        tel:Number(name.tel),//手机号
+        dq:name.addressDetail,//地区信息
+        isDefault:Boolean(name.isDefault=='flase'?0:1),//是否设为默认地址
+        postcode:name.postalCode,//邮编
+        areaCode:name.areaCode,
+        username:this.userInfo.username
+      })
+      // console.log(res);
+      if(JSON.stringify(data).indexOf(JSON.stringify(res)) === -1){
+        this.$toast.success('地址添加成功!!!');
+         this.$router.push({name:'mine'});
+      }else{
+        this.$toast.filed('该地址已存在');
       }
     },
-  },
-  mounted() {
-    // console.log(this.$route.params.items);
-    this.from.push(this.$route.params.items)
-    // console.log(this.from);
   },
 };
 </script>
 
-<style>
-</style>

@@ -35,16 +35,16 @@ export default {
       toSearch(){
         this.$router.push({name:'search'})
       },
-      async getCategory(){
+      async getCategorys(){
         let res=await this.$ajax.getCategory({
           shopId: 2233
         })
-        console.log(res.data.vo);
+        // console.log(res.data.vo);
         this.tyList=res.data.vo;
       }
     },
     mounted() {
-      this.getCategory();
+      this.getCategorys();
     },
 }
 </script>

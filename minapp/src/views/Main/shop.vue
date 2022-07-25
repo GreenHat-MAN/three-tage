@@ -137,7 +137,7 @@ export default {
         this.$nextTick(() => {
           this.goodsList = this.goodsList.concat(res.data.vo.list); // 数据累加
           dataLoad();
-          console.log(this.goodsList);
+          // console.log(this.goodsList);
         });
       }
     },
@@ -146,7 +146,7 @@ export default {
     async getDate(options) {
       let res = await this.$ajax.getShop(options);
       this.goodsList = res.data.vo.list;
-      console.log(this.goodsList);
+      // console.log(this.goodsList);
     },
 
   },

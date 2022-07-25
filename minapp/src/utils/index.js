@@ -142,7 +142,15 @@ export const Ajax={
 
     addToLikes:(params)=>post('/api/likes',params),   // 添加点赞数据 
 
-    deleteCarts:(id,params)=>Delete('/api/likes/'+id,params),   // 删除点赞 
+    deleteCarts:(id,params)=>Delete('/api/likes/'+id,params),   // 删除点赞
+
+    
+
+    getContent:(params)=>get('/api/contentss',params), //获取评论内容
+
+    delContent:(params)=>Delete('/api/contentss',params), //删除评论内容
+
+    addContent:(params)=>post('/api/contentss',params), //发表评论内容
 
 
     // 卖座电影接口

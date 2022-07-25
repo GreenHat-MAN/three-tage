@@ -55,6 +55,24 @@
 
     </div>
     </div>
+
+    <div class="sendContent">
+      <textarea v-model="valCon"></textarea>
+      <button @click="sendContent">发布</button>
+    </div>
+
+    <!-- 评论内容 -->
+    <div class="contents">
+      <ul>
+        <li v-for="(l,i) in contentList" :key="i">
+          评论内容:{{l.content}},<br>
+          我是谁:{{l.name}},<br>
+          发布时间:{{l.time | dateFormat}}
+        </li>
+      </ul>
+    </div>
+
+    
     
     <div class="line"></div>
 
@@ -81,14 +99,16 @@ export default {
   name: "shopinfo",
   data() {
     return {
-      itemsId: "",
-      current: 0,
-      line:'',
-      shopList:[],
-      count:1,
-      cartLent:'',
+      valCon:'',//评论内容
+      itemsId: "",//商品id
+      current: 0,//轮播下标
+      line:'',//具体那张轮播页数
+      shopList:[],//商品信息
+      count:1,//数量初始化
+      cartLent:'',//加入购物车的图标数量
       hasLike: false, // 是否已经点赞
       likeCount: 0, // 点赞次数
+      contentList:[],//评论内容
     };
   },
   methods: {
@@ -115,6 +135,7 @@ export default {
         });
     },
 
+    // 轮播发生改变
     onChange(index) {
       this.current = index;
     },
@@ -201,15 +222,44 @@ export default {
         })
     },
 
+    // 用户评论内容获取
+    async getCont(){
+      // 判断该商品下是否存在评论内容
+      let res=await this.$ajax.getContent({
+        shopId:this.itemsId
+      });
+      if(res.length>0){
+        // 表示有评论内容
+        this.contentList=res;
+      }else{
+        this.$toast.success('该商品还没有评论,赶快发表第一条!!')
+      }
+    },
+
+    // 发送评论内容
+    sendContent(){
+      this.checkIsLogin(async()=>{
+          let res=await this.$ajax.addContent({
+              shopId:this.itemsId,
+              name:this.userInfo.username,
+              content:this.valCon,
+              time: new Date()
+          })
+      });
+      this.getCont();
+      this.valCon='';
+    }
+
   },
   mounted() {
     // 获取商品ID
     this.itemsId=this.$route.query.itemsId;
     this.getShopitem();
+    this.getLikeCount();
+    this.getCont();
     if(this.userInfo){
-        this.getType()
         this.getHasLike()
-        this.getLikeCount()
+        this.getType()
     }
   },
 };
@@ -376,9 +426,19 @@ export default {
 
     
   .line{
-    height: 30px;
+    height: 50px;
   }
 
+  .contents{
+    width: 100%;
+    min-height: 30px;
+    ul{
+      list-style: none;
+      li{
+        border-bottom: 1px solid #ccc;
+      }
+    }
+  }
 
 }
 </style>

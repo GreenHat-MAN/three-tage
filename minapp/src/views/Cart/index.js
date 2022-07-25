@@ -18,5 +18,10 @@ export default[
         path:'/editadress',
         name:'editadress',
         component:()=>import('./editadress.vue')
+    },
+    {
+        path:'/updateadress',
+        name:'updateadress',
+        component:()=>import('./updateadress.vue')
     }
 ]

@@ -206,6 +206,10 @@ export default {
     this.goodId = this.$route.params.goodId;
     // 调用获取商品详情的方法
     this.getGoods();
+    this.getLikeCount()
+      if(this.userInfo){
+          this.getHasLike()
+      }
   },
 
 

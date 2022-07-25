@@ -1236,9 +1236,472 @@
         }
       },
       "id": 5
+    },
+    {
+      "goodId": 10082880,
+      "phone": "15272459621",
+      "good": {
+        "itemsId": 10082880,
+        "selfSold": true,
+        "name": "[余量预售]TAITO AFG Re：从零开始的异世界生活 雷姆 景品手办",
+        "brief": "",
+        "extBrief": null,
+        "shopId": 2233,
+        "img": [
+          "//i0.hdslb.com/bfs/mall/mall/c0/bd/c0bd964fca252c06b99936c6270fde89.png",
+          "//i0.hdslb.com/bfs/mall/mall/47/ad/47ad594252709d13bb7901789e7411ab.jpg",
+          "//i0.hdslb.com/bfs/mall/mall/f9/d6/f9d63babd730e4e9435386813c9c007e.jpg",
+          "//i0.hdslb.com/bfs/mall/mall/0d/ed/0ded439de35af2d7e5a4f122876d35d9.jpg",
+          "//i0.hdslb.com/bfs/mall/mall/7f/cf/7fcf2c566e2f359892286f5230a74530.jpg",
+          "//i0.hdslb.com/bfs/mall/mall/1b/27/1b279bd90895c95395020759f458623e.jpg"
+        ],
+        "price": "99",
+        "maxPrice": "99",
+        "linePrice": null,
+        "maxLinePrice": null,
+        "activityPrice": null,
+        "maxActivityPrice": null,
+        "brandId": 23,
+        "brandName": "TAITO",
+        "brandJumpUrl": "https://mall.bilibili.com/list.html?goFrom=na&noTitleBar=1&from=brand&brand=23&isifmagic=no",
+        "brandTotalScore": null,
+        "ipRightId": 0,
+        "ipRightName": "",
+        "mobileDesc": null,
+        "pcDesc": "",
+        "status": 11,
+        "itemsStatus": 1,
+        "saleStatus": 11,
+        "saleType": 0,
+        "fullDepositStatus": null,
+        "itemsType": "1",
+        "itemsSubType": "12",
+        "isSingleSku": true,
+        "cartCount": -1,
+        "activityTags": null,
+        "attrList": [
+          {
+            "attrName": "尺寸",
+            "attrValue": "高约100mm"
+          },
+          {
+            "attrName": "材质",
+            "attrValue": [
+              "PVC",
+              "ABS"
+            ]
+          },
+          {
+            "attrName": "发售日",
+            "attrValue": "2022-08"
+          },
+          {
+            "attrName": "类别",
+            "attrValue": [
+              "比例手办"
+            ]
+          },
+          {
+            "attrName": "官方价",
+            "attrValue": "无"
+          }
+        ],
+        "advState": {
+          "preSale": true,
+          "remain": 25003121,
+          "presaleStartOrderTime": 1651248600,
+          "presaleEndOrderTime": 1683734400,
+          "state": [
+            {
+              "timeNode": {
+                "year": 2022,
+                "month": 4,
+                "day": 30
+              },
+              "process": "预售开始",
+              "active": true,
+              "timeNodeDesc": null,
+              "underlineProcess": null
+            },
+            {
+              "timeNode": {
+                "year": 2022,
+                "month": 8,
+                "day": null
+              },
+              "process": "制作完成",
+              "active": false,
+              "timeNodeDesc": null,
+              "underlineProcess": null
+            },
+            {
+              "timeNode": {
+                "year": 2022,
+                "month": 9,
+                "day": null
+              },
+              "process": "到货补款",
+              "active": false,
+              "timeNodeDesc": null,
+              "underlineProcess": null
+            }
+          ],
+          "batchRecords": null,
+          "depositType": 0,
+          "deposit": "14.85",
+          "maxDeposit": "14.85",
+          "activityDeposit": null,
+          "maxActivityDeposit": null
+        },
+        "itemsDepositVO": {
+          "depositType": 0,
+          "deposit": 1485,
+          "depositPrice": "14.85",
+          "skuId": 1000155482,
+          "price": "99",
+          "stock": 99,
+          "warnStock": 5,
+          "stockLevel": 1,
+          "img": "//i0.hdslb.com/bfs/mall/mall/ad/57/ad57ead6d1ddb4bc37ae4b4ba26c20aa.png",
+          "preDepositPrice": "0",
+          "limitBuy": false,
+          "activityPrice": null,
+          "activityDepositPrice": null,
+          "activityStock": null,
+          "activityRestriction": null,
+          "frozenStock": 0,
+          "zpEntityStock": 0,
+          "tax": 0,
+          "taxRate": 0,
+          "status": 1,
+          "subStatus": 10,
+          "autoOnSaleTime": 1650974400,
+          "asyncSku": false
+        },
+        "shopVO": {
+          "shopId": 2233,
+          "shopName": "会员购 ",
+          "logo": "//i2.hdslb.com/bfs/openplatform/201808/5b7632021bb937.49324687.png",
+          "count": 17028,
+          "followState": 0,
+          "shopOwnerId": 174501086,
+          "customerLinks": "",
+          "purchaseSaleMode": null,
+          "businessLicenseUrl": null
+        },
+        "itemsLikeVO": {
+          "hasLiked": false,
+          "count": 21961,
+          "users": [
+            "http://i0.hdslb.com/bfs/face/9d320ea74cada16f6f186f93249a1372815684aa.jpg",
+            "http://i0.hdslb.com/bfs/face/f183d9500e5d77b25d671bdf8f79c92b3f579793.jpg",
+            "http://i0.hdslb.com/bfs/face/member/noface.jpg",
+            "http://i2.hdslb.com/bfs/face/b1a6a9b90078bce267de5adec1d08ebda39e5a78.jpg",
+            "http://i1.hdslb.com/bfs/face/9669832a7778613b1dcfaa44eaba44562610dcc8.jpg"
+          ],
+          "userVOS": [
+            {
+              "mid": 11360373,
+              "avator": "http://i0.hdslb.com/bfs/face/9d320ea74cada16f6f186f93249a1372815684aa.jpg"
+            },
+            {
+              "mid": 604229520,
+              "avator": "http://i0.hdslb.com/bfs/face/f183d9500e5d77b25d671bdf8f79c92b3f579793.jpg"
+            },
+            {
+              "mid": 1436584680,
+              "avator": "http://i0.hdslb.com/bfs/face/member/noface.jpg"
+            },
+            {
+              "mid": 445987187,
+              "avator": "http://i2.hdslb.com/bfs/face/b1a6a9b90078bce267de5adec1d08ebda39e5a78.jpg"
+            },
+            {
+              "mid": 2134402762,
+              "avator": "http://i1.hdslb.com/bfs/face/9669832a7778613b1dcfaa44eaba44562610dcc8.jpg"
+            }
+          ]
+        },
+        "avInfo": null,
+        "tags": null,
+        "ugcListVO": null,
+        "topUgcVO": null,
+        "overseas": false,
+        "overseaVO": null,
+        "preDepositVO": null,
+        "activityInfoVO": null,
+        "groupBuyRankVO": null,
+        "atmosVOList": null,
+        "shopMode": 1,
+        "microTags": null,
+        "tax": 0,
+        "maxTax": 0,
+        "taxRate": 0,
+        "restriction": 5,
+        "customerLinks": "bilibili://assistant/f92645a1700947158fd6d4ccd6969112?title=会员购中心&comefrom=itemsinfo",
+        "recommendVO": null,
+        "presaleDeliveryTimeStr": "2022年09月",
+        "itemsWhiteListVO": null,
+        "isShow": 1,
+        "autoOnSaleTime": 1650974400,
+        "serverTime": 1658731279,
+        "needLogin": 0,
+        "isSpecHide": 0,
+        "blindBoxUrl": null,
+        "deliveryInfoVO": null,
+        "abGroupVo": null,
+        "ipRightList": [
+          {
+            "ipRightId": "0_3000235",
+            "ipRightName": "Re:从零开始的异世界生活",
+            "jumpUrl": "https://mall.bilibili.com/ip.html?noTitleBar=1&ip=0_3000235&from=detail",
+            "naJumpUrl": "bilibili://mall/ip/home?ip=0_3000235&from=detail",
+            "prefix": null,
+            "title": null,
+            "benefitInfo": null,
+            "isShow": false
+          }
+        ],
+        "ugcTotalCount": 6434,
+        "isShowIpActivity": false,
+        "canAddCart": 1,
+        "earlyBuyActivityInfo": null,
+        "promotionActivityInfo": null,
+        "multiDiscountActivityInfoVO": null,
+        "europeanCompassActivityInfoVO": null,
+        "luckyBuySubsideActivityInfoVO": null,
+        "progressActivityInfoVO": null,
+        "itemsSkuListVO": {
+          "itemsId": 10082880,
+          "specs": [
+            "角色"
+          ],
+          "itemsSkuList": [
+            {
+              "id": 1000155482,
+              "price": "99",
+              "stock": 99,
+              "warnStock": 5,
+              "stockLevel": 1,
+              "img": "//i0.hdslb.com/bfs/mall/mall/ad/57/ad57ead6d1ddb4bc37ae4b4ba26c20aa.png",
+              "specValues": [
+                " 雷姆"
+              ],
+              "deposit": "14.85",
+              "preDepositPrice": "0",
+              "limitBuy": false,
+              "activityPrice": null,
+              "activityDeposit": null,
+              "activityStock": null,
+              "activityRestriction": null,
+              "activitySaleStatus": null,
+              "activityType": null,
+              "status": 1,
+              "subStatus": 10,
+              "isShow": 1,
+              "autoOnSaleTime": 1650974400,
+              "referencePrice": "99",
+              "saleType": 0,
+              "whiteListSku": null,
+              "linePrice": null,
+              "skuTagVO": null,
+              "asyncSku": false
+            }
+          ]
+        },
+        "marketingInfo": null,
+        "activityExtInfo": {
+          "forbidStatus": 1,
+          "lowestSkuReducedPrice": null,
+          "hasStockSkuCount": null
+        },
+        "crowdFundingVO": null,
+        "jumpLinkType": 0,
+        "isHotItem": 0,
+        "h5CustomerLinks": "https://service.bilibili.com/v2/chat/h5/index.html?sysNum=102d1b48515346ec8e9fb543b54ec454&groupId=64812738d0164cc8b437c31aea0b9e38&robotFlag=34",
+        "commitmentTag": [
+          {
+            "type": "zp",
+            "name": "正品保障",
+            "style": 0
+          },
+          {
+            "type": "packaging",
+            "name": "专业包装",
+            "style": 0
+          },
+          {
+            "type": "deliveryfeetype",
+            "name": "满129包邮",
+            "style": 0
+          },
+          {
+            "type": "delayrefund",
+            "name": "延期无忧",
+            "style": 0
+          },
+          {
+            "type": "insurancepolicy",
+            "name": "保价保单",
+            "style": 0
+          },
+          {
+            "type": "supportreturn0",
+            "name": "不支持7天无理由退货",
+            "style": 2
+          }
+        ],
+        "brandProvidedPicture": 0,
+        "headAvDTO": {
+          "videoIds": [],
+          "videoUrls": [],
+          "videoType": null
+        },
+        "verticalHeadAvDTO": {
+          "videoIds": [],
+          "videoUrls": [
+            "https://upos-sz-staticcos.bilivideo.com/mallboss/nextvideo/720p/standing1_v1/10082880_59748a4a540b4d678af3d887a1a1083e_v.mp4"
+          ],
+          "videoType": 1
+        },
+        "itemTags": [
+          {
+            "name": "Re:从零开始的异世界生活榜No.1",
+            "first": "Re:从零开始的异世界生活榜",
+            "last": "No.1",
+            "type": "recommendTop",
+            "jumpUrl": "https://mall.bilibili.com/neul/index.html?page=mall_ranklist&loadingShow=1&noTitleBar=1&boardId=1145596114&from=malldetail",
+            "tagId": 1145596114
+          }
+        ],
+        "itemsDetailTagVO": {
+          "topTagMode": 1
+        },
+        "itemsBuyInfoDTO": null,
+        "arrivalNotice": false,
+        "isShowArrival": true,
+        "customized": null,
+        "salePoints": [],
+        "ipRoleDTO": {
+          "ipRoleId": 35516,
+          "logo": "//i0.hdslb.com/bfs/mall/mall/fe/33/fe33345d145cc7260bd1a2dfa0205eef.jpg",
+          "dialogues": "如果觉得独自前行很辛苦，雷姆成为你的支柱，互相支持着前进。"
+        },
+        "crowdFundingInfoVO": null,
+        "recommendBannerVO": null,
+        "itemsVideoVO": {
+          "firstFrameImg": "//i0.hdslb.com/bfs/mall/mall/d1/29/d129d357917caf7826217fdf9ceb6dde.png"
+        },
+        "detailDescVO": {
+          "descList": [
+            {
+              "title": "商品介绍",
+              "contentList": [
+                {
+                  "type": 1,
+                  "content": "//i0.hdslb.com/bfs/mall/mall/87/99/87990335a1af8c0e1f7224dfe8791d14.jpg"
+                }
+              ]
+            },
+            {
+              "title": "商品展示",
+              "contentList": [
+                {
+                  "type": 0,
+                  "content": "图片仅供参考，实际请以实物为准。"
+                },
+                {
+                  "type": 1,
+                  "content": "//i0.hdslb.com/bfs/mall/mall/a7/10/a71096b13ab9f0193a8ea0f5f1bd9e0c.jpg"
+                },
+                {
+                  "type": 1,
+                  "content": "//i0.hdslb.com/bfs/mall/mall/35/cf/35cf4184ab9f178285d25addb667b9fd.jpg"
+                },
+                {
+                  "type": 1,
+                  "content": "//i0.hdslb.com/bfs/mall/mall/db/4b/db4beab662451569e93f94d16f096806.jpg"
+                },
+                {
+                  "type": 1,
+                  "content": "//i0.hdslb.com/bfs/mall/mall/0c/0f/0c0fea4a76fafd5bd84ac4532e781821.jpg"
+                },
+                {
+                  "type": 1,
+                  "content": "//i0.hdslb.com/bfs/mall/mall/55/93/55934cf672805dd9f26a96a7a20796c4.jpg"
+                },
+                {
+                  "type": 1,
+                  "content": "//i0.hdslb.com/bfs/mall/mall/cf/cf/cfcfd7dc5f7a85b1faaf16de17d25b0d.jpg"
+                }
+              ]
+            },
+            {
+              "title": "细节展示",
+              "contentList": [
+                {
+                  "type": 1,
+                  "content": "//i0.hdslb.com/bfs/mall/mall/e7/42/e742699436de03ea72fbb902a8534099.jpg"
+                },
+                {
+                  "type": 1,
+                  "content": "//i0.hdslb.com/bfs/mall/mall/99/bd/99bd6e56524eeaeedfccfe61e17ed0a6.jpg"
+                },
+                {
+                  "type": 1,
+                  "content": "//i0.hdslb.com/bfs/mall/mall/ad/f3/adf3d4ef6ed6c635770cd8b65042a2ad.jpg"
+                }
+              ]
+            }
+          ]
+        },
+        "floorOrder": {
+          "attr": 1
+        },
+        "itemsSalePoint": {
+          "starBoxUrl": null,
+          "starBoxDetailImg": null,
+          "starBoxSalePoints": null,
+          "otherSalePoints": null
+        },
+        "pageType": "video",
+        "deliveryNotices": null,
+        "delayBulletinList": null,
+        "asyncItems": false
+      },
+      "id": 6
     }
   ],
-  "collects": [],
+  "contentss": [
+    {
+      "shopId": "10092175",
+      "name": "罗先略",
+      "content": "看到我你就不是第一个!!!",
+      "time": "2022-07-25T07:47:40.075Z",
+      "id": 1
+    },
+    {
+      "shopId": 10092175,
+      "name": "刘强东",
+      "content": "那我就是第二个喽?",
+      "time": "2022-07-25T07:51:40.154Z",
+      "id": 2
+    },
+    {
+      "shopId": "10092175",
+      "name": "刘强东",
+      "content": "星之守护者我滴神",
+      "time": "2022-07-25T07:52:59.013Z",
+      "id": 3
+    },
+    {
+      "shopId": 10082880,
+      "name": "刘强东",
+      "content": "雷姆yyds",
+      "time": "2022-07-25T07:53:20.025Z",
+      "id": 4
+    }
+  ],
   "order": [],
   "adress": [
     {
@@ -1270,6 +1733,17 @@
       "address": "武汉千峰daydayup",
       "isDefault": true,
       "phone": 13077206807
+    },
+    {
+      "address": "湖北省/武汉市/洪山区",
+      "name": "罗先略",
+      "tel": 15272459621,
+      "dq": "鹏翔花园",
+      "isDefault": true,
+      "postcode": "434309",
+      "areaCode": "420111",
+      "username": "罗先略",
+      "id": 5
     }
   ]
 }
