@@ -1,7 +1,7 @@
 <template>
   <div class="box">
     <!-- 头部 -->
-    <hearder title="我的" :back="true"></hearder>
+    <hearder title="MY" :back="true"></hearder>
 
     <!-- 用户信息 -->
     <div class="bugImg">
@@ -9,17 +9,17 @@
         <img :src="PIC11" />
       </div>
       <p class="login" v-if="userInfo">
-        用户名:{{ userInfo.username }}<br />
-        手机号:{{ userInfo.phone }}
+        UserName:{{ userInfo.username }}<br />
+        Phone:{{ userInfo.phone }}
       </p>
-      <p v-else class="login" @click="goLogin">立即登录</p>
+      <p v-else class="login" @click="goLogin">Now Go</p>
     </div>
 
     <!-- 我的订单 -->
     <div class="myOrder">
       <div class="order-top">
-        <div class="title">我的订单</div>
-        <div class="see">查看全部订单</div>
+        <div class="title">My Order</div>
+        <div class="see" @click="allOrder">All Order</div>
       </div>
 
       <div class="order-bottom">
@@ -35,7 +35,7 @@
     <!-- 常用功能 -->
     <div class="fun">
       <div class="fun-top">
-        <div class="title">常用功能</div>
+        <div class="title">Function</div>
       </div>
 
       <div class="fun-bottom">
@@ -50,7 +50,7 @@
 
     <!-- 退出 -->
     <div class="logbox" v-if="userInfo" @click="logoutAction">
-      <van-button class="logout" block>退出登录</van-button>
+      <van-button class="logout" block>Login Out</van-button>
     </div>
 
   </div>
@@ -107,30 +107,29 @@ export default {
     goLogin() {
       this.$router.push({ name: "login" });
     },
-    // async getUserInfo(username) {
-    //   let res = await this.$ajax.getLogin({ username });
-    //   this.changeUserInfo(res[0]); //全局的vuex
-    // },
+    allOrder(){
+      this.checkIsLogin(async()=>{
+          this.$router.push({name:'Allorder'});
+      });
+      
+    }
   },
   mounted() {
     this.imgList = [
-      { background: this.PIC, text: "待付款", name: "" },
-      { background: this.PIC2, text: "待开补款", name: "" },
-      { background: this.PIC3, text: "待收货", name: "" },
-      { background: this.PIC4, text: "待评价", name: "" },
-      { background: this.PIC5, text: "盒柜", name: "" },
+      { background: this.PIC, text: "waitPay", name: "" },
+      { background: this.PIC2, text: "waitMenoy", name: "" },
+      { background: this.PIC3, text: "waitGppds", name: "" },
+      { background: this.PIC4, text: "waitEvaluate", name: "" },
+      { background: this.PIC5, text: "Box", name: "" },
     ];
     this.funList = [
-      { background: this.PIC, text: "优惠券", name: "" },
-      { background: this.PIC6, text: "地址管理", name: "adress" },
-      { background: this.PIC7, text: "建议反馈", name: "" },
-      { background: this.PIC8, text: "在线客服", name: "" },
-      { background: this.PIC9, text: "魔力仓库", name: "" },
-      { background: this.PIC10, text: "我的奖品", name: "" },
+      { background: this.PIC, text: "RedPage", name: "redpage" },
+      { background: this.PIC6, text: "AdressMange", name: "adress" },
+      { background: this.PIC7, text: "Link", name: "people" },
+      { background: this.PIC8, text: "customer service", name: "" },
+      { background: this.PIC9, text: "My Collect", name: "collect" },
+      { background: this.PIC10, text: "I like", name: "like" },
     ];
-    //  if (localStorage.getItem("username")) {
-    //   this.getUserInfo(localStorage.getItem("username"));
-    // }
   },
 };
 </script>

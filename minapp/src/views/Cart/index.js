@@ -23,5 +23,10 @@ export default[
         path:'/updateadress',
         name:'updateadress',
         component:()=>import('./updateadress.vue')
+    },
+    {
+        path:'/buy',
+        name:'buy',
+        component:()=>import('./buy.vue')
     }
 ]

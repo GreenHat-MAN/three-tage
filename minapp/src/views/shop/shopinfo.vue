@@ -65,9 +65,9 @@
     <div class="contents">
       <ul>
         <li v-for="(l,i) in contentList" :key="i">
-          评论内容:{{l.content}},<br>
-          我是谁:{{l.name}},<br>
-          发布时间:{{l.time | dateFormat}}
+          Comment content:{{l.content}},<br>
+          name:{{l.name}},<br>
+          Release time:{{l.time | dateFormat}}
         </li>
       </ul>
     </div>
@@ -81,13 +81,13 @@
     <van-goods-action-icon 
      icon="like-o"
       :color ="hasLike?'#f50':'#999'" 
-      :text ="hasLike?'已点赞':'点赞'"
+      :text ="hasLike?'Liked':'thumbs-up'"
       @click="toLike"
       :badge="likeCount" 
       />
-    <van-goods-action-icon icon="shop-o" text="购物车" @click="toCart" :badge="cartLent" />
-    <van-goods-action-button color="#be99ff" type="warning" text="加入购物车" @click="addCart" />
-    <van-goods-action-button color="#7232dd" type="danger" text="立即购买" />
+    <van-goods-action-icon icon="shop-o" text="cart" @click="toCart" :badge="cartLent" />
+    <van-goods-action-button color="#be99ff" type="warning" text="add to cart" @click="addCart" />
+    <van-goods-action-button color="#7232dd" type="danger" text="Buy now" />
     </van-goods-action>   
     
     

@@ -1,13 +1,13 @@
 <template>
   <div>
     <!-- 头部 -->
-    <hearder title="购物车" :back="true"></hearder>
+    <hearder title="Cart" :back="true"></hearder>
     <!-- 提示信息 -->
     <div class="erro" v-if="!userInfo">
       <van-notice-bar color="#e78b1f" left-icon="info-o">
-        登录后可同步购物车中的商品
+        After login, you can synchronize the goods in the shopping cart
         <router-link class="gotologin" :to="{ name: 'login' }"
-          >立即登录</router-link
+          >Log in now</router-link
         >
       </van-notice-bar>
       <div class="empty"></div>
@@ -36,7 +36,7 @@
                           <template #right>
                             <van-button
                               square
-                              text="删除"
+                              text="Delete"
                               type="danger"
                               class="delete-button"
                             />
@@ -64,10 +64,10 @@
       class="sub"
       :price="ltotal"
       button-color="#fb7299"
-      :button-text="`结算(${numTotal})`"
+      :button-text="`Total(${numTotal})`"
       @submit="onSubmit"
     >
-      <van-checkbox :value="flag" @click="checkAll">全选</van-checkbox>
+      <van-checkbox :value="flag" @click="checkAll">All Check</van-checkbox>
     </van-submit-bar>
 
     <!-- 底部导航 -->
@@ -93,7 +93,7 @@ export default {
       switch(position){
         case 'right':
           this.$dialog.confirm({
-            message:'删除该商品吗?',
+            message:'Delete this item?',
           }).then(()=>{
             console.log(name);
             this.delCartList(name);
@@ -129,7 +129,7 @@ export default {
         });
           this.$router.push({name:'order',params:{orders:this.orderList}});
       }else{
-          this.$toast.fail("至少买一个吧!!!");
+          this.$toast.fail("At least buy one!!!");
       }
 
 

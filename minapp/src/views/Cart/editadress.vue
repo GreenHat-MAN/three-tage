@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 头部 -->
-    <hearder title="新增收货地址" :back="true"></hearder>
+    <hearder title="Add receiving address" :back="true"></hearder>
 
     <!-- 地址新增 -->
     
@@ -10,7 +10,7 @@
       show-postal
       show-set-default
       show-search-result
-      :area-columns-placeholder="['请选择', '请选择', '请选择']"
+      :area-columns-placeholder="['Please select', 'Please select', 'Please select']"
       @save="onSave"
       />
       
@@ -48,10 +48,10 @@ export default {
       })
       // console.log(res);
       if(JSON.stringify(data).indexOf(JSON.stringify(res)) === -1){
-        this.$toast.success('地址添加成功!!!');
+        this.$toast.success('Address added successfully!!!');
          this.$router.push({name:'mine'});
       }else{
-        this.$toast.filed('该地址已存在');
+        this.$toast.filed('The address already exists');
       }
     },
   },

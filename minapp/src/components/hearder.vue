@@ -35,7 +35,7 @@ export default {
     },
   data() {
     return {
-        text:'换一种',
+        text:'Change it',
     };
   },
   methods: {

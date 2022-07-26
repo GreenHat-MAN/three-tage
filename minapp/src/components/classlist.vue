@@ -2,7 +2,7 @@
   <div class="category-part">
     <div class="category-part-item">
         <h5 class="category-title">{{name}}</h5>
-        <p class="ip">人气排行</p>
+        <p class="ip">Popularity ranking</p>
         <ul>
             <li class="category-list" v-for="(l,i) in list.categoryLogicVOList" :key="i">
                 <div class="category-item" @click="gotowhere({name:'searchinfo',params:{id:l.id}})">

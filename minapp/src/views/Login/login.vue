@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <hearder title="登录bilibili" :back="false"></hearder>
+    <hearder title="LoginBilibili" :back="false"></hearder>
 
     <div class="boxs"></div>
 
@@ -9,26 +9,26 @@
       <van-field
         v-model="username"
         name="username"
-        label="账号"
-        placeholder="你的手机号/邮箱"
-        :rules="[{ required: true, message: '请填写用户名' }]"
+        label="username"
+        placeholder="Your mobile number / email"
+        :rules="[{ required: true, message: 'Please fill in the user name' }]"
       />
       <van-field
         v-model="password"
         type="password"
         name="password"
-        label="密码"
-        placeholder="请输入密码"
-        :rules="[{ required: true, message: '请输入密码' }]"
+        label="password"
+        placeholder="Please input a password"
+        :rules="[{ required: true, message: 'Please input a password' }]"
       />
       <router-link :to="{ name: 'forget' }" class="forget">
-        <p class="p1">忘记密码</p>
+        <p class="p1">Forget password</p>
       </router-link>
       <div style="margin: 16px" class="btn">
         <van-button block size="normal" type="info" native-type="submit"
-          >登录</van-button
+          >Login</van-button
         >
-        <router-link :to="{ name: 'regist' }" class="regist">注册</router-link>
+        <router-link :to="{ name: 'regist' }" class="regist">Regist</router-link>
       </div>
     </van-form>
 
@@ -58,7 +58,7 @@ export default {
       let res = await this.$ajax.getLogin(values);
       console.log(res);
       if (res.length > 0) {
-        this.$toast.success("登录成功");
+        this.$toast.success("Login successful");
         if (
           this.fromName == "regist" || this.fromName == "forget"
         ) {
@@ -73,7 +73,7 @@ export default {
         // this.$router.push({ name: "mine" });
       } else {
         this.$notify({
-          message: "密码错误",
+          message: "Password error",
           color: "#ad0000",
           background: "#ffe1e1",
         });

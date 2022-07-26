@@ -4,22 +4,22 @@
       v-model="value"
       shape="round"
       show-action
-      placeholder="商品、品牌、IP名"
+      placeholder="Product, brand, IP name"
       @search="onSearch"
       @cancel="onCancel"
       background="#fb7299"
     >
       <template #action>
-        <div @click="onCancel">取消</div>
+        <div @click="onCancel">cancel</div>
       </template>
     </van-search>
 
 
     <van-tabs v-model="active" animated @change="changeActive">
-      <van-tab title="商品">
+      <van-tab title="commodity">
         <searchres :list="resList"></searchres>
       </van-tab>
-      <van-tab title="漫展">
+      <van-tab title="Diffuse Exhibition">
         <searchres :list="resList"></searchres>
       </van-tab>
     </van-tabs>

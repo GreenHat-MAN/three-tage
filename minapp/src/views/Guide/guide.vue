@@ -45,6 +45,7 @@ export default {
 <style lang='scss' scoped>
 .guide {
   position: relative;
+  background: url('../../../public/img/none.png') no-repeat 100%;
   .dao {
     position: absolute;
     top: 30px;

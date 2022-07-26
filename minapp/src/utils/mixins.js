@@ -29,6 +29,7 @@ Vue.mixin({
             console.log(values);
         },
         goback(){
+           
             this.$router.go(-1);
         },
         ...mapMutations(['changeAge','changeUserInfo','changeCity','changeCityList',
@@ -44,8 +45,8 @@ Vue.mixin({
                 callback()
             }else{
                 this.$dialog.confirm({
-                    title: '友情提示',
-                    message: '你还没有登录,请先登录哦.',
+                    title: 'Friendly tips',
+                    message: 'You havent logged in yet, please log in first',
                     // theme: 'round-button',
                 }).then(() => {
                     // on close

@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <hearder title="登录bilibili" :back="false"></hearder>
+    <hearder title="LoginBilibili" :back="false"></hearder>
 
     <!-- 地区选择 -->
     <div class="choses">
@@ -9,14 +9,14 @@
         v-model="fieldValue"
         is-link
         readonly
-        label="地区"
-        placeholder="请选择所在地区"
+        label="region"
+        placeholder="Please select your region"
         @click="show = true"
       />
       <van-popup v-model="show" round position="bottom">
         <van-cascader
           v-model="cascaderValue"
-          title="请选择所在地区"
+          title="Please select your region"
           :options="options"
           @close="show = false"
           @change="onChange"
@@ -33,10 +33,10 @@
         clearable
         :label="countryNum"
         name="phone"
-        placeholder="请输入常用手机号"
+        placeholder="Please enter your common mobile number"
         :rules="[
-          { required: true, message: '请输入手机号' },
-          { pattern: reg.phones, message: '请输入正确的手机号' },
+          { required: true, message: 'Please enter your mobile number' },
+          { pattern: reg.phones, message: 'Please enter the correct mobile number' },
         ]"
       >
         <template #button>
@@ -47,7 +47,7 @@
             type="primary"
             :disabled="!disabled"
             @click="sendCode"
-            >获取验证码</van-button
+            >Get verification code</van-button
           >
           <van-button
             v-else
@@ -56,24 +56,24 @@
             disabled
             type="primary"
             @click="sendCode"
-            >{{ count }}S后重试</van-button
+            >{{ count }}S Retry</van-button
           >
         </template>
       </van-field>
       <van-field
         v-model="code"
         clearable
-        label="验证码"
+        label="code"
         name="code"
-        placeholder="请输入验证码"
+        placeholder="Please enter the verification code"
         :rules="[
-          { required: true, message: '请填写验证码' },
-          { pattern: reg.code, message: '请输入4位数的验证码' },
+          { required: true, message: 'Please fill in the verification code' },
+          { pattern: reg.code, message: 'Please enter a 4-digit verification code' },
         ]"
       />
       <div style="margin: 16px" class="tobtn">
         <van-button round block type="info" native-type="submit"
-          >登录/注册</van-button
+          >Login / registration</van-button
         >
       </div>
     </van-form>
@@ -165,15 +165,15 @@ export default {
       if(res.length>0){
         let data=await this.$ajax.sendCaptcha({phone:this.phone})
         .catch(err=>{
-        this.$toast.fail('发送失败')
+        this.$toast.fail('fail in send')
         });
         if(data && data.code==200){
-            this.$toast.success('验证码已发送');
+            this.$toast.success('Verification code sent');
         }else{
-            this.$toast.fail('发送失败');
+            this.$toast.fail('fail in send');
         }
       }else{
-        this.$toast.fail('该手机号还未注册,请先去注册!!!')
+        this.$toast.fail('This mobile number has not been registered, please register first!!!')
       }
     },
 
@@ -184,10 +184,10 @@ export default {
       if(data.length>0){
         // 校验验证码
         let res=await this.$ajax.verifyCaptcha({phone:values.phone,captcha:values.code}).catch(err=>{
-            this.$toast.fail('验证失败');
+            this.$toast.fail('Validation failed');
         })
         if(res && res.code==200){
-            this.$toast.success('验证成功');
+            this.$toast.success('Validation successful');
             if(this.fromName=='regist'||this.fromName=='forget'){
                this.$router.push({name:'mine'})
             }else{
@@ -197,10 +197,10 @@ export default {
             localStorage.setItem('phone',values.phone)
             localStorage.setItem('username',data[0].username)
         }else{
-          this.$toast.fail('验证失败');
+          this.$toast.fail('Validation failed');
         }
       }else{
-        this.$toast('当前手机号未注册,请先去注册');
+        this.$toast('The current mobile number is not registered, please register first');
       }
     },
 

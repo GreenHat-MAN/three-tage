@@ -23,19 +23,19 @@ export const request = axios.create({
 export function ShowLoading(msg) {
     Toast.clear()
     Toast.loading({
-        message: msg || '加载中....',
+        message: msg || 'Loading....',
         forbidClick: true,
     })
 }
 
 //成功
-export function ShowSuccess(msg = '成功') {
+export function ShowSuccess(msg = 'sucess') {
     Toast.clear()
     Toast.success(msg)
 }
 
 //失败
-export function ShowFail(msg = '失败') {
+export function ShowFail(msg = 'error') {
     Toast.clear()
     Toast.fail(msg)
 }
@@ -49,7 +49,7 @@ request.interceptors.request.use(function (config) {
     return config
 }, function (error) {
     //请求失败发送失败信息
-    ShowFail('网络异常')
+    ShowFail('Network exception')
     return Promise.reject(error)
 })
 
@@ -61,7 +61,7 @@ request.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     // 响应失败 
-    ShowFail('服务器异常')
+    ShowFail('Server exception')
     return Promise.reject(error);
 })
 

@@ -2,15 +2,15 @@
 
 <div>
     <!-- 头部 -->
-    <hearder title="地址管理" :back="true"></hearder>
+    <hearder title="Address management" :back="true"></hearder>
 
     <div class="adress" v-if="userInfo">
         <van-address-list
         v-model="chosenAddressId"
         :list="list"
         :disabled-list="disabledList"
-        disabled-text="以下地址超出配送范围"
-        default-tag-text="默认"
+        disabled-text="The following addresses are out of the scope of delivery"
+        default-tag-text="default"
         @add="onAdd"
         @edit="onEdit"
         @select="onAdress"
@@ -18,9 +18,9 @@
     </div>   
     <div class="unadress" v-else>
       <div class="login-wrapper-img"></div>
-      <p>你还没有登录哦～</p>
-      <p>请先登录后查看地址管理</p>
-      <div class="login-button" @click="gotoLogin">登录</div>
+      <p>You haven't logged in yet</p>
+      <p>Please login first and then check address management</p>
+      <div class="login-button" @click="gotoLogin">Login</div>
     </div>
 </div>
     

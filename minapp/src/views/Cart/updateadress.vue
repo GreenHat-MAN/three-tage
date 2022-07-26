@@ -2,7 +2,7 @@
     
     <div>
     <!-- 头部 -->
-    <hearder title="修改收货地址" :back="true"></hearder>
+    <hearder title="Modify receiving address" :back="true"></hearder>
 
     <!-- 修改地址 -->
     <van-address-edit
@@ -11,7 +11,7 @@
       show-delete
       show-set-default
       show-search-result
-      :area-columns-placeholder="['请选择', '请选择', '请选择']"
+      :area-columns-placeholder="['Please select', 'Please select', 'Please select']"
       @save="onSave"
       @delete="onDelete"
       :address-info="{
@@ -56,14 +56,14 @@ export default {
                 username:this.userInfo.username
             });
             if(res){
-                this.$toast.success('修改成功!!!');
+                this.$toast.success('Successfully modified!!!');
                 this.goback();
             }
             
         },
         async onDelete(){
             let res=await this.$ajax.delAdress(this.info[0].id,{});
-            this.$toast.success('删除成功!!!');
+            this.$toast.success('Successfully deleted!!!');
             this.goback();
         }
     },

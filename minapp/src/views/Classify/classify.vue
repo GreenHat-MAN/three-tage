@@ -2,7 +2,7 @@
 <!-- 分类栏 -->
 <div class="shop">
     <!-- 头部搜索框 -->
-    <van-search shape="round" background="#fb7299" placeholder="商品、品牌、IP名" @click="toSearch"/>
+    <van-search shape="round" class="serch" background="#fb7299" placeholder="Product, brand, IP name" @click="toSearch"/>
         <div class="shop-box">
             <div class="shop-left">
                 <van-sidebar v-model="activeKey" @change="changeActive">
@@ -13,6 +13,8 @@
               <classlist :list="tyList[activeKey]" :name="tyList[activeKey].typeName"></classlist>
             </div>
         </div>
+
+    <div class="line"></div>
 
     <!-- 底部导航 -->
     <footers></footers>
@@ -52,8 +54,9 @@ export default {
 <style lang="scss" scoped>
 .shop{
     &-box{
+        margin-top: 50px;
         width:100%;
-        height:calc(100vh - 100px);
+        // height:calc(100vh - 100px);
         display: flex;
         overflow: hidden;
         .shop-left{
@@ -70,5 +73,17 @@ export default {
             color:#ee0a24;
         }
     }
+    .serch{
+      position: fixed;
+      left: 0;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+}
+.line{
+  margin-top: 20px;
+  width: 100%;
+  height: 20px;
 }
 </style>

@@ -1,0 +1,27 @@
+export default[
+    {
+        path:'/allorder',
+        name:'Allorder',
+        component:()=>import('./Allorder.vue')
+    },
+    {
+        path:'/people',
+        name:'people',
+        component:()=>import('./people.vue')
+    },
+    {
+        path:'/redpage',
+        name:'redpage',
+        component:()=>import('./redpage.vue')
+    },
+    {
+        path:'/collect',
+        name:'collect',
+        component:()=>import('./collect.vue')
+    },
+    {
+        path:'/like',
+        name:'like',
+        component:()=>import('./like.vue')
+    }
+]

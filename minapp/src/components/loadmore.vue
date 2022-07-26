@@ -1,13 +1,13 @@
 <template>
   <van-pull-refresh
     v-model="isLoading"
-    success-text="刷新成功"
+    success-text="Refresh successful"
     @refresh="onRefresh"
   >
     <van-list
       v-model="loading"
       :finished="finished"
-      finished-text="没有更多了"
+      finished-text="No more"
       @load="onLoad"
       :immediate-check="false"
       :offset="300"
@@ -32,7 +32,7 @@ export default {
         onRefresh(){
             setTimeout(()=>{
                 this.isLoading = false;
-                this.$toast("刷新成功")
+                this.$toast("Refresh successful")
                 this.getFilmsRefresh()
             },500)
         },
@@ -40,10 +40,10 @@ export default {
             setTimeout(()=>{
                 this.loadData(()=>{
                     this.loading = false;
-                    this.$toast("加载更多数据成功")
+                    this.$toast("Loading more data succeeded")
                 },()=>{
                     this.finished = true;
-                    this.$toast("数据见底了")
+                    this.$toast("Data bottomed out")
                 })
             },500)
         }

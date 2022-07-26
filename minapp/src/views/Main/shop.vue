@@ -3,7 +3,7 @@
     <!-- 头部 -->
     <div class="header">
       <div class="content">
-         会员购
+         Member purchase
       </div>
     </div>
 
@@ -12,7 +12,7 @@
       <!-- 搜索框 -->
       <div class="serach">
         <router-link class="ser" :to="{ name: 'search' }"
-          ><span><van-icon name="search" />搜一搜</span></router-link
+          ><span><van-icon name="search" />Search</span></router-link
         >
       </div>
       <!-- 商品类别 -->
@@ -31,11 +31,11 @@
     <!-- 试听 -->
     <div class="container">
       <router-link :to="{ name: '' }" class="con-left">
-        <img src="../../../public/img/msic.png" />免费音频试听
+        <img src="../../../public/img/msic.png" />Free audio audition
       </router-link>
 
       <router-link :to="{ name: '' }" class="con-right">
-        <img src="../../../public/img/book.png" />免费漫画试读
+        <img src="../../../public/img/book.png" />Free trial reading
       </router-link>
     </div>
 
@@ -154,14 +154,14 @@ export default {
   mounted() {
     // 分类选项
     this.gameList = [
-      { background: PIC1, text: "手办" ,name:'categoryinfo',parentCategory:'category_sb',values:'1_107'},
-      { background: PIC2, text: "周边",name:'categoryinfo', parentCategory:'category_zb' ,values:'1_109'},
-      { background: PIC3, text: "漫展演出", name:'503'},
-      { background: PIC4, text: "今日上新", name:'404'},
-      { background: PIC5, text: "潮玩扭蛋", name:'categoryinfo',parentCategory:'category_cwnd' ,values:'2_681'},
-      { background: PIC6, text: "游戏相关", name:'categoryinfo',parentCategory:'category_game' ,values:'1_716'},
-      { background: PIC7, text: "图书漫画", name:'categoryinfo',parentCategory:'category_book' ,values:'1_735'},
-      { background: PIC8, text: "全部分类",name:'classify'},
+      { background: PIC1, text: "Garage Kit" ,name:'categoryinfo',parentCategory:'category_sb',values:'1_107'},
+      { background: PIC2, text: "periphery",name:'categoryinfo', parentCategory:'category_zb' ,values:'1_109'},
+      { background: PIC3, text: "Free exhibition performance", name:'503'},
+      { background: PIC4, text: "Shangxin today", name:'404'},
+      { background: PIC5, text: "Chaowan twist egg", name:'categoryinfo',parentCategory:'category_cwnd' ,values:'2_681'},
+      { background: PIC6, text: "Game related", name:'categoryinfo',parentCategory:'category_game' ,values:'1_716'},
+      { background: PIC7, text: "Book Comics", name:'categoryinfo',parentCategory:'category_book' ,values:'1_735'},
+      { background: PIC8, text: "All categories",name:'classify'},
     ];
 
     // 调用数据请求

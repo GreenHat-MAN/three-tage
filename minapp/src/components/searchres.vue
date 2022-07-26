@@ -3,7 +3,7 @@
     <div class="search-result">
       <div class="item-container">
         <ul v-for="(l, i) in list" :key="i">
-          <li class="item">
+          <li class="item" @click="toInfo(l.id)">
             {{ l.name }}
           </li>
         </ul>
@@ -16,6 +16,16 @@
 export default {
   name: "searchres",
   props: ["list"],
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+      toInfo(id){
+        this.$router.push({name:'shopinfo',query:{itemsId:id}})
+      }
+  },
 };
 </script>
 

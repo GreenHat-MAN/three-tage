@@ -44,25 +44,25 @@ export const FooterList = [
     {
         path: '/shop',
         name: 'shop',
-        text: '会员购',
+        text: 'Member purchase',
         icon: "icon-shangcheng",
     },
     {
         path: '/classify',
         name: 'classify',
-        text: '分类',
+        text: 'Classification',
         icon: "icon-zixun"
     },
     {
         path: '/cart',
         name: 'cart',
-        text: '购物车',
+        text: 'Cart',
         icon: "icon-cinema",
     },
     {
         path: '/mine',
         name: 'mine',
-        text: '我的',
+        text: 'Mine',
         icon: "icon-mine"
     },
 ]

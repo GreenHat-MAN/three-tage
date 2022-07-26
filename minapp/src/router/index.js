@@ -11,6 +11,7 @@ import erroPageRouter from '@/views/erroPage'
 import cartRouter from '@/views/Cart'
 import classifyRouter from '@/views/Classify'
 import shopRouter from '@/views/shop'
+import orderRouter from '@/views/order'
 
 const routes = [
 
@@ -35,7 +36,8 @@ const routes = [
   ...classifyRouter,
   ...erroPageRouter,
   ...MainRouter,
-  ...shopRouter
+  ...shopRouter,
+  ...orderRouter
 ]
 
 const router = new VueRouter({

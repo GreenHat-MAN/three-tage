@@ -1,6 +1,6 @@
 <template>
   <div>
-    <hearder title="找回密码" :back="true"></hearder>
+    <hearder title="Retrieve password" :back="true"></hearder>
 
     <!-- 找回密码 -->
     <van-form 
@@ -12,16 +12,16 @@
             <van-field
                 v-model="form.phone"
                 name="phone"
-                label="手机号"
-                placeholder="手机号"
+                label="phone"
+                placeholder="phone"
                 center
                 clearable
                 left-icon="phone-o"
                 
                 :rules="[
-                    { required: true, message: '请填写手机号' },
+                    { required: true, message: 'Please fill in your mobile number' },
                     {
-                        pattern:reg.phones, message:'请输入正确的手机号'
+                        pattern:reg.phones, message:'Please enter the correct mobile number'
                     }
                 ]"
             ></van-field>
@@ -29,42 +29,42 @@
                 v-model="form.captcha"
                 center
                 clearable
-                label="验证码"
-                placeholder="验证码"
+                label="code"
+                placeholder="code"
                 name="captcha"
                 left-icon="apps-o"
                 :rules="[
-                    { required: true, message: '请填写验证码' },
+                    { required: true, message: 'Please fill in the verification code' },
                     {
-                        pattern:reg.code, message:'请输入4位数字验证码'
+                        pattern:reg.code, message:'Please enter a 4-digit verification code'
                     }
                 ]"
                 >
                 <template #button>
-                    <van-button @click="sendCaptcha" v-if="flag" size="small" :disabled="!disabled" type="primary" native-type="button" >发送验证码</van-button>
-                    <van-button v-else size="small" disabled type="danger" native-type="button" >剩余 {{count}} S</van-button>
+                    <van-button @click="sendCaptcha" v-if="flag" size="small" :disabled="!disabled" type="primary" native-type="button" >Sendcode</van-button>
+                    <van-button v-else size="small" disabled type="danger" native-type="button" >surplus{{count}} S</van-button>
                 </template>
             </van-field>
             <van-field
                 v-model="form.newpwd"
                 name="newpwd"
-                label="新密码"
-                placeholder="请输入新密码"
+                label="newpwd"
+                placeholder="Please enter a new password"
                 center
                 clearable
                 left-icon="phone-o"
                 :rules="[
-                    { required: true, message: '请输入新密码' },
+                    { required: true, message: 'Please enter a new password' },
                     {
-                        pattern:reg.pwd, message:'请输入数字密码组合'
+                        pattern:reg.pwd, message:'Please enter a digital password combination'
                     }
                 ]"
             ></van-field>
             <div class="mr15">
-                <van-button round block type="warning" native-type="submit">确认</van-button>
+                <van-button round block type="warning" native-type="submit">confirm</van-button>
             </div>
             <div class="mr15">
-                <van-button round block type="danger" native-type="button" @click="resetData">重置</van-button>
+                <van-button round block type="danger" native-type="button" @click="resetData">Reset</van-button>
             </div>
     </van-form>
 
@@ -116,15 +116,15 @@ export default {
                 // 发送验证码
                 let res2 = await this.$ajax.sendCaptcha({phone:this.form.phone})
                 .catch(err=>{
-                     this.$toast.fail('发送失败');
+                     this.$toast.fail('fail in send');
                 })
                 if(res2 && res2.code==200){
-                    this.$toast.success('发送成功');
+                    this.$toast.success('Sent successfully');
                 }else{
-                    this.$toast.fail('发送失败');
+                    this.$toast.fail('fail in send');
                 }
             }else{
-                this.$toast('当前手机号未注册,请先去注册');
+                this.$toast('The current mobile number is not registered, please register first');
             }
         },
         sendCaptcha(){
@@ -138,7 +138,7 @@ export default {
                     phone:value.phone,
                     captcha:value.captcha,
                 }).catch(err=>{
-                    this.$toast("验证失败")
+                    this.$toast("Validation failed")
                 })
                 if(res &&  res.code == 200){
                     // 修改密码 
@@ -146,17 +146,17 @@ export default {
                         password:value.newpwd,
                     })
                     this.$router.push({name:'login'})
-                    this.$toast.success("找回密码成功")
+                    this.$toast.success("Password retrieved successfully")
                 }else{
-                    this.$toast("验证码验证失败")
+                    this.$toast("Verification code verification failed")
                 }
 
             }else{
-                this.$toast("当前手机号未注册,请先去注册")
+                this.$toast("The current mobile number is not registered, please register first")
             }
         },
         onFailed(){
-            this.$toast.fail("数据验证失败")
+            this.$toast.fail("Data validation failed")
         },
     }
 
