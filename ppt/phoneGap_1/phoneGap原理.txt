@@ -1,0 +1,36 @@
+PhoneGap是目前最被看好的：
+
+兼容性：完全做到了Written Once，Run Everywhere!
+标准化：PhoneGap采用W3C标准，Web App直接运行!
+采用普通web开发技术：JavaScript+HTM5+CSS3。
+但是这并不代表PhoneGap是完美的，本文完美将介绍PhoneGap的不足及工作原理
+
+一、PhoneGap如何工作?
+
+
+PhoneGap架构拥有强大的跨平台访问设备能力，但是其工作原理并不神秘，
+iPhone和Android平台共同点是都有内置的WebView组件，其具备两个特性：
+
+WebView组件实质是移动设备的内置浏览器
+
+WebView这个内置浏览器特性是Web能被打包成本地客户端的基础，
+可方便的用HTML5、CSS3页面布局，这是移动Web技术的优势相对于原生开发。
+
+WebView提供Web和设备本地API双向通信的能力  (JSbridge)
+
+PhoneGap针对不同平台的WebView做了扩展和封装，使WebView这个组件变成可访问设备本地API的强大浏览器，
+所以开发人员在PhoneGap框架下可通过JavaScript访问设备本地API。
+
+
+PhoneGap与设备本地API通信图
+
+一个成熟的PhoneGap技术客户端运行状况：应用运行在WebView组件上 -> 通过PhoneGap在各平台的扩展 -> 最终访问设备本地资源。
+
+
+PhoneGap架构图
+
+二、存在不足：
+
+性能，正常操作速度流畅，频繁操作响应会变慢。
+稳定性及资源占用方面，手动频繁操作会引起，响应速度变慢，webkit的WebView不能很好释放内存，
+导致内存占用上升，甚至会引起应用的crash。
