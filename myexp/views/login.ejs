@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="http://localhost:3000/static/javascripts/dataApi.js"></script> -->
+    <title>登录</title>
+</head>
+
+<body>
+    <h1><%= title %></h1>
+    <div class="login">
+        <form action="http://localhost:3000/stuinfos" method="post">
+            账号:<input type="text" name="username" class="uname"><br>
+            密码:<input type="password" name="password" class="pwd"><br>
+            <button type="submit" class="toLogin">登录</button>
+            <button class="toRegist" type="button" onclick="location.href='http://localhost:3000/regist'">注册</button>
+        </form>
+    </div>
+</body>
+
+    <script>
+
+       
+
+        // function tologin(){
+        //     let username=document.querySelector('.uname').value;
+        //     let password = document.querySelector('.pwd').value;
+        //     getUser('http://localhost:3000/stuinfos',username);
+        // }   
+
+
+
+        // document.querySelector('.toLogin').addEventListener('click',tologin);
+
+    </script>
+
+</html>
