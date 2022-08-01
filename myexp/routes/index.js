@@ -5,7 +5,7 @@ const { stuInfoModel, stuScoreModel, MyMoiveModel } = require('../public/javascr
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Express', username: req.session.username });
 });
 
 router.get('/login', function (req, res, next) {
@@ -20,30 +20,74 @@ router.get('/regist', function (req, res, next) {
   })
 })
 
-router.post('/stuinfos', async function (rep, res, next) {
+router.post('/stuinfos', (req, res) => {
+  const data = req.body;
+  // console.log(data.username);
+  // console.log(data.password);
+  stuInfoModel.findOne(
+    // {stuName:data.username,stuPassword:data.password}
+    data
+  ).then((result) => {
+    if (result) {
+      req.session.username = data.username;
+      req.session.userInfo = data;
+      res.redirect('/');//重定向
+    } else {
+      res.send(`<script>alert('登录密码,用户名和密码不匹配');location.href='/login' </script>`);
+    }
+  }).catch((result) => {
+    console.log(result);
+    res.send(`<script>alert('服务器异常')</script>`)
+  })
+})
 
-  // console.log(rep.body.username);
-  // console.log(rep.body.password);
-  let result = await stuInfoModel.find({
-    $or:[
-      {stuName:{$eq:rep.body.username}},
-      {password:{$eq:rep.body.password}}
-    ]
-        // stuName: rep.body.username,
-        // password: rep.body.password
-  });
-  console.log(result);
-  // if(result.length>0){
-  //   console.log('登录成功!!!');
-  //   console.log(result);
-  // }else{
-  //   console.log('密码错误!!!');
-  // }
-  // res.json({
-  //   code: 200,
-  //   msg: '获取用户成功',
-  //   data: result
-  // })
+router.all('/out', (req, res) => {
+  req.session.destroy(() => {
+    res.redirect('/');
+  })
+})
+
+router.all('/movie', (req, res) => {
+  var data=req.query;
+  var keyword = data.keyword;
+  var sort={}
+  var obj={}
+  if(keyword){
+    obj = {
+      $or:[
+        {
+          title:new RegExp(keyword)
+        },
+        {
+          year:new RegExp(keyword)
+        },
+        {
+          genres:new RegExp(keyword)
+        },{
+          'rating.average':new RegExp(keyword)
+        }
+      ]
+    }
+  }else{
+    sort=data
+  }
+
+  if (req.session.username) {
+    MyMoiveModel.find(obj, {})
+    .sort(sort)
+    .then((result) => {
+      res.render('movie', {
+        result
+      })
+    }).catch((result) => {
+      res.send(`<script>alert('服务器异常')</script>`)
+    })
+  } else {
+    res.send(`<script>alert('session 过期或者无效,请重新登录');location.href='/login' </script>`)
+  }
+
+
+
 })
 
 

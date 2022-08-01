@@ -24,8 +24,9 @@ const Schema=mongoose.Schema;
 // 定义学生信息集合
 const stuInfo=new Schema({
     stuName:String,
-    stuAge:Number,
-    stuSex:String,
+    stuPassword:String,
+    stuEmail:String,
+    stuPhone:String,
 });
 
 

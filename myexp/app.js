@@ -3,6 +3,7 @@ var express = require('express'); //导入express插件
 var path = require('path'); //导入获取访问地址node自带
 var cookieParser = require('cookie-parser'); //处理cookie插件
 var logger = require('morgan'); //导入日志记录
+var session =require('express-session');//导入session文件
 
 var indexRouter = require('./routes/index'); //根目录index路由
 var usersRouter = require('./routes/users'); //根目录users路由
@@ -22,6 +23,18 @@ app.use(logger('dev'));  //日志打印
 app.use(express.json()); //获取请求数据的方法 req.body
 app.use(express.urlencoded({ extended: false })); //post提交的数据
 app.use(cookieParser()); //获取cookie
+
+
+// 使用express-session
+app.use(session({
+  secret:'WH2206YYDS',// cookie签名 这个属性是必须的 具体配置和`cookie-parser`一样
+  saveUninitialized:true, // 是否自动初始化 默认为true
+  resave:false,// 当用户session无变化的时候依然自动保存
+  cookie:{ // cookie的信息具体操作和`cookie-parser`一样
+    maxAge:1000 * 60 * 60 * 2 // 30分钟后过期
+  },
+  rolling:true// 每次请求的时候覆写cookie
+}))
 
 // console.log(path.join(__dirname + '/public')+'/\javascripts/connect');
 

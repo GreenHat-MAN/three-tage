@@ -7,5 +7,16 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+
+    <div>
+      <% if(username){ %>
+        姓名:<%- username %><br>
+        <button type="button" onclick="location.href='http://localhost:3000/movie'">电影列表</button>
+        <button type="button" onclick="location.href='http://localhost:3000/out'">退出</button>
+    <%  }else{ %>
+        你还没有登录!!!GO---><button type="button" onclick="location.href='http://localhost:3000/login'">登录</button>
+    <%  } %>
+    </div>
+
   </body>
 </html>

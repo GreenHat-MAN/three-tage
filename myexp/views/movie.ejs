@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电影列表</title>
+</head>
+<body>
+    <h1><%- include('./hearde',{title:'电影院'}) %></h1>
+
+    <div>
+        <button onclick="location.href='/movie?year=1'">年份升序</button>
+        <button onclick="location.href='/movie?year=-1'">年份降序</button>
+        <button onclick="location.href='/movie?rating.average=1'">评分升序</button>
+        <button onclick="location.href='/movie?rating.average=-1'">评分降序</button>
+        <div>
+            <input type="text" id="keyword" placeholder="请输入搜索关键字"  >
+            <button onclick="todosearch()"> 点击搜索</button>
+        </div>
+        <ul>
+          <%  result.forEach((item,index)=>{ %>
+                <li>
+                    <a href="/users/detail?id=<%-item.id%>">
+                        <img src="<%- item.images.large.replace(/img7/,'img3')  %>" alt="">
+                        <div>
+                            <h2><%- item.title %></h2>
+                            <p>年份:<%- item.year%></p>
+                            <p>评分:<%- item.rating.average %></p>
+                            <p>类型: <%- item.genres %></p>
+                        </div>
+                    </a>
+                </li>
+           <% }) %>
+        </ul>
+
+    </div>
+
+</body>
+
+    <script>
+        function todosearch(){
+            window.location.href='/movie?keyword='+document.getElementById('keyword').value;
+        }
+    </script>
+
+</html>

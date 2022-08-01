@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>电影详情</title>
+</head>
+<body>
+    <h1><%- include('./hearde',{title:'电影详情'}) %></h1>
+
+    <div>
+        <img src="<%- result.images.large.replace(/img7/,'img3')  %>" alt="">
+        <div>
+            <h2><%- result.title %></h2>
+            <p>年份:<%- result.year%></p>
+            <p>评分:<%- result.rating.average %></p>
+            <p>类型: <%- result.genres %></p>
+            <p>导演: <%- result.directors[0].name  %></p>
+            <p>主演: 
+              <%  result.casts.forEach((l,i)=>{  %>
+                    <span> <%- l.name %></span>
+              <%  })  %> 
+            </p>
+
+
+        </div>
+    </div>
+
+</body>
+</html>

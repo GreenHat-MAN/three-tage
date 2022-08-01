@@ -10,9 +10,9 @@
 </head>
 
 <body>
-    <h1><%= title %></h1>
+    <h1><%- include('./hearde',{title:'登录'}) %></h1>
     <div class="login">
-        <form action="http://localhost:3000/stuinfos" method="post">
+        <form action="/stuinfos" method="post">
             账号:<input type="text" name="username" class="uname"><br>
             密码:<input type="password" name="password" class="pwd"><br>
             <button type="submit" class="toLogin">登录</button>
