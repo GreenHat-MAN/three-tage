@@ -7,17 +7,22 @@ var session =require('express-session');//导入session文件
 
 var indexRouter = require('./routes/index'); //根目录index路由
 var usersRouter = require('./routes/users'); //根目录users路由
+var apiRouter = require('./routes/api'); //根目录users路由
 
 var app = express(); //将express实例上所有方法赋给app
 
 app.use('/static', express.static(path.join(__dirname, 'public'))); //将public设置为静态资源目录文件
 // 引入数据库
 require('./public/javascripts/connect')
-
+var cors = require('cors')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views')); //将views文件设置为根目录
 app.set('view engine', 'ejs'); //设置视图模板引擎为ejs
+
+app.use(cors({
+  // 没有任何cors限制 
+}))
 
 app.use(logger('dev'));  //日志打印
 app.use(express.json()); //获取请求数据的方法 req.body
@@ -40,6 +45,7 @@ app.use(session({
 
 app.use('/', indexRouter); //使用路由插件 路由地址=路由别名+路由原名
 app.use('/users', usersRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 // 进入404异常捕捉范围

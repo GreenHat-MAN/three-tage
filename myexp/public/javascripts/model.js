@@ -27,6 +27,10 @@ const stuInfo=new Schema({
     stuPassword:String,
     stuEmail:String,
     stuPhone:String,
+    dbPass:String,
+    role:Number,  // 身份角色
+    avatar:String,   
+    time:Date 
 });
 
 
