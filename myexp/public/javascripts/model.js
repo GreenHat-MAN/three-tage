@@ -42,6 +42,15 @@ const stuScore=new Schema({
     testDay:Date
 });
 
+
+// 定义角色权限信息集合
+const stuRole=new Schema({
+    text:String,
+    value:Number,
+    id:Number,
+    color:String,
+});
+
 //定义电影列表集合
 const MyMoive = new Schema({
     "genres":Array,
@@ -65,3 +74,5 @@ exports.stuInfoModel=mongoose.model('stuInfos',stuInfo);//表明+Schema模块名
 exports.stuScoreModel=mongoose.model('stuScores',stuScore);
 
 exports.MyMoiveModel=mongoose.model('movies',MyMoive);
+
+exports.roleInfoModel=mongoose.model('roles',stuRole);

@@ -13,12 +13,12 @@ export const GolbalMixins = {
         }
     },
     methods: {
-        ...mapMutations(['changeUserInfo'])
+        ...mapMutations(['changeUserInfo','changecollapse',])
     },
     watch:{
 
     },
     computed:{
-        ...mapState(['userInfo'])
+        ...mapState(['userInfo','roleList','collapse'])
     }
 }

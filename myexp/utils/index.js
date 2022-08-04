@@ -7,7 +7,7 @@
 exports.FindOneDataFromTable = function({
     model,query,field,res,callback,msg="查询成功"
 }){
-    model.findOne(query,field)
+    model.find(query,field)
     .then(result=>{
         if(callback){
             callback(result)

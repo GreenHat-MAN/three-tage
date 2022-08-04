@@ -16,4 +16,8 @@ export const Ajax = {
 
     updateAll:(data)=>post("/api/updateInfo",data), //修改用户信息
 
+    getRole:(data)=>post("/api/getrole",data), //获取角色权限信息
+
+    getImgs:(data)=>post("/api/uploads",data),   //上传用户头像
+
 }

@@ -4,8 +4,10 @@
 var express = require('express');
 var router = express.Router();   // express 的路由模块 
 var {createToken,checkToken}  = require('../utils/token')
-var { stuInfoModel } = require("../public/javascripts/model")
+var { stuInfoModel, roleInfoModel } = require("../public/javascripts/model")
 var {FindOneDataFromTable} = require('../utils')
+var multer =require('multer')
+var path=require('path')
 
 //接口测试
 router.all("/test", (req, res) => {
@@ -135,6 +137,48 @@ router.all('/updateInfo',async(req,res)=>{
     })
 })
 
+
+// 获取角色权限信息
+router.all('/getrole',async (req,res)=>{
+    checkToken(req,res,({stuName})=>{
+        FindOneDataFromTable({
+            model:roleInfoModel,
+            query:{},
+            res,
+        })
+    })
+})
+
+
+// 上传文件
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, 'public/images/upload')
+    },
+    filename: function (req, file, cb) {
+      const uniqueSuffix = 'WH2206'+ Date.now() + '-' + Math.round(Math.random() * 1E9)
+      //获取文件后缀
+      var extname = path.extname(file.originalname)
+      cb(null, file.fieldname + '-' + uniqueSuffix+extname)
+    }
+})
+
+// 将上传的文件转换为任意文件类型
+const upload = multer({ storage: storage }).any()
+
+router.all('/uploads',upload,(req,res)=>{
+    checkToken(req,res,({stuName})=>{
+        var path = req.files[0].path;  // 上传的文件的相对于的 服务器路径
+        console.log(req.files[0]) 
+        res.json({
+            code:200,
+            mas:'上传成功',
+            path,
+            ressult:path
+        })
+
+    })
+})
 
 
 

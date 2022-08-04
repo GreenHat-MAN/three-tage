@@ -1,7 +1,7 @@
 <template>
     <div class="common-layout">
         <el-container class="container">
-            <el-aside width="200px">Aside</el-aside>
+               <Aside></Aside>
             <el-container class="main-context">
                 <Myheard></Myheard>
                 <el-main>Main</el-main>
@@ -17,17 +17,24 @@ import { useStore } from 'vuex';
 import { Ajax } from '../../api/index.js';
 import Myfooter from './myfooter.vue';
 import Myheard from './myheard.vue';
+import Aside from './aside.vue';
 
 const store=useStore()
 
 const getUserInfo = async () => {
     let res = await Ajax.userAll()
-    console.log(res.result);
+    // console.log(res.result);
     store.commit('changeUserInfo',res.result)
+    console.log(store.state.userInfo);
+}
+
+const getRoleList =()=>{
+    store.dispatch('getRoleListAsync')
+    getUserInfo()
 }
 
 onMounted(() => {
-    getUserInfo()
+    getRoleList()
 })
 
 </script>

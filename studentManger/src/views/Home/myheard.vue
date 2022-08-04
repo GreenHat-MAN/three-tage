@@ -3,7 +3,7 @@
 
         <el-row class="headrow">
             <el-col class="elitem" :span="7">
-                <el-icon class="icons" :size="20">
+                <el-icon class="icons" :size="20" @click="changecollapse(!collapse)">
                     <Fold />
                 </el-icon>
                 <h3>Nerve stimulating management system</h3>
@@ -16,16 +16,18 @@
                     </div>
                 </marquee>
             </el-col>
-            <!-- <el-tag>
-                {{ userInfo.role }}
-            </el-tag>
-            <span>头像</span> -->
             <el-col class="elitem" :span="7" :offset="1">
                 <div class="info" v-if="userInfo">
 
+                    <el-tag  :color="roleList.find(item=>item.value==userInfo[0].role).color">
+                        {{ roleList.find(item=>item.value==userInfo[0].role).text}}
+                    </el-tag>
+
+                    <MyAvatar></MyAvatar>
+
                     <el-dropdown @command="handleCommand">
                         <span class="el-dropdown-link">
-                            {{ userInfo.stuName }}
+                            {{ userInfo[0].stuName }}
                             <el-icon class="el-icon--right">
                                 <ArrowDownBold />
                             </el-icon>
@@ -82,13 +84,14 @@
 </template>
 
 <script setup>
-import { reactive, ref, computed } from 'vue'
+import { reactive, ref, computed, onMounted } from 'vue'
 import { Fold, ArrowDownBold, Unlock, SwitchButton } from '@element-plus/icons-vue'
 import { useStore } from 'vuex';
-import { ElMessage,ElMessageBox } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { reg } from '../../utils/validate.js';
 import { Ajax } from '../../api/index.js';
 import { useRouter } from 'vue-router';
+import MyAvatar from './MyAvatar.vue';
 const model = reactive({})
 
 const router = useRouter()
@@ -167,8 +170,6 @@ const logoutAction = () => {
 }
 
 
-
-
 // 修改密码
 const changpwd = () => {
     formRef.value.validate(async valid => {
@@ -198,12 +199,14 @@ const changpwd = () => {
     })
 }
 
+
+
 </script>
 
 <style lang="scss" scoped>
 .heard {
     background: #222c3a;
-
+width: 100%;
     .headrow {
         height: 100%;
         display: flex;
@@ -225,7 +228,7 @@ const changpwd = () => {
 .info {
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
     align-items: center;
 
     .el-dropdown-link {
