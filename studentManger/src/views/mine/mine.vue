@@ -1,5 +1,5 @@
 <template>
     <div>
-        <h1>主页广告</h1>
+        <h1>我的</h1>
     </div>
 </template>

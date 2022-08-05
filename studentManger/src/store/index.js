@@ -9,6 +9,7 @@ const store = new createStore({
             userInfo:null, //用户信息
             roleList:[], //系统角色权限信息
             collapse:false ,// false 展开  true 收起
+            routerLists:[], //权限列表
         }
     },
     mutations:{
@@ -21,6 +22,9 @@ const store = new createStore({
         changecollapse(state,payload){
             state.collapse = payload
         },
+        changeRouterList(state,payload){
+            state.routerLists=payload
+        }
     },
     actions:{
         async getRoleListAsync({commit},payload){

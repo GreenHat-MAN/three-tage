@@ -14,7 +14,7 @@ import "@/styles/index.scss"
 import store from '@/store'
 
 // 全局混入
-import {GolbalMixins} from '@/utils/mixins'
+import { GolbalMixins } from '@/utils/mixins'
 
 // 配置路由
 import router from '@/router'
@@ -23,10 +23,11 @@ import router from '@/router'
 import Test from '@/components/Test.vue'
 
 
+
 app
 .use(ElementPlus, { size: 'small', zIndex: 3000 })
-.use(router)
 .use(store) // 将 store 实例作为插件安装
+.use(router)
 .mixin(GolbalMixins)
-.component("Test",Test)
+.component("Test", Test)
 .mount('#app')
