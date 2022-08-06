@@ -14,10 +14,16 @@ export const Ajax = {
 
     userAll:(data)=>post("/api/getAll",data), //获取用户全部信息
 
+    getuser:(data)=>post('api/getUser',data), //获取整个数据库用户信息
+
     updateAll:(data)=>post("/api/updateInfo",data), //修改用户信息
 
     getRole:(data)=>post("/api/getrole",data), //获取角色权限信息
 
     getImgs:(data)=>post("/api/uploads",data),   //上传用户头像
+
+    delAll:(data)=>post("api/deleteInfo",data), //删除方法
+
+    updatePlus:(data)=>post("api/updatePlus",data), //修改方法
 
 }
