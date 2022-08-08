@@ -26,4 +26,24 @@ export const Ajax = {
 
     updatePlus:(data)=>post("api/updatePlus",data), //修改方法
 
+    addAuition:(data)=>post("/api/addAudition",data), //添加面试题
+
+    searchAuition:(data)=>post("/api/searchAudition",data), //查询面试题
+
+
+    // 学科
+    addxueke:(data)=>post("/api/addxueke",data),
+    updatexueke:(data)=>post("/api/updatexueke",data),
+    removexueke:(data)=>post("/api/removexueke",data),
+    findxueke:(data)=>post("/api/findxueke",data),
+
+    // 班级 
+    addbanji:(data)=>post("/api/addbanji",data),
+
+
+
+    // 通知
+    addtongzhi:(data)=>post("/api/public",data), //添加公告记录
+
+    sercherpublic:(data)=>post("/api/serPub",data), //查询通知
 }

@@ -21,7 +21,6 @@ const routes = [
     ...LoginRouter,
     ...errPageRouter,
     ...mainRouter,
-   
 ]
 
 
@@ -50,23 +49,13 @@ const getRouter = (arr, role) => {
 router.beforeEach(async (to, from, next) => {
     console.log(to);
     const store = useStore
-    // to and from are both route objects. must call `next`.
-    // console.log(store);
     if (to.path == '/login') {
-        // console.log('8888');
-        // next({ path: '/regist' });
         next();
     } else {
-        // console.log(Boolean(store.state.routerLists));
-        // console.log(Boolean(store.state.routerLists.length>0));
         if (!(store.state.routerLists && store.state.routerLists.length > 0)) {
-            // console.log('123');
             store.dispatch('getRoleListAsync')
             let res = await Ajax.userAll()
             store.commit('changeRouterList', getRouter(routerList, res.result[0].role))
-            // console.log('123');
-            // 动态路由配置
-
             router.addRoute({
                 path: '/main',
                 name: 'main',
@@ -79,15 +68,12 @@ router.beforeEach(async (to, from, next) => {
                     redirect: { name: 'notfound' },
                 }
             )
-            // console.log(router.getRoutes());
-            // debugger
             console.log({ ...to, replace: true });
             next({ ...to, replace: true })
         } else {
             next()
         }
     }
-
 })
 
 

@@ -22,7 +22,7 @@ export const routerList = [
         path: '/main/ann',
         name: 'ann',
         redirect: '/main/ann/annlist',
-        text: '公告中心',
+        text: '班级管理',
         role: 0,
         icon: markRaw(Document),
         children: [
@@ -30,7 +30,7 @@ export const routerList = [
                 path: '/main/ann/annlist',
                 name: 'annlist',
                 component: () => import('../views/annManger/annlist.vue'),
-                text: '公告列表',
+                text: '班级管理',
                 role: 0,
                 icon: markRaw(Document)
             },
@@ -38,7 +38,7 @@ export const routerList = [
                 path: '/main/ann/annasyncsis',
                 name: 'annasyncsis',
                 component: () => import('../views/annManger/annasyncsis.vue'),
-                text: '公告分析',
+                text: '学科管理',
                 role: 1,
                 icon: markRaw(Document)
             },
@@ -64,7 +64,7 @@ export const routerList = [
                 path: '/main/advise/adviseasync',
                 name: 'adviseasync',
                 component: () => import('../views/adviseManger/adviseasync.vue'),
-                text: '公告分析',
+                text: '建议分析',
                 role: 1,
                 icon: markRaw(Headset)
             },
@@ -118,6 +118,66 @@ export const routerList = [
                 component: () => import('../views/rootManger/rootChange.vue'),
                 text: '权限更改',
                 role: 5,
+                icon: markRaw(Operation)
+            },
+        ]
+    },
+    {
+        path: '/main/audition',
+        name: 'audition',
+        redirect: '/main/audition/audsquare',
+        text: '面试中心',
+        role: 0,
+        icon: markRaw(Operation),
+        children: [
+            {
+                path: '/main/audition/audsquare',
+                name: 'audsquare',
+                component: () => import('../views/audition/audsquare.vue'),
+                text: '面试广场',
+                role: 0,
+                icon: markRaw(Operation)
+            },
+            {
+                path: '/main/audition/addaudition',
+                name: 'addaudition',
+                component: () => import('../views/audition/addaudition.vue'),
+                text: '发布面试题',
+                role: 0,
+                icon: markRaw(Operation)
+            },
+            {
+                path: '/main/audition/myaud',
+                name: 'myaud',
+                component: () => import('../views/audition/myaud.vue'),
+                text: '我发布的面试题',
+                role: 0,
+                icon: markRaw(Operation)
+            },
+        ]
+    },
+    {
+        path: '/main/publics',
+        name: 'publics',
+        redirect: '/main/publics/publicslist',
+        text: '公告管理',
+        role: 0,
+        icon: markRaw(Operation),
+        children: [
+            {
+                path: '/main/publics/publicslist',
+                name: 'publicslist',
+                component: () => import('../views/publics/publicslist.vue'),
+                text: '公告列表',
+                role: 0,
+                icon: markRaw(Operation)
+            },
+            {
+                path: '/main/publics/addpublics',
+                name: 'addpublics',
+                component: () => import('../views/publics/addpublics.vue'),
+                text: '新增公告',
+                role: 3,
                 icon: markRaw(Operation)
             },
         ]

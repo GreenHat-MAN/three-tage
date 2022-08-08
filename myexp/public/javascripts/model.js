@@ -43,6 +43,15 @@ const stuScore=new Schema({
 });
 
 
+// 定义面试题集合
+const audInfo=new Schema({
+    subject:String,
+    content:String,
+    stuName:String,
+    releaseTime:Date,
+});
+
+
 // 定义角色权限信息集合
 const stuRole=new Schema({
     text:String,
@@ -68,6 +77,28 @@ const MyMoive = new Schema({
 })
 
 
+const MyXueke = new Schema({
+    name:String,
+    id:Number,
+    value:String,
+})
+
+const MyBanji = new Schema({
+    xueke:String,
+    year:Number,
+    num:Number,
+    name:String,   // 武汉HTML5JY2206
+    value:String,  // wh-html5-2206
+})
+
+const tongzhi = new Schema({
+    name:String,
+    region:String,
+    desc:String,
+    time:String,
+})
+
+
 // 暴露模块信息
 exports.stuInfoModel=mongoose.model('stuInfos',stuInfo);//表明+Schema模块名
 
@@ -76,3 +107,11 @@ exports.stuScoreModel=mongoose.model('stuScores',stuScore);
 exports.MyMoiveModel=mongoose.model('movies',MyMoive);
 
 exports.roleInfoModel=mongoose.model('roles',stuRole);
+
+exports.audInfoModel=mongoose.model('audInfos',audInfo);
+
+exports.MyXuekeModel = mongoose.model('xuekes',MyXueke)
+
+exports.MyBanjiModel = mongoose.model('banjis',MyBanji)
+
+exports.TongzhiModel = mongoose.model('tongzhis',tongzhi)
