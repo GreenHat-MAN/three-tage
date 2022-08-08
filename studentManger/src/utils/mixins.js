@@ -1,5 +1,5 @@
 import { mapMutations, mapState } from "vuex"
-
+import {baseURL} from '../api/request'
 
 
 // 全局的混入 mixins 
@@ -9,7 +9,8 @@ export const GolbalMixins = {
     },
     data(){
         return {
-            hello:"wh2206-yyds"
+            hello:"wh2206-yyds",
+            baseURL
         }
     },
     methods: {

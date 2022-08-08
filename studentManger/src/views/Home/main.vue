@@ -58,6 +58,9 @@ const getUserInfo = async () => {
     })
 
     store.commit('changeUserInfo', res.result)
+    if(localStorage.getItem("formRouteName")=="login"){
+        router.push({name:"guide"})
+    }
 }
 
 // 获取全部角色信息

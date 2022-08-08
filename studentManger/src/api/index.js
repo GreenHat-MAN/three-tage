@@ -30,6 +30,8 @@ export const Ajax = {
 
     searchAuition:(data)=>post("/api/searchAudition",data), //查询面试题
 
+    uploadfiles:(data)=>post("/api/uploads",data), //上传图片
+
 
     // 学科
     addxueke:(data)=>post("/api/addxueke",data),

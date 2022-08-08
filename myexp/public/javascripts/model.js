@@ -95,7 +95,8 @@ const tongzhi = new Schema({
     name:String,
     region:String,
     desc:String,
-    time:String,
+    time:Date,
+    image:Array
 })
 
 
