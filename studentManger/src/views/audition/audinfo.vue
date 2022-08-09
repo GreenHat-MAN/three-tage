@@ -13,7 +13,7 @@
             <el-form :model="form" class="table">
 
                 <el-form-item class="btn">
-                    <el-input v-model="form.desc" type="textarea" />
+                    <el-input v-model="form.content" type="textarea" />
 
                 </el-form-item>
                 <div class="btn">
@@ -22,7 +22,12 @@
             </el-form>
 
             <div class="boxs">
-                评论内容
+                <div v-for="(l,i) in disList" :key="i">
+                    <div class="disInfo">
+                        <p>评论内容:{{l.content}}</p>
+                        <span>该评论由我们热心的{{l.name}}发表于{{l.time}}</span>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -31,10 +36,46 @@
 </template>
 
 <script setup>
-import { inject, ref } from 'vue'
+import { inject, ref, toRaw,onMounted,watch } from 'vue'
+import { useStore } from 'vuex';
+import { Ajax } from '../../api';
+import { ElButton,ElMessage } from 'element-plus'
 
 const infolist = inject('list')
+const id = inject('id')
 const form = ref({})
+const store = useStore()
+const disList = ref([])
+const onSubmit = async () => {
+    let name = toRaw(store.state.userInfo)[0].stuName
+    form.value = {
+        ...form.value,
+        titleId: id.value,
+        name: name,
+        time: new Date()
+    }
+    let data = await Ajax.adddis(form.value)
+    if (data.code == 200) {
+        form.value={}
+        getDis()
+    }
+}
+
+// 查询当前评论内容
+const getDis = async ()=>{
+    let data = await Ajax.finddis({titleId: id.value,})
+    // console.log(data);
+    disList.value=data.result
+}
+
+onMounted(() => {
+    getDis()
+})
+
+watch(id, (newValue, oldValue) =>{
+    console.log('watch已触发',newValue);
+    getDis()
+})
 
 </script>
 
@@ -77,14 +118,24 @@ const form = ref({})
 
     .table {
         background-color: white;
-        .btn{
+
+        .btn {
             width: 100%;
             text-align: right;
         }
     }
 }
-.boxs{
+
+.boxs {
     width: 100%;
     min-height: 200px;
+    padding: 20px;
+}
+.disInfo{
+    width: 100%;
+    min-height: 50px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: burlywood;
 }
 </style>

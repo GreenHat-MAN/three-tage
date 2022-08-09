@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();   // express 的路由模块 
 var { createToken, checkToken } = require('../utils/token')
-var { stuInfoModel, roleInfoModel, audInfoModel, MyXuekeModel, MyBanjiModel, TongzhiModel } = require("../public/javascripts/model")
+var { stuInfoModel, roleInfoModel, audInfoModel, MyXuekeModel, MyBanjiModel, TongzhiModel, DiscussModel } = require("../public/javascripts/model")
 var { FindOneDataFromTable, FindOneDataFromTables, FindManyDataFromTable, InsertManyFromTable, RemoveFromTable, UpdateDataFromTable } = require('../utils')
 var multer = require('multer')
 var path = require('path')
@@ -418,6 +418,112 @@ router.all('/addbanji', (req, res) => {
 })
 
 
+// 查询班级
+router.all("/findclass", (req, res) => {
+    var body = req.body;
+    var { keyword, xueke } = body;
+    var query = {}
+    if (keyword && xueke) {
+        query = {
+            $or: [
+                {
+                    name: new RegExp(keyword),
+                },
+                {
+                    value: new RegExp(keyword),
+                }
+            ],
+            xueke: xueke
+        }
+    } else if (xueke) {
+        query = {
+            xueke: xueke
+        }
+    } else if (keyword) {
+        query = {
+            $or: [
+                {
+                    name: new RegExp(keyword),
+                },
+                {
+                    value: new RegExp(keyword),
+                }
+            ],
+        }
+    }
+    checkToken(req, res, ({ stuName }) => {
+        FindManyDataFromTable({
+            model: MyBanjiModel,
+            query: query,
+            res,
+        })
+    })
+})
+
+
+// 删除班级
+router.all("/removeclass", (req, res) => {
+    checkToken(req, res, ({ stuName }) => {
+        RemoveFromTable({
+            model: MyBanjiModel,
+            query: req.body,  // _id 
+            res,
+        })
+    })
+})
+
+// 修改班级 
+router.all("/updateclass", (req, res) => {
+    var body = req.body
+    var { year, num, xueke } = body
+    var num = num < 10 ? '0' + num : num;
+    checkToken(req, res, ({ stuName }) => {
+        FindOneDataFromTables({
+            model: MyXuekeModel,
+            query: {
+                value: body.xueke
+            },
+            res,
+            callback(result) {
+                // result 学科信息
+                var name = "武汉" + result.name + "JY" + year.toString().slice(2, 4) + num;
+                var value = "wh-" + result.value + "-" + year.toString().slice(2, 4) + num;
+                body.name = name;
+                body.value = value;
+                FindOneDataFromTables({
+                    model: MyBanjiModel,
+                    query: {
+                        year, num, xueke
+                    },
+                    res,
+                    callback(data) {
+                        if (data) {
+                            res.json({
+                                code: 401,
+                                msg: "班级已存在",
+                                result
+                            })
+                        } else {
+                            UpdateDataFromTable({
+                                model: MyBanjiModel,
+                                query: {
+                                    _id: body._id,
+                                },
+                                data: body,
+                                res,
+                            })
+                        }
+                    }
+                })
+
+            }
+        })
+    })
+})
+
+
+
+
 // 添加通知
 router.all('/public', (req, res) => {
     let body = req.body
@@ -427,7 +533,7 @@ router.all('/public', (req, res) => {
             model: TongzhiModel,
             query: {
                 $or: [
-                    { name: body.name }
+                    { content: body.content }
                 ]
             },
             res,
@@ -451,11 +557,55 @@ router.all('/public', (req, res) => {
 })
 
 // 查询通知
-router.all('/serPub',(req,res)=>{
-    checkToken(req,res,({stuName})=>{
+router.all('/serPub', (req, res) => {
+    checkToken(req, res, ({ stuName }) => {
         FindOneDataFromTable({
-            model:TongzhiModel,
-            query:{},
+            model: TongzhiModel,
+            query: {},
+            res,
+        })
+    })
+})
+
+// 添加评论表
+router.all('/addDis', (req, res) => {
+    let body=req.body
+    checkToken(req, res, ({ stuName }) => {
+        FindOneDataFromTables({
+            model:DiscussModel,
+            query:{
+                $or: [
+                    { content: body.content },
+                ]
+            },
+            res,
+            callback(data) {
+                if (data) {
+                    res.json({
+                        code: 401,
+                        msg: "不能发送重复的评论",
+                        result
+                    })
+                } else {
+                    InsertManyFromTable({
+                        model: DiscussModel,
+                        data: body,
+                        res,
+                    })
+                }
+            }
+        })
+    })
+})
+
+// 查询评论表
+router.all('/findDis',(req,res)=>{
+    let body=req.body
+    // console.log(body);
+    checkToken(req, res, ({ stuName }) => {
+        FindOneDataFromTable({
+            model: DiscussModel,
+            query: {titleId:body.titleId},
             res,
         })
     })

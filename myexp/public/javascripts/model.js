@@ -99,6 +99,14 @@ const tongzhi = new Schema({
     image:Array
 })
 
+// 评论表
+const discuss = new Schema({
+    name:String,
+    content:String,
+    time:Date,
+    titleId:String
+})
+
 
 // 暴露模块信息
 exports.stuInfoModel=mongoose.model('stuInfos',stuInfo);//表明+Schema模块名
@@ -116,3 +124,5 @@ exports.MyXuekeModel = mongoose.model('xuekes',MyXueke)
 exports.MyBanjiModel = mongoose.model('banjis',MyBanji)
 
 exports.TongzhiModel = mongoose.model('tongzhis',tongzhi)
+
+exports.DiscussModel = mongoose.model('discusss',discuss)

@@ -41,7 +41,14 @@ export const Ajax = {
 
     // 班级 
     addbanji:(data)=>post("/api/addbanji",data),
+    findclass:(data)=>post("/api/findclass",data),
+    removeclass:(data)=>post("/api/removeclass",data),
+    updateclass:(data)=>post("/api/updateclass",data),
 
+
+    // 评论
+    adddis:(data)=>post("/api/addDis",data), //添加评论
+    finddis:(data)=>post("/api/findDis",data), //查询全部评论
 
 
     // 通知

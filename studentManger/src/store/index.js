@@ -48,6 +48,10 @@ const store = new createStore({
             let res = await Ajax.findxueke(payload)
             commit("getXuekeList", res.result)
         },
+        async getClassListAsync({commit},payload){
+            let res = await Ajax.findclass(payload)
+            commit("getClassList",res.result)
+        },
     }
 })
 
