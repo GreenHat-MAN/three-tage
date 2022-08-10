@@ -107,6 +107,13 @@ const discuss = new Schema({
     titleId:String
 })
 
+// 意见表
+const Advise = new Schema({
+    name:String,
+    advise:String,
+    time:Date,
+})
+
 
 // 暴露模块信息
 exports.stuInfoModel=mongoose.model('stuInfos',stuInfo);//表明+Schema模块名
@@ -126,3 +133,5 @@ exports.MyBanjiModel = mongoose.model('banjis',MyBanji)
 exports.TongzhiModel = mongoose.model('tongzhis',tongzhi)
 
 exports.DiscussModel = mongoose.model('discusss',discuss)
+
+exports.AdviseModel = mongoose.model('advises',Advise)

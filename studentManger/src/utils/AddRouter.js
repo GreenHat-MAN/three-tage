@@ -64,7 +64,7 @@ export const routerList = [
                 path: '/main/advise/adviseasync',
                 name: 'adviseasync',
                 component: () => import('../views/adviseManger/adviseasync.vue'),
-                text: '建议分析',
+                text: '提提意见',
                 role: 1,
                 icon: markRaw(Headset)
             },

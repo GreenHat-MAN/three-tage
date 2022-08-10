@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();   // express 的路由模块 
 var { createToken, checkToken } = require('../utils/token')
-var { stuInfoModel, roleInfoModel, audInfoModel, MyXuekeModel, MyBanjiModel, TongzhiModel, DiscussModel } = require("../public/javascripts/model")
+var { stuInfoModel, roleInfoModel, audInfoModel, MyXuekeModel, MyBanjiModel, TongzhiModel, DiscussModel,AdviseModel } = require("../public/javascripts/model")
 var { FindOneDataFromTable, FindOneDataFromTables, FindManyDataFromTable, InsertManyFromTable, RemoveFromTable, UpdateDataFromTable } = require('../utils')
 var multer = require('multer')
 var path = require('path')
@@ -606,6 +606,52 @@ router.all('/findDis',(req,res)=>{
         FindOneDataFromTable({
             model: DiscussModel,
             query: {titleId:body.titleId},
+            res,
+        })
+    })
+})
+
+
+// 添加意见
+router.all('/addvise',(req,res)=>{
+    let body = req.body
+    checkToken(req,res,({stuName})=>{
+        FindOneDataFromTables({
+            model:AdviseModel,
+            query:{
+                $or: [
+                    { advise: body.advise },
+                ]
+            },
+            res,
+            callback(data) {
+                if (data) {
+                    res.json({
+                        code: 401,
+                        msg: "不能重复发布意见",
+                        result
+                    })
+                } else {
+                    InsertManyFromTable({
+                        model: AdviseModel,
+                        data: body,
+                        res,
+                    })
+                }
+            }
+        })
+    })
+})
+
+
+// 查询意见表
+router.all('/findAddvise',(req,res)=>{
+    let body=req.body
+    // console.log(body);
+    checkToken(req, res, ({ stuName }) => {
+        FindOneDataFromTable({
+            model: AdviseModel,
+            query: {},
             res,
         })
     })

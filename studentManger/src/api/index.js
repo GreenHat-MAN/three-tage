@@ -55,4 +55,9 @@ export const Ajax = {
     addtongzhi:(data)=>post("/api/public",data), //添加公告记录
 
     sercherpublic:(data)=>post("/api/serPub",data), //查询通知
+
+
+    // 意见
+    addAdvise:(data)=>post("/api/addvise",data), //添加意见
+    findAdvise:(data)=>post("/api/findAddvise",data), //查询意见
 }

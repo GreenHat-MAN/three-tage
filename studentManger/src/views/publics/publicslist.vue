@@ -56,15 +56,15 @@
 
 
         <!-- 弹出框 -->
-        <el-dialog v-model="dialogVisible" title="通知" width="30%" >
+        <el-dialog v-model="dialogVisible" title="通知" width="30%">
             <span class="tan">
-                <h1>{{list.name}}</h1>
-                <p>{{list.desc}}</p>
+                <h1>{{ list.name }}</h1>
+                <p>{{ list.desc }}</p>
                 <div class="msg">
-                    <span v-if="list.image.length>0">
+                    <span v-if="list.image">
                         <img :src="list.image[0].replace(/public/, baseURL + 'static')">
                     </span>
-                    {{list.region}}于{{list.time}}发布
+                    {{ list.region }}于{{ list.time }}发布
                 </div>
             </span>
             <template #footer>
@@ -101,15 +101,15 @@ const getpublicList = async () => {
     console.log(tableData.value);
 }
 
-const close = ()=>{
-    list.value=[]
+const close = () => {
+    list.value = []
     console.log(123);
-    dialogVisible.value=false
+    dialogVisible.value = false
 }
 
 const submitForm = (index) => {
-    dialogVisible.value=true
-    list.value=tableData.value[index]
+    dialogVisible.value = true
+    list.value = tableData.value[index]
 }
 
 
@@ -128,22 +128,26 @@ onMounted(() => {
 .main {
     margin-top: 50px;
 }
-.tan{
-    h1{
+
+.tan {
+    h1 {
         font-size: 20px;
         font-weight: bold;
         color: black;
     }
-    p{
+
+    p {
         font-size: 12px;
         color: cadetblue;
         min-height: 100px;
 
     }
-    .msg{
+
+    .msg {
         text-align: right;
         font-size: 10px;
-        img{
+
+        img {
             width: 20px;
             height: 20px;
             display: inline;
