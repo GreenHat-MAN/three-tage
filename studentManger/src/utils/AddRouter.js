@@ -182,5 +182,57 @@ export const routerList = [
             },
         ]
     },
+    {
+        path: '/main/attend',
+        name: 'attend',
+        redirect: '/main/attend/attendlist',
+        text: '考勤管理',
+        role: 0,
+        icon: markRaw(Operation),
+        children: [
+            {
+                path: '/main/attend/attendlist',
+                name: 'attendlist',
+                component: () => import('../views/attend/attendlist.vue'),
+                text: '考勤记录管理',
+                role: 5,
+                icon: markRaw(Operation)
+            },
+            {
+                path: '/main/attend/attendinfo',
+                name: 'attendinfo',
+                component: () => import('../views/attend/attendinfo.vue'),
+                text: '考勤查询',
+                role: 0,
+                icon: markRaw(Operation)
+            },
+        ]
+    },
+    {
+        path: '/main/score',
+        name: 'score',
+        redirect: '/main/score/scorelist',
+        text: '成绩管理',
+        role: 0,
+        icon: markRaw(Operation),
+        children: [
+            {
+                path: '/main/score/scorelist',
+                name: 'scorelist',
+                component: () => import('../views/score/scorelist.vue'),
+                text: '我的成绩表',
+                role: 0,
+                icon: markRaw(Operation)
+            },
+            {
+                path: '/main/score/upscore',
+                name: 'upscore',
+                component: () => import('../views/score/upscore.vue'),
+                text: '成绩上传',
+                role: 3,
+                icon: markRaw(Operation)
+            },
+        ]
+    },
     
 ]

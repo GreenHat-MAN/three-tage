@@ -37,6 +37,9 @@ const stuInfo=new Schema({
 // 定义学生成绩集合
 const stuScore=new Schema({
     stuName:String,
+    english:String,
+    math:String,
+    chinese:String,
     stuScore:Number,
     stuRank:Number,
     testDay:Date

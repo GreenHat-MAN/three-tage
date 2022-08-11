@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();   // express 的路由模块 
 var { createToken, checkToken } = require('../utils/token')
-var { stuInfoModel, roleInfoModel, audInfoModel, MyXuekeModel, MyBanjiModel, TongzhiModel, DiscussModel,AdviseModel } = require("../public/javascripts/model")
+var { stuInfoModel, roleInfoModel, audInfoModel, MyXuekeModel, MyBanjiModel, TongzhiModel, DiscussModel, AdviseModel, stuScoreModel } = require("../public/javascripts/model")
 var { FindOneDataFromTable, FindOneDataFromTables, FindManyDataFromTable, InsertManyFromTable, RemoveFromTable, UpdateDataFromTable } = require('../utils')
 var multer = require('multer')
 var path = require('path')
@@ -569,11 +569,11 @@ router.all('/serPub', (req, res) => {
 
 // 添加评论表
 router.all('/addDis', (req, res) => {
-    let body=req.body
+    let body = req.body
     checkToken(req, res, ({ stuName }) => {
         FindOneDataFromTables({
-            model:DiscussModel,
-            query:{
+            model: DiscussModel,
+            query: {
                 $or: [
                     { content: body.content },
                 ]
@@ -599,13 +599,13 @@ router.all('/addDis', (req, res) => {
 })
 
 // 查询评论表
-router.all('/findDis',(req,res)=>{
-    let body=req.body
+router.all('/findDis', (req, res) => {
+    let body = req.body
     // console.log(body);
     checkToken(req, res, ({ stuName }) => {
         FindOneDataFromTable({
             model: DiscussModel,
-            query: {titleId:body.titleId},
+            query: { titleId: body.titleId },
             res,
         })
     })
@@ -613,12 +613,12 @@ router.all('/findDis',(req,res)=>{
 
 
 // 添加意见
-router.all('/addvise',(req,res)=>{
+router.all('/addvise', (req, res) => {
     let body = req.body
-    checkToken(req,res,({stuName})=>{
+    checkToken(req, res, ({ stuName }) => {
         FindOneDataFromTables({
-            model:AdviseModel,
-            query:{
+            model: AdviseModel,
+            query: {
                 $or: [
                     { advise: body.advise },
                 ]
@@ -645,8 +645,8 @@ router.all('/addvise',(req,res)=>{
 
 
 // 查询意见表
-router.all('/findAddvise',(req,res)=>{
-    let body=req.body
+router.all('/findAddvise', (req, res) => {
+    let body = req.body
     // console.log(body);
     checkToken(req, res, ({ stuName }) => {
         FindOneDataFromTable({
@@ -656,6 +656,48 @@ router.all('/findAddvise',(req,res)=>{
         })
     })
 })
+
+
+// 成绩管理
+// 添加成绩
+router.all('/addScore', (req, res) => {
+    let body = req.body
+    checkToken(req, res, ({ stuName }) => {
+        InsertManyFromTable({
+            model: DiscussModel,
+            data: body,
+            res,
+        })
+    })
+})
+
+
+// 查询单人成绩
+router.all('/findScore',(req,res)=>{
+    let body = req.body
+    checkToken(req, res, ({ stuName }) => {
+        FindOneDataFromTable({
+            model: stuScoreModel,
+            query: { stuName: body.stuName },
+            res,
+        })
+    })
+})
+
+
+// 查询多人成绩
+router.all('/findManyScore',(req,res)=>{
+    let body = req.body
+    checkToken(req, res, ({ stuName }) => {
+        FindOneDataFromTable({
+            model: stuScoreModel,
+            query: {},
+            res,
+        })
+    })
+})
+
+
 
 module.exports = router
 

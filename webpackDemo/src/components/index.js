@@ -3,6 +3,7 @@ import Community from "./community.jsx";
 import Event from "./event.jsx";
 import Footer from "./footer.jsx";
 import Heard from "./heard.jsx";
+import MyContent from "./myContent.jsx";
 
 
 export default class CapIndex extends React.Component{
@@ -14,7 +15,8 @@ export default class CapIndex extends React.Component{
                 {/* <Event></Event> */}
                 <div>
                     {/* <Community></Community> */}
-                    <Borther></Borther>
+                    {/* <Borther></Borther> */}
+                    <MyContent></MyContent>
                 </div>
                 <Footer></Footer>
             </div>
