@@ -5,33 +5,43 @@
             <el-row class="mb-4">
                 <el-button type="primary" size="large" @click="addScore">上传成绩</el-button>
             </el-row>
-            <el-table :data="tableData" stripe border :default-sort="{ prop: 'date', order: 'descending' }"
+            <el-table :data="filterTableData" stripe border :default-sort="{ prop: 'date', order: 'descending' }"
                 style="width: 100%">
-                <el-table-column prop="date" label="Date" sortable width="180" />
-                <el-table-column prop="name" label="Name" width="180" />
-                <el-table-column prop="date" label="Date" sortable width="180" />
-                <el-table-column prop="name" label="Name" width="180" />
-                <el-table-column prop="date" label="Date" sortable width="180" />
-                <el-table-column prop="address" label="Address" :formatter="formatter" />
+                <el-table-column prop="testDay" label="上传日期" sortable width="180" />
+                <el-table-column prop="stuName" label="学生姓名" width="180" />
+                <el-table-column prop="chinese" label="语文成绩" sortable />
+                <el-table-column prop="math" label="数学成绩" sortable width="180" />
+                <el-table-column prop="english" label="英语成绩" sortable />
+                <el-table-column prop="stuScore" label="总成绩" sortable />
+                <el-table-column align="right">
+                    <template #header>
+                        <el-input v-model="search" size="small" placeholder="Type to search" />
+                    </template>
+                    <template #default="scope">
+                        <el-button size="small" @click="handleEdit(scope.$index, scope.row)">Edit</el-button>
+                        <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">Delete
+                        </el-button>
+                    </template>
+                </el-table-column>
             </el-table>
         </div>
 
 
         <!-- 弹出框 -->
-        <el-dialog v-model="dialogVisible" title="Tips" width="30%" ref="formRef">
+        <el-dialog v-model="dialogVisible" title="上传成绩" width="30%">
             <span>
                 <el-form :label-position="labelPosition" label-width="100px" :model="model" style="max-width: 460px"
-                    :rules="rules">
-                    <el-form-item label="学生姓名" props="stuName">
+                    :rules="rules" ref="formRef">
+                    <el-form-item label="学生姓名" prop="stuName">
                         <el-input v-model="model.stuName" />
                     </el-form-item>
-                    <el-form-item label="语文成绩" props="chinese">
+                    <el-form-item label="语文成绩" prop="chinese">
                         <el-input v-model="model.chinese" />
                     </el-form-item>
-                    <el-form-item label="数学成绩" props="math">
+                    <el-form-item label="数学成绩" prop="math">
                         <el-input v-model="model.math" />
                     </el-form-item>
-                    <el-form-item label="英语成绩" props="english">
+                    <el-form-item label="英语成绩" prop="english">
                         <el-input v-model="model.english" />
                     </el-form-item>
                 </el-form>
@@ -48,13 +58,12 @@
 </template>
 
 <script setup>
-import { ElMessage, ElMessageBox } from 'element-plus'
-import { ref, reactive } from 'vue'
+import { ElMessage } from 'element-plus'
+import { ref, reactive, onMounted,computed } from 'vue'
+import { Ajax } from '../../api';
 import { reg } from '../../utils/validate';
-const formatter = (row, column) => {
-    return row.address
-}
 const model = ref({})
+const search = ref('')
 const formRef = ref()
 const dialogVisible = ref(false)
 const labelPosition = ref('left')
@@ -80,8 +89,27 @@ const addScore = () => {
 }
 
 const addPlus = () => {
-    console.log(model.value);
-    console.log(formRef.value);
+    formRef.value.validate(async valid => {
+        if (valid) {
+            let data = await Ajax.addScore(model.value)
+            if (data.code == 200) {
+                model.value = {}
+                dialogVisible.value = false
+                getAllScore()
+            } else {
+                ElMessage({
+                    type: 'info',
+                    message: '未知错误',
+                })
+            }
+        } else {
+            ElMessage({
+                type: 'info',
+                message: '请输入完整的信息',
+            })
+        }
+    })
+
 }
 
 const close = () => {
@@ -89,29 +117,41 @@ const close = () => {
     dialogVisible.value = false
 }
 
-const tableData = [
-    {
-        date: '2016-05-03',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-    },
-    {
-        date: '2016-05-02',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-    },
-    {
-        date: '2016-05-04',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-    },
-    {
-        date: '2016-05-01',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles',
-    },
-]
+const tableData = ref([])
 
+// 删除
+const handleDelete = (index, row) => {
+    tableData.value.splice(index, 1)
+    ElMessage({
+        type: 'success',
+        message: 'ok',
+    })
+}
+
+// 搜索
+const filterTableData = computed(() =>
+    tableData.value.filter(
+        (data) =>
+            !search.value ||
+            data.chinese.toLowerCase().includes(search.value.toLowerCase()) ||
+            data.math.toLowerCase().includes(search.value.toLowerCase()) ||
+            data.english.toLowerCase().includes(search.value.toLowerCase()) ||
+            data.stuName.toLowerCase().includes(search.value.toLowerCase())
+    )
+)
+
+
+// 查询全部学生信息
+const getAllScore = async () => {
+    let data = await Ajax.searchScore()
+    tableData.value = data.result
+    // console.log(tableData.value);
+}
+
+
+onMounted(() => {
+    getAllScore()
+})
 </script>
 
 <style lang="scss" scoped>

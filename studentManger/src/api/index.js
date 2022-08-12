@@ -60,4 +60,10 @@ export const Ajax = {
     // 意见
     addAdvise:(data)=>post("/api/addvise",data), //添加意见
     findAdvise:(data)=>post("/api/findAddvise",data), //查询意见
+
+
+    // 成绩
+    addScore:(data)=>post("/api/addScore",data), //添加学生成绩
+    searchScore:(data)=>post("/api/findManyScore",data), //查询学生全部成绩
+    findScore:(data)=>post("/api/findScore",data), //查询单个学生成绩
 }

@@ -1,5 +1,5 @@
 <template>
     <div>
-        权限情况分析
+        权限更改
     </div>
 </template>

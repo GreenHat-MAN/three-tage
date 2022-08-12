@@ -663,8 +663,10 @@ router.all('/findAddvise', (req, res) => {
 router.all('/addScore', (req, res) => {
     let body = req.body
     checkToken(req, res, ({ stuName }) => {
+        body.testDay=new Date()
+        body.stuScore=Number(body.math)+Number(body.chinese)+Number(body.english)
         InsertManyFromTable({
-            model: DiscussModel,
+            model: stuScoreModel,
             data: body,
             res,
         })
