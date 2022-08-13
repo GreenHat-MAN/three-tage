@@ -3,6 +3,8 @@ import './style.css'
 import App from './App.vue'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import moment from 'moment'
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
 const app = createApp(App)
 // createApp  返回一个提供应用上下文的应用实例   链式调用
 
@@ -24,7 +26,8 @@ import Test from '@/components/Test.vue'
 
 
 app
-.use(ElementPlus, { size: 'small', zIndex: 3000 })
+.use(moment)
+.use(ElementPlus, { size: 'small', zIndex: 3000,locale: zhCn, })
 .use(store) // 将 store 实例作为插件安装
 .use(router)
 .mixin(GolbalMixins)

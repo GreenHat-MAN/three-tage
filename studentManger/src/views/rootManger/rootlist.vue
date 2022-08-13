@@ -22,7 +22,6 @@ const userRole = ref([])
 const store = useStore()
 const getUserInfo = async () => {
     let res = await Ajax.getuser()
-    store.commit('changeUserInfo', res.result)
     userRole.value = res.result
 }
 

@@ -27,31 +27,31 @@ const stuInfo=new Schema({
     stuPassword:String,
     stuEmail:String,
     stuPhone:String,
-    dbPass:String,
+    dbPass:String, //密码
     role:Number,  // 身份角色
-    avatar:String,   
+    avatar:String,   //头像
     time:Date 
 });
 
 
 // 定义学生成绩集合
 const stuScore=new Schema({
-    stuName:String,
-    english:String,
-    math:String,
-    chinese:String,
-    stuScore:Number,
-    stuRank:Number,
-    testDay:Date
+    stuName:String, //学生姓名
+    english:String, //英语成绩
+    math:String, //数学成绩
+    chinese:String, //语文成绩
+    stuScore:Number, //总分
+    stuRank:Number, //排名
+    testDay:Date //上传成绩的时间
 });
 
 
 // 定义面试题集合
 const audInfo=new Schema({
-    subject:String,
-    content:String,
-    stuName:String,
-    releaseTime:Date,
+    subject:String, //面试题标题
+    content:String, //面试题内容
+    stuName:String, //谁发的面试题
+    releaseTime:Date, //上传的时间
 });
 
 
@@ -95,26 +95,34 @@ const MyBanji = new Schema({
 })
 
 const tongzhi = new Schema({
-    name:String,
-    region:String,
-    desc:String,
-    time:Date,
-    image:Array
+    name:String, //谁发的通知
+    region:String, //通知标题
+    desc:String,  //通知具体内容
+    time:Date, //发通知的时间
+    image:Array //通知图片
 })
 
 // 评论表
 const discuss = new Schema({
-    name:String,
-    content:String,
-    time:Date,
-    titleId:String
+    name:String, //谁评论的
+    content:String, //评论的啥
+    time:Date, //啥时候评论的
+    titleId:String //在哪个面试题下评论的
 })
 
 // 意见表
 const Advise = new Schema({
-    name:String,
-    advise:String,
-    time:Date,
+    name:String, //谁发的意见
+    advise:String, //发的啥
+    time:Date,  //什么时候发的
+})
+
+
+// 考勤表
+const Attendance = new Schema({
+    name:String, //谁打的卡
+    cardTime:String, //打卡日期
+    cardCount:String //打卡次数
 })
 
 
@@ -138,3 +146,5 @@ exports.TongzhiModel = mongoose.model('tongzhis',tongzhi)
 exports.DiscussModel = mongoose.model('discusss',discuss)
 
 exports.AdviseModel = mongoose.model('advises',Advise)
+
+exports.AttendanceModel = mongoose.model('attendances',Attendance)

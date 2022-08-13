@@ -18,6 +18,8 @@ export const Ajax = {
 
     updateAll:(data)=>post("/api/updateInfo",data), //修改用户信息
 
+    updateRole:(data)=>post("/api/updateRole",data), //修改角色权限
+
     getRole:(data)=>post("/api/getrole",data), //获取角色权限信息
 
     getImgs:(data)=>post("/api/uploads",data),   //上传用户头像
@@ -66,4 +68,11 @@ export const Ajax = {
     addScore:(data)=>post("/api/addScore",data), //添加学生成绩
     searchScore:(data)=>post("/api/findManyScore",data), //查询学生全部成绩
     findScore:(data)=>post("/api/findScore",data), //查询单个学生成绩
+
+
+    // 考勤
+    addAttend:(data)=>post("/api/attend",data), //添加考勤记录
+    findAttend:(data)=>post("/api/allAttend",data), //查看全部考勤记录
+    searchAttend:(data)=>post("/api/myAttend",data), //查看单人考勤记录
+    upAttend:(data)=>post("/api/updAttend",data), //修改考勤记录
 }

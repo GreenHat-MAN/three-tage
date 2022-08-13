@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();   // express 的路由模块 
 var { createToken, checkToken } = require('../utils/token')
-var { stuInfoModel, roleInfoModel, audInfoModel, MyXuekeModel, MyBanjiModel, TongzhiModel, DiscussModel, AdviseModel, stuScoreModel } = require("../public/javascripts/model")
+var { stuInfoModel, roleInfoModel, audInfoModel, MyXuekeModel, MyBanjiModel, TongzhiModel, DiscussModel, AdviseModel, stuScoreModel, AttendanceModel } = require("../public/javascripts/model")
 var { FindOneDataFromTable, FindOneDataFromTables, FindManyDataFromTable, InsertManyFromTable, RemoveFromTable, UpdateDataFromTable } = require('../utils')
 var multer = require('multer')
 var path = require('path')
@@ -147,6 +147,30 @@ router.all('/updateInfo', async (req, res) => {
     })
 })
 
+
+// 修改角色权限信息
+router.all('/updateRole', async (req, res) => {
+    let data = req.body
+    console.log(data);
+    checkToken(req, res, ({ stuName }) => {
+        stuInfoModel.updateMany({ stuName: data.stuName }, { $set: data })
+            .then((result) => {
+                res.json({
+                    code: 200,
+                    msg: 'ok',
+                    result
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+                res.json({
+                    code: 500,
+                    err,
+                    msg: '服务器异常'
+                })
+            })
+    })
+})
 
 // 获取角色权限信息
 router.all('/getrole', async (req, res) => {
@@ -663,8 +687,8 @@ router.all('/findAddvise', (req, res) => {
 router.all('/addScore', (req, res) => {
     let body = req.body
     checkToken(req, res, ({ stuName }) => {
-        body.testDay=new Date()
-        body.stuScore=Number(body.math)+Number(body.chinese)+Number(body.english)
+        body.testDay = new Date()
+        body.stuScore = Number(body.math) + Number(body.chinese) + Number(body.english)
         InsertManyFromTable({
             model: stuScoreModel,
             data: body,
@@ -675,7 +699,7 @@ router.all('/addScore', (req, res) => {
 
 
 // 查询单人成绩
-router.all('/findScore',(req,res)=>{
+router.all('/findScore', (req, res) => {
     let body = req.body
     checkToken(req, res, ({ stuName }) => {
         FindOneDataFromTable({
@@ -688,12 +712,94 @@ router.all('/findScore',(req,res)=>{
 
 
 // 查询多人成绩
-router.all('/findManyScore',(req,res)=>{
+router.all('/findManyScore', (req, res) => {
     let body = req.body
     checkToken(req, res, ({ stuName }) => {
         FindOneDataFromTable({
             model: stuScoreModel,
             query: {},
+            res,
+        })
+    })
+})
+
+
+
+// 添加考勤记录
+router.all('/attend', (req, res) => {
+    let body = req.body
+    checkToken(req, res, ({ stuName }) => {
+        FindOneDataFromTables({
+            model: AttendanceModel,
+            query: {
+                $and: [
+                    { name: body.name },
+                    { cardTime: body.cardTime },
+                ]
+            },
+            res,
+            callback(data) {
+                if (data) {
+                    if (data.cardTime != body.cardTime) {
+                        UpdateDataFromTable({
+                            model: AttendanceModel,
+                            data: body,
+                            query: {
+                                name: body.name,
+                            },
+                            res,
+                        })
+                    } else {
+                        res.json({
+                            code: 401,
+                            msg: "您已经打过卡了",
+                        })
+                    }
+                } else {
+                    InsertManyFromTable({
+                        model: AttendanceModel,
+                        data: body,
+                        res,
+                    })
+                }
+            }
+        })
+    })
+})
+
+// 查询全部考勤信息
+router.all('/allAttend', (req, res) => {
+    checkToken(req, res, ({ stuName }) => {
+        FindOneDataFromTable({
+            model: AttendanceModel,
+            query: {},
+            res,
+        })
+    })
+})
+
+// 查询我的考勤信息
+router.all('/myAttend', (req, res) => {
+    let body = req.body
+    checkToken(req, res, ({ stuName }) => {
+        FindOneDataFromTable({
+            model: AttendanceModel,
+            query: { name: body.name },
+            res,
+        })
+    })
+})
+
+// 修改考勤记录
+router.all('/updAttend', (req, res) => {
+    let body = req.body
+    checkToken(req, res, ({ stuName }) => {
+        UpdateDataFromTable({
+            model: AttendanceModel,
+            data: {cardCount:body.cardCount},
+            query: {
+                name: body.name,
+            },
             res,
         })
     })
