@@ -6,7 +6,7 @@ import axios from 'axios'
 import { Toast } from 'vant'
 
 // axios配置
-export const baseURL = 'http://localhost:2206/'
+export const baseURL = 'http://h.dalaodi.top:3233/'
 export const request = axios.create({
     timeout: 60000, //超时
     // baseURL: "http://localhost:2206/", //项目的基本路径

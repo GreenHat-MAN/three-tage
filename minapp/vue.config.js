@@ -6,15 +6,15 @@ module.exports = defineConfig({
   lintOnSave: false, //去除eslint的警告
 
   devServer: {  //开发的服务器配置 
-    host: "localhost", // 0.0.0.0
-    port: 7000,
+    host: "0.0.0.0", // 0.0.0.0
+    port: 4399,
     // inline:true, 
     hot: true,  // 自动刷新页面
     open: true,  // 自动打开浏览器 
     proxy: {
       // 配置反向代理解决跨域问题
       "/api": {   // 没有公共的代理  自己设置公共路径 api 
-        target: "http://localhost:2206/",
+        target: "http://h.dalaodi.top:3233/",
         pathRewrite: {  // 人为添加公共路径的代理 需要重置为 ''
           "^/api": ""
         }
