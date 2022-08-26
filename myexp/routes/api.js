@@ -4,7 +4,7 @@
 var express = require('express');
 var router = express.Router();   // express 的路由模块 
 var { createToken, checkToken } = require('../utils/token')
-var { stuInfoModel, roleInfoModel, audInfoModel, MyXuekeModel, MyBanjiModel, TongzhiModel, DiscussModel, AdviseModel, stuScoreModel, AttendanceModel } = require("../public/javascripts/model")
+var { stuInfoModel, roleInfoModel, audInfoModel, MyXuekeModel, MyBanjiModel, TongzhiModel, DiscussModel, AdviseModel, stuScoreModel, AttendanceModel,MyMainShi } = require("../public/javascripts/model")
 var { FindOneDataFromTable, FindOneDataFromTables, FindManyDataFromTable, InsertManyFromTable, RemoveFromTable, UpdateDataFromTable } = require('../utils')
 var multer = require('multer')
 var path = require('path')
@@ -68,7 +68,7 @@ router.all("/register", async (req, res) => {
 //登录
 router.all('/login', async (req, res) => {
     let data = req.body;
-
+    console.log(data);
     let ressult = await stuInfoModel.findOne({ stuName: data.username, stuPassword: data.password }).catch((err) => {
         res.json({
             err,
@@ -98,6 +98,20 @@ router.all('/login', async (req, res) => {
         })
     }
 
+})
+
+// 找回用户密码
+router.all('/bandpass',(req,res)=>{
+    let data = req.body
+    console.log(data.phone,data.password);
+    UpdateDataFromTable({
+        model: stuInfoModel,
+        query: {
+            stuPhone: data.phone
+        },
+        data: {stuPassword:data.password},
+        res,
+    })
 })
 
 
@@ -219,7 +233,7 @@ router.all('/uploads', upload, (req, res) => {
 router.all('/deleteInfo', (req, res) => {
     checkToken(req, res, async ({ stuName }) => {
         let data = req.body
-        let result = await stuInfoModel.remove(data)
+        let result = await stuInfoModel.deleteOne(data)
         res.json({
             code: 200,
             mag: '删除成功',
@@ -298,6 +312,19 @@ router.all('/searchAudition', (req, res) => {
             model: audInfoModel,
             query: {},
             res,
+        })
+    })
+})
+
+// 查询面试题(按条件)
+router.all('/sehAudition', (req, res) => {
+    let data = req.body
+    checkToken(req, res, async ({ stuName }) => {
+        let result = await audInfoModel.findOne(data)
+        res.json({
+            code: 200,
+            mag: '查询成功',
+            result
         })
     })
 })
@@ -562,19 +589,11 @@ router.all('/public', (req, res) => {
             },
             res,
             callback(data) {
-                if (data) {
-                    res.json({
-                        code: 401,
-                        msg: "该通知已被发布过",
-                        result
-                    })
-                } else {
                     InsertManyFromTable({
                         model: TongzhiModel,
                         data: body,
                         res,
                     })
-                }
             }
         })
     })
@@ -594,6 +613,7 @@ router.all('/serPub', (req, res) => {
 // 添加评论表
 router.all('/addDis', (req, res) => {
     let body = req.body
+    console.log(body);
     checkToken(req, res, ({ stuName }) => {
         FindOneDataFromTables({
             model: DiscussModel,
@@ -676,6 +696,34 @@ router.all('/findAddvise', (req, res) => {
         FindOneDataFromTable({
             model: AdviseModel,
             query: {},
+            res,
+        })
+    })
+})
+
+
+// 删除意见
+router.all('/deladvise',(req,res)=>{
+    let data = req.body
+    checkToken(req,res, async ({stuName})=>{
+        let result = await AdviseModel.deleteOne(data)
+        res.json({
+            code: 200,
+            mag: '删除成功',
+        })
+    })
+})
+
+// 修改意见
+router.all('/updateAdvise',(req,res)=>{
+    let data = req.body
+    checkToken(req,res,({stuName})=>{
+        UpdateDataFromTable({
+            model: AdviseModel,
+            data:data,
+            query: {
+                _id: data._id,
+            },
             res,
         })
     })
@@ -796,10 +844,91 @@ router.all('/updAttend', (req, res) => {
     checkToken(req, res, ({ stuName }) => {
         UpdateDataFromTable({
             model: AttendanceModel,
-            data: {cardCount:body.cardCount},
+            data: { cardCount: body.cardCount },
             query: {
                 name: body.name,
             },
+            res,
+        })
+    })
+})
+
+
+
+// 查询班级(无token版)
+router.all("/findcls", (req, res) => {
+    var body = req.body;
+    var { keyword, xueke } = body;
+    var query = {}
+    if (keyword && xueke) {
+        query = {
+            $or: [
+                {
+                    name: new RegExp(keyword),
+                },
+                {
+                    value: new RegExp(keyword),
+                }
+            ],
+            xueke: xueke
+        }
+    } else if (xueke) {
+        query = {
+            xueke: xueke
+        }
+    } else if (keyword) {
+        query = {
+            $or: [
+                {
+                    name: new RegExp(keyword),
+                },
+                {
+                    value: new RegExp(keyword),
+                }
+            ],
+        }
+    }
+        FindManyDataFromTable({
+            model: MyBanjiModel,
+            query: query,
+            res,
+        })
+})
+
+
+// 面试
+// 添加面试题 
+router.all("/addms",(req,res)=>{
+    var body = req.body;
+    body.time = new Date()
+    checkToken(req,res,({stuName})=>{
+        InsertManyFromTable({
+            model:MyMainShi,
+            data:body,
+            res,
+        })
+    })
+})
+
+// 查询
+router.all("/findms",(req,res)=>{
+    var body = req.body;
+    checkToken(req,res,({stuName})=>{
+        FindManyDataFromTable({
+            model:MyMainShi,
+            query:req.body,
+            res,
+        })
+    })
+})
+
+// 查询一条
+router.all("/findmsone",(req,res)=>{
+    var body = req.body;
+    checkToken(req,res,({stuName})=>{
+        FindOneDataFromTable({
+            model:MyMainShi,
+            query:req.body,
             res,
         })
     })

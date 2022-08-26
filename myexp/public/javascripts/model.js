@@ -88,7 +88,7 @@ const MyXueke = new Schema({
 
 const MyBanji = new Schema({
     xueke:String,
-    year:Number,
+    year:String,
     num:Number,
     name:String,   // 武汉HTML5JY2206
     value:String,  // wh-html5-2206
@@ -107,7 +107,8 @@ const discuss = new Schema({
     name:String, //谁评论的
     content:String, //评论的啥
     time:Date, //啥时候评论的
-    titleId:String //在哪个面试题下评论的
+    titleId:String, //在哪个面试题下评论的
+    avater:String //头像
 })
 
 // 意见表
@@ -123,6 +124,21 @@ const Attendance = new Schema({
     name:String, //谁打的卡
     cardTime:String, //打卡日期
     cardCount:String //打卡次数
+})
+
+// 面试题
+const MyMainShi = new Schema({
+    author:Object,
+    title:String,
+    type:String,
+    cate:String,
+    content:String,
+    answer:String,
+    score:Number,  // 0  有答案 10  看一次加一分 点赞加2分  收藏加3分  评论加2分 
+    time:Date, 
+    like:Number,
+    collect:Number,
+    ping:Number 
 })
 
 
@@ -148,3 +164,5 @@ exports.DiscussModel = mongoose.model('discusss',discuss)
 exports.AdviseModel = mongoose.model('advises',Advise)
 
 exports.AttendanceModel = mongoose.model('attendances',Attendance)
+
+exports.MyMainShi = mongoose.model('mainshis',MyMainShi)

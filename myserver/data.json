@@ -2,20 +2,39 @@
   "title": [
     "我是手动生成的json假数据"
   ],
-  "data": [
-    {
-      "name": "老王",
-      "age": "18",
-      "adress": "你家隔壁",
-      "id": 8
-    },
-    {
-      "name": "罗先略",
-      "age": "22",
-      "adress": "武汉",
-      "id": 9
-    }
-  ],
+
+  "test":{
+    "data": [
+          {
+            "user": "老王",
+            "number":6689,
+            "labels": [
+              {
+                "name":"bug",
+                "color":"error"
+              }
+            ],
+            "title": "测试数据",
+            "id": 8,
+            "state": "open",
+            "locked": false,
+            "comments": 1,
+            "created_at": "2022-05-26T09:42:56Z",
+            "updated_at": "2022-05-26T10:03:02Z",
+            "closed_at": null,
+            "author_association": "NONE"
+          }
+        ],
+    "page":1,
+    "success":true,
+    "total":20
+  },
+
+  
+
+
+
+
   "info": [
     {
       "username": "琳琅上天",

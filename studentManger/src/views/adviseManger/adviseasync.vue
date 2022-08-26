@@ -82,7 +82,7 @@ const onSubmit = async () => {
     .imgs{
         width: 100%;
         min-height:500px;
-        background: url('../../assets/images/advise.jpeg.crdownload') no-repeat 100% 100%;
+        background: url('../../assets/images/advise.jpg') no-repeat 100% 100%;
         text-align: left;
         color: black;
         .p1{
