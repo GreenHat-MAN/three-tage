@@ -90,7 +90,6 @@ const startUpload = async () => {
     data.append('file', file)
     let res = await Ajax.uploadfiles(data)
     if (res.code == 200) {
-        console.log(res.path)
         model.value.image.push(res.path)
     }
 }
@@ -99,7 +98,6 @@ const submitForm = () => {
     formRef.value.validate(async valid => {
         if (valid) {
             let res = await Ajax.addtongzhi(toRaw(model.value));
-            // console.log(toRaw(model.value));
             if (res.code == 200) {
                 resetFrom()
                 ElMessage({

@@ -44,7 +44,6 @@ export default {
         const spanNumInit = ()=>{
             var width = bgstar.value.clientWidth;
             var height = document.getElementById("bgstar").clientHeight;
-            console.log(width,height)
 
             for(var i=0;i<520;i++){
                 var left = Math.round(width * Math.random())

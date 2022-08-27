@@ -82,7 +82,6 @@ const router = useRouter()
 const route = useRoute()
 
 const remenber = () => {
-    console.log(checked.value);
 }
 
 
@@ -93,18 +92,15 @@ const toRegist = () => {
 const toLogin = () => {
     formRef.value.validate(async valid => {
         if (valid) {
-            // console.log(checked.value);
             let res = await Ajax.logins(model.value)
             if (res.code == 200 && checked.value==true) {
                 localStorage.setItem('wh_username',res.ressult.stuName)
                 localStorage.setItem('wh_phone',res.ressult.stuPhone)
                 sessionStorage.setItem("wh_token",res.token)
                 router.push({ name: 'main' })
-                // console.log(checked.value);
             }else if(res.code == 200){
                 router.push({ name: 'main' })
             }
-            // console.log(model.value);
         } else {
             ElMessage({
                 showClose: true,
@@ -113,7 +109,6 @@ const toLogin = () => {
             })
         }
     })
-    // console.log(model.value);
 }
 
 onMounted(() => {

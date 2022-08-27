@@ -24,7 +24,6 @@ var data = Mock.mock({
     }]
   })
 // 输出结果随机生成的数据（node index.js）
-console.log(data);
 
 // 定义数据类型
 var data1 = Mock.mock({
@@ -80,7 +79,6 @@ var data1 = Mock.mock({
     }]
   })
   
-  console.log(data1)
 
 
 
@@ -94,7 +92,6 @@ Mock.mock("/getdataone","get",config=>{
 })
 
 Mock.mock('/getdatalist',"get",config=>{
-  console.log(config)
   return {
     msg:'获取数据成功',
     code:200,
@@ -104,9 +101,7 @@ Mock.mock('/getdatalist',"get",config=>{
 
 // 删除
 Mock.mock("/deldata1one","post",config=>{
-  console.log(config)
   var body = JSON.parse(config.body)
-  console.log(body)
   var data = data1.data.filter(item=>item.goodsId!=body.goodsId);
   data1.data = data;  //修改数据 
   return {

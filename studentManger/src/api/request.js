@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { ElMessage , ElLoading   } from 'element-plus'
 
-export const baseURL = 'http://localhost:3000/'
+export const baseURL = 'http://47.106.15.197:3000/'
 // axios 的配置  request=axios 
 export const request = axios.create({
     timeout:60000,  // 超时 
@@ -64,7 +64,6 @@ return Promise.reject(error);
 request.interceptors.response.use(function (response) {
     // 响应成功的拦截器 
     // ShowSuccess() 手机端APP不需要成功的提示 
-    console.log(response.data)
     if(response.data.code==200){
         ShowSuccess(response.data.msg)
     }else{

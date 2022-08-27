@@ -145,7 +145,6 @@ const filterTableData = computed(() =>
 const getAllScore = async () => {
     let data = await Ajax.searchScore()
     tableData.value = data.result
-    // console.log(tableData.value);
 }
 
 

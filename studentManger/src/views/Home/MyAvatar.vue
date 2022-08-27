@@ -35,7 +35,6 @@ const { circleUrl } = toRefs(state)
 
 const startUpload= async ()=>{
     let file=fileRef.value.files[0]
-    // console.log(file);
     const data = new FormData()
     data.append('file',file)
 

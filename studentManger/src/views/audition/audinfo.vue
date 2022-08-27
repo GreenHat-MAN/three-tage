@@ -64,7 +64,6 @@ const onSubmit = async () => {
 // 查询当前评论内容
 const getDis = async ()=>{
     let data = await Ajax.finddis({titleId: id.value,})
-    // console.log(data);
     disList.value=data.result
 }
 
@@ -73,7 +72,6 @@ onMounted(() => {
 })
 
 watch(id, (newValue, oldValue) =>{
-    console.log('watch已触发',newValue);
     getDis()
 })
 

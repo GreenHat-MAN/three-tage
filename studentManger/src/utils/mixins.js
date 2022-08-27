@@ -5,7 +5,6 @@ import {baseURL} from '../api/request'
 // 全局的混入 mixins 
 export const GolbalMixins = {
     mounted(){
-        // console.log("GolbalMixins - 全局混入 ")
     },
     data(){
         return {

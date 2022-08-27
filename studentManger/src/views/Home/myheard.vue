@@ -105,7 +105,6 @@ const userInfo = computed(() => store.state.userInfo)
 const dialogVisible = ref(false)
 
 const chechPassEqual = (rule, value, callback) => {
-    // console.log(model.newpass)
     if (value !== model.newpass) {
         callback(new Error("两次密码不匹配"))
     } else {
@@ -130,7 +129,6 @@ const rules = reactive({
 
 
 const handleCommand = (command) => {
-    // console.log(command);
     if (command == 'changepass') {
         dialogVisible.value = true
     }
@@ -174,7 +172,6 @@ const logoutAction = () => {
 const changpwd = () => {
     formRef.value.validate(async valid => {
         if (valid) {
-            // console.log(model);
             if (model.newpass == userInfo.value.stuPassword) {
                 ElMessage({
                     showClose: true,

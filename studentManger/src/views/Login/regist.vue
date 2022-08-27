@@ -62,8 +62,6 @@ const formRef = ref()
 const router = useRouter()
 // 比较两次密码一致 
 const chechPassEqual =  (rule, value,callback) => {
-    console.log(model.password)
-    console.log(value)
     if(value!==model.value.password){
         callback(new Error("两次密码不匹配"))
     }else{
@@ -103,7 +101,6 @@ const resetForm = ()=>{
 }
 const submitForm = ()=>{
     formRef.value.validate(async valid=>{
-        console.log(valid)
         if(valid){
             // 注册账号
             let {code,result} = await Ajax.register(model.value)
@@ -123,7 +120,6 @@ const testApi = async ()=>{
     let res = await Ajax.testApi()
 }
 onMounted(()=>{
-    console.log(formRef)
     testApi()
 })
 </script>

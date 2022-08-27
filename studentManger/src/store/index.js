@@ -42,7 +42,6 @@ const store = new createStore({
         async getRoleListAsync({ commit }, payload) {
             let res = await Ajax.getRole(payload)
             commit("changeRole", res.result)
-            console.log(res.result);
         },
         async getXuekeListAsync({ commit }, payload) {
             let res = await Ajax.findxueke(payload)

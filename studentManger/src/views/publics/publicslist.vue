@@ -95,15 +95,15 @@ const list = ref([])
 
 const getpublicList = async () => {
     let res = await Ajax.sercherpublic()
-    console.log(res.result);
+
     store.commit('getPublicList', res.result)
     tableData.value = res.result
-    console.log(tableData.value);
+
 }
 
 const close = () => {
     list.value = []
-    console.log(123);
+
     dialogVisible.value = false
 }
 

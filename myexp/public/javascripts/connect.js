@@ -5,7 +5,7 @@
 const mongoose=require('mongoose');
 
 // 1.定义数据库主机信息
-const hostName='localhost';
+const hostName='47.106.15.197';
 // 2.定义数据库端口名称
 const portName=27017;
 // 3.定义需要连接数据库的名称

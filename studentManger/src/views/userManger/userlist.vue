@@ -104,7 +104,7 @@ const rules = reactive({
 const handleEdit = async (index, row) => {
     flag.value=false
     dialogVisible.value = true
-    // console.log(index, row)
+
     model.value = {
         username: toRaw(row).stuName,
         password: toRaw(row).stuPassword,
@@ -123,7 +123,7 @@ const adduser = ()=>{
 
 // 删除用户
 const handleDelete = (index, row) => {
-    // console.log(index, toRaw(row)._id)
+
     ElMessageBox.confirm(
         '一旦删除又要重新添加是否继续?',
         'Warning',
@@ -176,10 +176,10 @@ const add = () => {
                     dialogVisible.value = false
                     getUserList()
                 }
-                // console.log('add');
+
             }else{
                 userUp()
-                // console.log('update');
+
             }
         }
     })

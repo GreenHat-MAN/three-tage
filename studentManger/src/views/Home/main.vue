@@ -47,7 +47,6 @@ const getUserInfo = async () => {
 
     // 调用动态路由过滤方法存储到vuex
     store.commit('changeRouterList',getRouter(routerList,res.result[0].role))
-    // console.log(store.state.routerLists);
 
     // 动态路由配置
     router.addRoute({

@@ -42,7 +42,6 @@ const formRef = ref()
 
 const Cancel = () => {
     // formRef.value.resetFields()
-    // console.log();
     form.value = {}
 }
 
@@ -62,7 +61,6 @@ const onSubmit = async () => {
             message: 'ok',
         })
     }
-    // console.log(form.value);
 }
 </script>
 

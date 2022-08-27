@@ -54,7 +54,6 @@ const rules = reactive({
 const submitForm = ()=>{
     ruleFormRef.value.validate(async valid =>{
         if(valid){
-            // console.log(toRaw(model.value));
             let res = await Ajax.addAuition(toRaw(model.value))
             if(res.code==200){
                 resetForm()

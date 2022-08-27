@@ -71,7 +71,6 @@ const card = async () => {
     // 获取当天的时间
     let today = moment(new Date()).format('MMMM Do YYYY')
     let cardTime = moment(values.value).format('MMMM Do YYYY')
-    // console.log(store.state.userInfo[0].stuName);
     if (today == cardTime) {
         let data = await Ajax.addAttend({
             name: store.state.userInfo[0].stuName,
@@ -95,13 +94,11 @@ const card = async () => {
         })
     }
 
-    console.log(today == cardTime);
 }
 
 const getAttend = async () => {
     let data = await Ajax.searchAttend({ name: store.state.userInfo[0].stuName })
     if (data.result.length > 0) {
-        console.log(data.result);
         countA.value = data.result[0].cardCount
     } else {
         countA.value == 0

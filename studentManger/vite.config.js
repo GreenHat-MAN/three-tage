@@ -21,7 +21,7 @@ export default defineConfig({
   mode:"development",  // 代码环境  开发和生产  
 
   server:{  //开发的服务器配置 
-    host:"localhost", // 0.0.0.0
+    host:"0.0.0.0", // 0.0.0.0
     port:7000,
     hot:true,  // 自动刷新页面
     open:true,  // 自动打开浏览器 

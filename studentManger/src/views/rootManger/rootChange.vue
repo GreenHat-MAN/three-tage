@@ -60,9 +60,6 @@ const getUserInfo = async () => {
 
 // 修改用户权限
 const onChange = async (val,index,row) => {
-    // console.log(val);
-    // console.log(index);
-    // console.log(row.stuName);
     info.value = {
         ...info.value,
         role:val[0],

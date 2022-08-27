@@ -36,7 +36,6 @@ const chartOneInit = (userList,roleList)=>{
             })
         }
     })
-    console.log(data)
     var option = {
         title: {
             text: '人员占比分析',

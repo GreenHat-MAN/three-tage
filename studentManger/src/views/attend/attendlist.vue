@@ -82,7 +82,6 @@ const handleClose = () => {
 const confirmAction = () => {
     formRef.value.validate(async valid => {
         if (valid) {
-            // console.log(model.value);
             let data = await Ajax.upAttend(model.value)
             if (data.code == 200) {
                 model.value = {}

@@ -47,7 +47,6 @@ const getRouter = (arr, role) => {
 
 
 router.beforeEach(async (to, from, next) => {
-    console.log(to);
     const store = useStore
     localStorage.setItem("formRouteName",from.name);
     if (to.path == '/login') {
@@ -69,7 +68,6 @@ router.beforeEach(async (to, from, next) => {
                     redirect: { name: 'notfound' },
                 }
             )
-            console.log({ ...to, replace: true });
             next({ ...to, replace: true })
         } else {
             next()
